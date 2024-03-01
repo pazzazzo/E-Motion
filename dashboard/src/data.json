@@ -1,0 +1,75 @@
+{
+    "icons": {
+        "lock": {
+            "close": "lock",
+            "open": "lock_open"
+        },
+        "battery": {
+            "level": {
+                "0": "battery_0_bar",
+                "1": "battery_1_bar",
+                "2": "battery_2_bar",
+                "3": "battery_3_bar",
+                "4": "battery_4_bar",
+                "5": "battery_5_bar",
+                "6": "battery_full"
+            },
+            "charging": {
+                "0": "battery_charging_full",
+                "1": "battery_charging_20",
+                "2": "battery_charging_30",
+                "3": "battery_charging_50",
+                "4": "battery_charging_60",
+                "5": "battery_charging_80",
+                "6": "battery_charging_90"
+            },
+            "alert": "battery_alert",
+            "change": "battery_change",
+            "error": "battery_error",
+            "plus": "battery_plus",
+            "setting": "battery_profile",
+            "share": "battery_share",
+            "unknown": "battery_unknown"
+        },
+        "bluetooth": {
+            "normal": "bluetooth",
+            "connected": "bluetooth_connected",
+            "disabled": "bluetooth_disabled",
+            "searching": "bluetooth_searching",
+            "call": "phone_bluetooth_speaker",
+            "sound": {
+                "on": "media_bluetooth_on",
+                "off": "media_bluetooth_off"
+            }
+        },
+        "maps": {
+            "search": "traver_explore",
+            "waypoint": {
+                "add": "add_location_alt",
+                "edit": "edit_location_alt",
+                "alert": "fmd_bad",
+                "home": "home_pin",
+                "on": "location_on",
+                "off": "location_off",
+                "person": "person_pin_circle",
+                "ok": "where_to_vote",
+                "error": "wrong_location"
+            }
+        },
+        "cellular": {
+            "level": {
+                "0": "signal_cellular_0_bar",
+                "1": "signal_cellular_1_bar",
+                "2": "signal_cellular_2_bar",
+                "3": "signal_cellular_3_bar"
+            },
+            "alert": {
+                "empty": "signal_cellular_connected_no_internet_0_bar",
+                "full": "signal_cellular_connected_no_internet_4_bar"
+            },
+            "error": "signal_cellular_nodata",
+            "off": "signal_cellular_off",
+            "pause": "signal_cellular_pause"
+        }
+    }
+}

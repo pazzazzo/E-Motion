@@ -1,0 +1,11 @@
+Dimensions:
+	Hauteur max: 1.37m
+	Hauteur cadre: 1.30m
+	Hauteur arrière: 1.20m
+	
+	Largeur: 1.50m
+	Longeur: 2.60m
+
+Pneus: 13 pouces
+Places: 2
+

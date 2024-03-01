@@ -1,0 +1,38 @@
+{
+  "name": "e-motion_dashboard",
+  "version": "0.0.1",
+  "description": "Dashboard of Hydix E-Motion",
+  "main": "main.js",
+  "homepage": "https://pazzazzo.github.io/e-motion",
+  "scripts": {
+    "test": "electron .",
+    "start": "electron .",
+    "version": "electron -v"
+  },
+  "author": {
+    "name": "pazzazzo",
+    "email": "azzo.lorenzo@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "mapbox-gl": "^3.1.2"
+  },
+  "build": {
+    "productName": "HydixEMotion",
+    "appId": "fr.hydix.e-motion",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "System"
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.12.0"
+  }
+}

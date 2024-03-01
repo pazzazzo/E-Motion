@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet" />
+    <title>Electron</title>
+</head>
+
+<body>
+    <div class="screen fc" id="load-screen">
+        <img src="" id="load-logo">
+    </div>
+    <div class="screen active" id="main-screen">
+        <div class="root">
+            <div class="left-part">
+                <div class="speedometer">
+                    <canvas id="speedometer" width="300"></canvas>
+                    <div class="speedometer-text-container">
+                        <div id="speedometer-text">15 km/h</div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-part">
+                <div id="map-box"></div>
+                <div id="map-layer">
+                    <div class="info-bar" id="info-bar">
+                        <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
+                        <div id="info-hour" class="info-content"><span></span></span></div>
+                        <div id="info-temp" class="info-content"><span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-bar">
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
