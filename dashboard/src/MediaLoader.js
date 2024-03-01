@@ -1,7 +1,7 @@
 const EventEmitter = require('events');
 const fs = require('fs');
 const path = require('path');
-const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+// const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 const Database = require('./Database');
 
 
@@ -15,35 +15,55 @@ class MediaLoader extends EventEmitter {
     }
     constructor(config = {}) {
         super()
+        this.preinitied = false;
         this.ready = false;
         this.database = new Database()
     }
-    init() {
-        if (!this.ready) {
+    preinit() {
+        if (!this.preinitied) {
             const t = performance.now()
             let i = 0
-
             const cb = () => {
                 i++
-                if (i === 4) {
-                    this.emit("ready", performance.now() - t)
-                    this.removeListener("sounds.load.finish", cb)
-                    this.removeListener("images.load.finish", cb)
-                    this.removeListener("map.load.finish", cb)
-                    this.ready = true
+                if (i === 3) {
+                    this.emit("preloaded", performance.now() - t)
+                    this.preinitied = true
                 }
             }
 
-            this.addListener("sounds.load.finish", cb)
-            this.addListener("images.load.finish", cb)
-            this.addListener("map.load.finish", cb)
+            this.once("sounds.load.finish", cb)
+            this.once("images.load.finish", cb)
             this.#loadSounds()
             this.#loadImages()
             this.database.load((err) => {
                 if (err) throw err;
                 cb()
-                this.#loadMap(this.database.data["mapbox-token"])
             })
+
+        }
+    }
+    init() {
+        const cont = () => {
+            const t = performance.now()
+            let i = 0
+
+            const cb = () => {
+                i++
+                if (i === 1) {
+                    this.emit("ready", performance.now() - t)
+                    this.ready = true
+                }
+            }
+
+            this.once("map.load.finish", cb)
+            this.#loadMap(this.database.data["mapbox-token"])
+        }
+        if (!this.ready) {
+            if (this.preinitied) {
+                cont()
+            } else {
+                this.once("preloaded", cont)
+            }
         } else {
             console.warn("MediaLoader already ready!")
         }

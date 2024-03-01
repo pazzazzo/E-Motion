@@ -6,7 +6,6 @@ const {Chart} = require("chart.js/auto")
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 const versions = process.versions
-const mediaLoader = new MediaLoader()
 const infoBar = new InfoBar()
 let ti = performance.now()
 mediaLoader.init()

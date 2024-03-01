@@ -1,3 +1,10 @@
+const MediaLoader = require("./MediaLoader");
+const { contextBridge } = require('electron')
+
+const mediaLoader = new MediaLoader()
+mediaLoader.preinit()
+window.mediaLoader = mediaLoader
+// contextBridge.exposeInMainWorld("mediaLoader", mediaLoader)
 
 
 const simulatedEvent = new DeviceOrientationEvent('deviceorientationabsolute', {
