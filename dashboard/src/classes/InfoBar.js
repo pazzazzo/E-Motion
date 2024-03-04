@@ -1,5 +1,5 @@
 const path = require('path');
-const data = require("./data.json")
+const data = require("../data.json")
 const icons = data.icons
 
 class InfoBar {

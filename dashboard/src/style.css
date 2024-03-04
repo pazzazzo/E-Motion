@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
 
+:root {
+    --speed: 0%
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -60,31 +64,75 @@ body {
 }
 .speedometer {
     position: relative;
-    width: 300px;
-    height: 150px;
+    padding: 1rem;
+    height: 40%;
+    width: 164px;
+    margin-top: 5%;
 }
-#speedometer {
-    position: relative;
+#speedometer-background {
+    position: absolute;
+    border-radius: 50%;
+    height: calc(100% - 2rem);
+    /* width: 170.39px; */
 }
-.speedometer-text-container {
+#speedometer-circle {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background:
+        radial-gradient(closest-side, rgba(0, 0, 0, 0.37) 79%, transparent 80% 100%),
+        conic-gradient(rgb(120, 78, 189) var(--speed), rgb(145, 149, 212) 0);
+    transform: rotate(155deg);
+}
+#speedometer-text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
-#speedometer-text {
-    font-size: large;
+#speedometer-text-units {
+    position: relative;
+    top: -40px;
+    font-size: .7rem;
+    color: #bdbdbdd5;
 }
+#speedometer-text-value {
+    font-size: 3rem;
+    font-weight: bolder;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Roboto, sans-serif;
+}
+
 
 .main-part {
     width: 60%;
     height: 100%;
     position: relative;
+}
+.view {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.view.active {
+    display: flex;
+}
+
+video {
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .menu-bar {
@@ -93,7 +141,7 @@ body {
 }
 
 
-#map-layer {
+#main-layer {
     position: absolute;
     top: 0;
     left: 0;
@@ -145,4 +193,35 @@ body {
 
 .mapboxgl-ctrl-top-right {
     display: none !important;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+
+
+#error-screen {
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+    background-color: #00000041;
+}
+.error-popup {
+    background-color: #121220;
+    max-height: 90vh;
+    max-width: 90vw;
+    padding: 1rem;
+    border-radius: 15px;
+}
+.error-title {
+    color: #df0000;
+}
+.error-file {
+    font-size: small;
+    color: #acacac;
+    margin-bottom: 1rem;
+}
+.error-details {
+    white-space: pre-wrap;
+    font-size: small;
 }

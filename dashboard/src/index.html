@@ -10,22 +10,30 @@
 </head>
 
 <body>
-    <div class="screen fc" id="load-screen">
-        <img src="" id="load-logo">
+    <div class="screen fc active" id="load-screen">
+        <img src="" class="img-logo-text">
     </div>
-    <div class="screen active" id="main-screen">
+    <div class="screen active hidden" id="main-screen">
         <div class="root">
             <div class="left-part">
-                <div class="speedometer">
-                    <canvas id="speedometer" width="300"></canvas>
-                    <div class="speedometer-text-container">
-                        <div id="speedometer-text">15 km/h</div>
+                <div id="speedometer" class="speedometer">
+                    <div id="speedometer-circle">
+                    </div>
+                    <video id="speedometer-background" src="./media/videos/power_dark.webm" autoplay loop></video>
+                    <div id="speedometer-text-container">
+                        <span id="speedometer-text-units">km/h</span>
+                        <span id="speedometer-text-value">0.0</span>
                     </div>
                 </div>
             </div>
             <div class="main-part">
-                <div id="map-box"></div>
-                <div id="map-layer">
+                <div id="main-view" class="view active">
+                    <div id="map-box"></div>
+                </div>
+                <div id="rear-cam-view" class="view fc">
+                    <video id="rear-cam" muted></video>
+                </div>
+                <div id="main-layer">
                     <div class="info-bar" id="info-bar">
                         <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
                         <div id="info-hour" class="info-content"><span></span></span></div>
@@ -37,6 +45,9 @@
         <div class="menu-bar">
 
         </div>
+    </div>
+    <div class="screen fc" id="error-screen">
+
     </div>
 
     <script src="script.js"></script>

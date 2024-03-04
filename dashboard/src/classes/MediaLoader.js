@@ -3,21 +3,23 @@ const fs = require('fs');
 const path = require('path');
 // const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 const Database = require('./Database');
+const Speedometer = require('./Speedometer');
 
 
 class MediaLoader extends EventEmitter {
     #sounds_buffer = {}
     #images_buffer = {}
     #path = {
-        media: path.join(__dirname, "media"),
-        sounds: path.join(__dirname, "media", "sounds"),
-        images: path.join(__dirname, "media", "images")
+        media: path.join(__dirname, "..", "media"),
+        sounds: path.join(__dirname, "..", "media", "sounds"),
+        images: path.join(__dirname, "..", "media", "images")
     }
     constructor(config = {}) {
         super()
         this.preinitied = false;
         this.ready = false;
         this.database = new Database()
+        this.speedometer = new Speedometer()
     }
     preinit() {
         if (!this.preinitied) {
@@ -49,12 +51,13 @@ class MediaLoader extends EventEmitter {
 
             const cb = () => {
                 i++
-                if (i === 1) {
+                if (i === 2) {
+                    this.speedometer.init()
                     this.emit("ready", performance.now() - t)
                     this.ready = true
                 }
             }
-
+            this.#loadDOMSrc(cb)
             this.once("map.load.finish", cb)
             this.#loadMap(this.database.data["mapbox-token"])
         }
@@ -68,6 +71,15 @@ class MediaLoader extends EventEmitter {
             console.warn("MediaLoader already ready!")
         }
         return this
+    }
+    #loadDOMSrc(cb) {
+        for (const image in this.#images_buffer) {
+            for (let i = 0; i < document.getElementsByClassName("img-" + image).length; i++) {
+                const img = document.getElementsByClassName("img-" + image)[i];
+                img.src = this.#images_buffer[image]
+            }
+        }
+        cb()
     }
     #loadSounds() {
         fs.readdir(this.#path.sounds, (err, files) => {
