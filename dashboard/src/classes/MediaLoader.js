@@ -4,6 +4,7 @@ const path = require('path');
 // const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 const Database = require('./Database');
 const Speedometer = require('./Speedometer');
+const Powermeter = require('./Powermeter');
 
 
 class MediaLoader extends EventEmitter {
@@ -20,6 +21,7 @@ class MediaLoader extends EventEmitter {
         this.ready = false;
         this.database = new Database()
         this.speedometer = new Speedometer()
+        this.powermeter = new Powermeter()
     }
     preinit() {
         if (!this.preinitied) {
@@ -53,6 +55,7 @@ class MediaLoader extends EventEmitter {
                 i++
                 if (i === 2) {
                     this.speedometer.init()
+                    this.powermeter.init()
                     this.emit("ready", performance.now() - t)
                     this.ready = true
                 }

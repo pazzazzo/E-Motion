@@ -4,22 +4,23 @@ class Speedometer {
     }
     init() {
         this.textElement = document.getElementById("speedometer-text-value")
-        for (let i = 0; i <= this.maxSpeed*2; i++) {
+        for (let i = 0; i <= this.maxSpeed*4; i++) {
             setTimeout(() => {
-                this.setSpeed(i/2)
-                if (i === this.maxSpeed*2) {
-                    for (let j = this.maxSpeed*2; j >= 0; j--) {
+                this.setSpeed(i/4)
+                if (i === this.maxSpeed*4) {
+                    for (let j = this.maxSpeed*4; j >= 0; j--) {
                         setTimeout(() => {
-                            this.setSpeed(j/2)
-                        }, (this.maxSpeed*2 - j) * 12);
+                            this.setSpeed(j/4)
+                        }, (this.maxSpeed*4 - j) * 3);
                     }
                 }
-            }, i * 12);
+            }, i * 3);
         }
+        // this.setSpeed(this.maxSpeed)
         return this
     }
     setSpeed(speed) {
-        document.documentElement.style.setProperty("--speed", `${speed / this.maxSpeed * 90}%`)
+        document.documentElement.style.setProperty("--speed", `${speed / this.maxSpeed * 84}%`)
         this.textElement.innerText = speed.toFixed(1)
     }
 }
