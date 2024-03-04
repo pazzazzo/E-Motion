@@ -50,10 +50,13 @@ En plus des fonctionnalités extérieures, l'intérieur du véhicule comprendra 
 - Le premier connecteur sera dédié à la communication entre la remorque et le véhicule, permettant l'échange de données entre les capteurs de la remorque et la gestion des actionneurs du véhicule à la remorque.
 - Le deuxième connecteur servira à alimenter le véhicule en énergie solaire ou avec une batterie externe, si la remorque en possède.
 
+## Carte de l'agencement des composants
+
+![Carte mentale](/mental-card.png)
+
 ## License
 
 Ce projet est protégé par une licence Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0), à l'exception du dossier "chassis". En ajoutant ce dépôt, vous acceptez les termes de cette licence pour tous les éléments du projet, sauf ceux spécifiquement exclus dans le dossier "chassis". Vous êtes autorisé à partager et à utiliser ce projet à des fins non commerciales, à condition de citer l'auteur original et de ne pas apporter de modifications au projet, à l'exception des éléments contenus dans le dossier "chassis". Pour plus d'informations sur cette licence, veuillez consulter le fichier `LICENSE` à la racine du dépôt.
-
 
 
 ## Conclusion
