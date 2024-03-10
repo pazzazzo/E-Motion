@@ -50,6 +50,32 @@ En plus des fonctionnalités extérieures, l'intérieur du véhicule comprendra 
 - Le premier connecteur sera dédié à la communication entre la remorque et le véhicule, permettant l'échange de données entre les capteurs de la remorque et la gestion des actionneurs du véhicule à la remorque.
 - Le deuxième connecteur servira à alimenter le véhicule en énergie solaire ou avec une batterie externe, si la remorque en possède.
 
+## Dashboard Electron JS
+
+Le dashboard est une composante essentielle du projet E-Motion. Il s'agit d'un écran de 16 pouces d'une résolution de 1024x600 pixels, conçu pour offrir une interface utilisateur intuitive et informative pour les utilisateurs du buggy électrique.
+
+### Caractéristiques du Dashboard :
+
+- **Taille de l'écran** : 16 pouces
+- **Résolution** : 1024x600 pixels
+- **Technologie** : Connecté au Jetson Nano via le PCB800099
+- **Framework Utilisé** : Electron JS
+
+### Fonctionnalités Principales :
+
+1. **Affichage des Informations du Buggy** : Le dashboard affiche en temps réel des informations vitales sur le buggy électrique, telles que la vitesse, la température du moteur, le niveau de batterie, etc.
+
+2. **Contrôle et Gestion** : Il permet aux utilisateurs d'interagir avec le buggy, en contrôlant diverses fonctions telles que les feux, les clignotants, etc., ainsi qu'en accédant à des paramètres de configuration.
+
+3. **Navigation Intuitive** : L'interface utilisateur est conçue pour être conviviale et intuitive, offrant une navigation fluide entre les différentes fonctionnalités et écrans du dashboard.
+
+### Aperçu :
+
+![Aperçu du Dashboard](./dashboard/Preview.png)
+
+L'image ci-dessus donne un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
+
+
 ## Carte de l'agencement des composants
 
 ![Carte mentale](/mental-card.png)
