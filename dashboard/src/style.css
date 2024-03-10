@@ -7,6 +7,11 @@
     --power-in: 0%;
 }
 
+* {
+    max-height: 600px !important;
+    max-width: 1024px !important;
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -68,7 +73,7 @@ body {
     position: relative;
     padding: 1rem;
     height: 40%;
-    width: 164px;
+    width: 212px;
     margin-top: 5%;
 }
 #speedometer-background {
@@ -119,8 +124,8 @@ body {
     position: absolute;
     top: 60%;
     left: 60%;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background:
         radial-gradient(closest-side, rgb(12, 20, 31) 79%, transparent 80% 100%),
@@ -131,8 +136,8 @@ body {
     position: absolute;
     top: 60%;
     left: 60%;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background:
         radial-gradient(closest-side, rgb(12, 20, 31) 79%, transparent 80% 100%),
@@ -143,8 +148,8 @@ body {
     position: absolute;
     top: 60%;
     left: 60%;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
