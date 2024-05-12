@@ -10,6 +10,8 @@ const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 const Buggy = require('./classes/Buggy');
 const Page = require('./classes/Page');
 
+;
+
 const versions = process.versions
 const infoBar = new InfoBar()
 const buggy = new Buggy()
