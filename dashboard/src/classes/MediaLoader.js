@@ -20,8 +20,8 @@ class MediaLoader extends EventEmitter {
         this.preinitied = false;
         this.ready = false;
         this.database = new Database()
-        this.speedometer = new Speedometer()
-        this.powermeter = new Powermeter()
+        // this.speedometer = new Speedometer()
+        // this.powermeter = new Powermeter()
     }
     preinit() {
         if (!this.preinitied) {
@@ -54,8 +54,8 @@ class MediaLoader extends EventEmitter {
             const cb = () => {
                 i++
                 if (i === 2) {
-                    this.speedometer.init()
-                    this.powermeter.init()
+                    // this.speedometer.init()
+                    // this.powermeter.init()
                     this.emit("ready", performance.now() - t)
                     this.ready = true
                 }

@@ -16,37 +16,40 @@
     <div class="screen active " id="main-screen">
         <div class="root">
             <div class="left-part">
-                <div id="speedometer" class="speedometer">
-                    <div id="speedometer-circle">
-                    </div>
-                    <video id="speedometer-background" src="./media/videos/power_dark.webm" autoplay loop></video>
-                    <div id="speedometer-text-container">
-                        <span id="speedometer-text-units">km/h</span>
-                        <span id="speedometer-text-value">0.0</span>
-                    </div>
-                    <div id="powermeter1"></div>
-                    <div id="powermeter2"></div>
-                    <div id="powermeter-text-container">
-                        <span id="powermeter-text-value">0</span>
-                        <span id="powermeter-text-units">W</span>
-                    </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>0</span><span>km/h</span></div>
+                    <div class="left-card-title"><span>Vitesse</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>31</span><span>km/h</span></div>
+                    <div class="left-card-title"><span>Vitesse max</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>0</span><span>W</span></div>
+                    <div class="left-card-title"><span>Puissance</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>351</span><span>W</span></div>
+                    <div class="left-card-title"><span>Puissance max</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>2.5</span><span>KM</span></div>
+                    <div class="left-card-title"><span>Trajet parcourus</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>37.5</span><span>KM</span></div>
+                    <div class="left-card-title"><span>Trajet restant</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>17</span><span>min</span><span>32</span><span>s</span></div>
+                    <div class="left-card-title"><span>Temps écoulé</span></div>
+                </div>
+                <div class="left-card">
+                    <div class="left-card-value"><span>20</span><span>°C</span></div>
+                    <div class="left-card-title"><span>Température du véhicule</span></div>
                 </div>
 
-                <div class="battery-container">
-                    <div class="battery">
-                        <div class="battery__wrapper">
-                            <span class="battery__text">80%</span>
-                        </div>
-                        <div class="battery__box">
-                            <div class="inner inner__top"></div>
-                            <div class="inner inner__front"></div>
-                            <div class="inner inner__bottom"></div>
-                            <div class="inner inner__back"></div>
-                            <div class="inner inner__left"></div>
-                            <div class="inner inner__right"></div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="main-part">
                 <div id="main-view" class="view active">
