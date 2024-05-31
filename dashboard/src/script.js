@@ -18,6 +18,8 @@ const buggy = new Buggy()
 const page = new Page()
 mediaLoader.init()
 
+page.view.change("data-graph")
+
 mediaLoader.on("ready", (t) => {
     page.change("main")
     mediaLoader.playSound("ready")

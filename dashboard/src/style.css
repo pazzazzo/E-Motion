@@ -24,6 +24,7 @@ body {
     background-color: black;
     color: #ffffff;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
 
 .material-symbols-outlined {
@@ -103,6 +104,26 @@ body {
 }
 .left-card-value>span:nth-child(3) {
     margin-left: .5rem;
+}
+
+#data-graph-view {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+    margin-top: 2.5rem;
+    max-height: calc(530px - 2.5rem) !important;
+    max-width: 614.39px !important;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.data-graph {
+    border-radius: 10px;
+    background-color: #171720;
+    width: 560px !important;
+    height: 280px !important;
 }
 
 
@@ -236,6 +257,8 @@ video {
 
 
 #main-layer {
+    user-select: none;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;

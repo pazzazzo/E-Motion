@@ -5,6 +5,7 @@ const path = require('path');
 const Database = require('./Database');
 const Speedometer = require('./Speedometer');
 const Powermeter = require('./Powermeter');
+const DataGraph = require("./DataGraph")
 
 
 class MediaLoader extends EventEmitter {
@@ -20,6 +21,7 @@ class MediaLoader extends EventEmitter {
         this.preinitied = false;
         this.ready = false;
         this.database = new Database()
+        this.dataGraph = new DataGraph()
         // this.speedometer = new Speedometer()
         // this.powermeter = new Powermeter()
     }
@@ -53,7 +55,7 @@ class MediaLoader extends EventEmitter {
 
             const cb = () => {
                 i++
-                if (i === 2) {
+                if (i === 3) {
                     // this.speedometer.init()
                     // this.powermeter.init()
                     this.emit("ready", performance.now() - t)
@@ -63,6 +65,7 @@ class MediaLoader extends EventEmitter {
             this.#loadDOMSrc(cb)
             this.once("map.load.finish", cb)
             this.#loadMap(this.database.data["mapbox-token"])
+            this.dataGraph.init(cb)
         }
         if (!this.ready) {
             if (this.preinitied) {

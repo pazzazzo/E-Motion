@@ -3,7 +3,7 @@ let hidden = ["remove", "hidden", "add"]
 
 class View {
     #actual = "main"
-    #pages_command = {"main": active, "rear-cam": active}
+    #pages_command = {"main": active, "rear-cam": active, "data-graph": active}
     constructor() {
     }
     get actual() {

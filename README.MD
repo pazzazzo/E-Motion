@@ -72,8 +72,9 @@ Le dashboard est une composante essentielle du projet E-Motion. Il s'agit d'un �
 ### Aperçu :
 
 ![Aperçu du Dashboard](./dashboard/Preview.png)
+![Aperçu du Dashboard](./dashboard/Preview-2.png)
 
-L'image ci-dessus donne un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
+Les images ci-dessus donnent un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
 
 
 ## Carte de l'agencement des composants
