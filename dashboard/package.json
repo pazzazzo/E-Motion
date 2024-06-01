@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "chart.js": "^4.4.1",
-    "mapbox-gl": "^3.1.2"
+    "mapbox-gl": "^3.1.2",
+    "usb": "^2.13.0"
   },
   "build": {
     "productName": "HydixEMotion",
