@@ -17,35 +17,35 @@
         <div class="root">
             <div class="left-part">
                 <div class="left-card">
-                    <div class="left-card-value"><span>0</span><span>km/h</span></div>
+                    <div class="left-card-value"><span id="speed-card">0</span><span>km/h</span></div>
                     <div class="left-card-title"><span>Vitesse</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>31</span><span>km/h</span></div>
+                    <div class="left-card-value"><span id="max-speed-card">31</span><span>km/h</span></div>
                     <div class="left-card-title"><span>Vitesse max</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>0</span><span>W</span></div>
+                    <div class="left-card-value"><span id="power-card">0</span><span>W</span></div>
                     <div class="left-card-title"><span>Puissance</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>351</span><span>W</span></div>
+                    <div class="left-card-value"><span id="max-power-card">351</span><span>W</span></div>
                     <div class="left-card-title"><span>Puissance max</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>2.5</span><span>KM</span></div>
+                    <div class="left-card-value"><span id="traveled-card">2.5</span><span>KM</span></div>
                     <div class="left-card-title"><span>Trajet parcourus</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>37.5</span><span>KM</span></div>
+                    <div class="left-card-value"><span id="remaining-card">37.5</span><span>KM</span></div>
                     <div class="left-card-title"><span>Trajet restant</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>17</span><span>min</span><span>32</span><span>s</span></div>
+                    <div class="left-card-value"><span id="time-1-card">17</span><span id="time-u1-card">min</span><span id="time-2-card">32</span><span id="time-u2-card">s</span></div>
                     <div class="left-card-title"><span>Temps écoulé</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span>20</span><span>°C</span></div>
+                    <div class="left-card-value"><span id="temp-card">20</span><span>°C</span></div>
                     <div class="left-card-title"><span>Température du véhicule</span></div>
                 </div>
 
@@ -73,8 +73,10 @@
                 <div id="main-layer">
                     <div class="info-bar" id="info-bar">
                         <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
-                        <div id="info-hour" class="info-content"><span></span></span></div>
+                        <div id="info-hour" class="info-content"><span></span></div>
                         <div id="info-temp" class="info-content"><span></span></div>
+                        <div id="info-battery" class="info-content"><span class="material-symbols-outlined">battery_error</span></div>
+                        <div id="info-battery-text" class="info-content"><span>100%</span></div>
                     </div>
                 </div>
             </div>

@@ -4,16 +4,15 @@ const errorHandler = new ErrorHandler()
 const fs = require('fs');
 const path = require('path');
 const MediaLoader = require("./classes/MediaLoader");
-const InfoBar = require('./classes/InfoBar');
 const { Chart } = require("chart.js/auto")
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 const Buggy = require('./classes/Buggy');
 const Page = require('./classes/Page');
 const usb = require("usb")
 const readline = require('readline');
+const { ipcRenderer } = require('electron');
 
 const versions = process.versions
-const infoBar = new InfoBar()
 const buggy = new Buggy()
 const page = new Page()
 mediaLoader.init()
@@ -92,6 +91,7 @@ function getUSBData(vendorIdDec, productIdDec) {
 }
 
 usb.usb.on("attach", (device) => {
+    console.log(device);
     getUSBData(device.deviceDescriptor.idVendor, device.deviceDescriptor.idProduct).then((r) => {
         console.log(r);
     })
@@ -116,3 +116,8 @@ buggy.on("rear.obstacle.detected", (distance) => {
     })
 })
 
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'T') {
+        ipcRenderer.send("dev.window.open")
+    }
+});

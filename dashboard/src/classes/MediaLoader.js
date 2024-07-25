@@ -6,6 +6,8 @@ const Database = require('./Database');
 const Speedometer = require('./Speedometer');
 const Powermeter = require('./Powermeter');
 const DataGraph = require("./DataGraph")
+const InfoBar = require('./InfoBar');
+const InfoCard = require('./InfoCard');
 
 
 class MediaLoader extends EventEmitter {
@@ -52,7 +54,8 @@ class MediaLoader extends EventEmitter {
         const cont = () => {
             const t = performance.now()
             let i = 0
-
+            this.infoBar = new InfoBar()
+            this.infoCard = new InfoCard()
             const cb = () => {
                 i++
                 if (i === 3) {

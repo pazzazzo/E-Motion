@@ -1,36 +1,48 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
+const Dev = require("./Dev")
+const BuggyConnect = require("./BuggyConnect")
+let mainWindow;
+let buggyConnect;
+let dev;
 
 const createWindow = () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 600,
+    resizable: false,
     autoHideMenuBar: true,
     show: false,
     webPreferences: {
-    //   preload: path.join(__dirname, 'preload.js')
-        nodeIntegration: true,
-        contextIsolation: false,
-        enableRemoteModule: true,
-        nodeIntegrationInWorker: true,
-        preload: path.join(__dirname, "src", "preload.js")
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      nodeIntegrationInWorker: true,
+      preload: path.join(__dirname, "src", "preload.js")
     }
   })
+
+  buggyConnect = new BuggyConnect({ mainWindow })
+  dev = new Dev({ buggyConnect })
 
   mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
   mainWindow.on("ready-to-show", () => {
     mainWindow.show()
   })
-  
+
 }
 
 app.setAppUserModelId("fr.hydix.e-motion")
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
+  dev.createDevWindow();
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+      dev.createDevWindow();
+    }
   })
 })
 

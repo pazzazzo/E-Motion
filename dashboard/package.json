@@ -5,7 +5,7 @@
   "main": "main.js",
   "homepage": "https://pazzazzo.github.io/e-motion",
   "scripts": {
-    "test": "electron .",
+    "test": "electron . -dev",
     "start": "electron .",
     "version": "electron -v"
   },

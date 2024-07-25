@@ -294,6 +294,13 @@ video {
 #info-temp {
     width: 2.5rem;
 }
+#info-battery {
+    margin-left: auto;
+}
+#info-battery-text {
+    margin-left: 0;
+    font-size: .9rem;
+}
 
 #map-box {
     height: 100%;
