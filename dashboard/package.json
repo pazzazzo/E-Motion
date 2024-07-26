@@ -7,7 +7,9 @@
   "scripts": {
     "test": "electron . -dev",
     "start": "electron .",
-    "version": "electron -v"
+    "version": "electron -v",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": {
     "name": "pazzazzo",
@@ -34,6 +36,6 @@
   },
   "devDependencies": {
     "electron": "^29.0.0",
-    "electron-builder": "^24.12.0"
+    "electron-builder": "^24.13.3"
   }
 }
