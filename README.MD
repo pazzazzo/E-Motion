@@ -76,6 +76,15 @@ Le dashboard est une composante essentielle du projet E-Motion. Il s'agit d'un �
 
 Les images ci-dessus donnent un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
 
+### Dépendances :
+L'application possèdes plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executer le fichier `dashboard/install.sh`.
+
+L'application nécéssite des tokens placés dans un fichier nommé `dashboard/src/database.json`. Le contenu fichier ce présente ainsi:
+```json
+{
+    "mapbox-token": "..."
+}
+```
 
 ## Carte de l'agencement des composants
 
