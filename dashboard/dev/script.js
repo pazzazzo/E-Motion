@@ -1,10 +1,10 @@
 const { ipcRenderer } = require("electron");
 
 const buttons = [
-    "accelerator", "breaks"
+    "accelerator", "breaks", "minus", "up", "plus", "stats", "left", "ok", "right", "mic", "down", "back"
 ]
 const switchs = [
-    
+
 ]
 const cursors = [
     "battery", "temp"

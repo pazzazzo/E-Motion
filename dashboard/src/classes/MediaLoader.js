@@ -8,6 +8,7 @@ const Powermeter = require('./Powermeter');
 const DataGraph = require("./DataGraph")
 const InfoBar = require('./InfoBar');
 const InfoCard = require('./InfoCard');
+const Spotify = require('./Spotify');
 
 
 class MediaLoader extends EventEmitter {
@@ -56,9 +57,10 @@ class MediaLoader extends EventEmitter {
             let i = 0
             this.infoBar = new InfoBar()
             this.infoCard = new InfoCard()
+            this.spotify = new Spotify(this.database.data)
             const cb = () => {
                 i++
-                if (i === 3) {
+                if (i === 4) {
                     // this.speedometer.init()
                     // this.powermeter.init()
                     this.emit("ready", performance.now() - t)
@@ -69,6 +71,7 @@ class MediaLoader extends EventEmitter {
             this.once("map.load.finish", cb)
             this.#loadMap(this.database.data["mapbox-token"])
             this.dataGraph.init(cb)
+            this.spotify.init(cb)
         }
         if (!this.ready) {
             if (this.preinitied) {

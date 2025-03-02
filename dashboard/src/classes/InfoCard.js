@@ -4,6 +4,8 @@ const data = require("../data.json")
 const icons = data.icons
 
 class InfoCard {
+    #containerElement = document.getElementsByClassName("left-part")[0]
+
     #speedElement = document.getElementById("speed-card")
     #maxSpeedElement = document.getElementById("max-speed-card")
 
@@ -45,6 +47,12 @@ class InfoCard {
         })
         ipcRenderer.on("data.temp", (event, temp) => {
             this.updateTemp(temp)
+        })
+
+        ipcRenderer.on("control.stats", (event, pressed) => {
+            if (pressed) {
+                this.#containerElement.classList.toggle("active")
+            }
         })
     }
     updateSpeed(speed) {

@@ -41,6 +41,9 @@ class Dev {
                     }, 400)
                 }
             }
+            if (["minus", "up", "plus", "stats", "left", "ok", "right", "mic", "down", "back"].includes(data.name)) {
+                this.buggyConnect.controlClick(data.name, data.pressed)
+            }
         })
         ipcMain.on("dev.switch", (event, data) => {
             console.log("sw", data);

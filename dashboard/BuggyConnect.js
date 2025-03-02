@@ -14,6 +14,9 @@ class BuggyConnect {
     batteryChange(percent) {
         this.mainWindow.webContents.send("data.battery", percent)
     }
+    controlClick(name, pressed) {
+        this.mainWindow.webContents.send(`control.${name}`, pressed)
+    }
 }
 
 module.exports = BuggyConnect
