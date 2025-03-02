@@ -104,3 +104,13 @@ Le projet E-Motion est sous licence Creative Commons (CC BY-NC-ND 4.0), à l’e
 ## Conclusion
 
 Le projet E-Motion vise à repousser les limites de la mobilité électrique en créant un buggy électrique innovant et futuriste, équipé des dernières technologies et conçu pour répondre aux besoins des conducteurs modernes. Suivez notre progression alors que nous travaillons à réaliser notre vision d'un avenir plus propre, plus sûre et plus connecté pour la conduite électrique.
+
+## Soutenir le Projet
+
+Le projet E-Motion est une initiative passionnée et indépendante visant à repousser les limites de la mobilité électrique. Si vous appréciez ce projet et souhaitez contribuer à son développement, vous pouvez apporter un soutien financier.
+
+Chaque contribution aide à financer les composants, le matériel et les améliorations nécessaires pour faire avancer E-Motion.
+
+🔗 Faire un don : [paypal.me/HydixFR](https://paypal.me/HydixFR?country.x=FR&locale.x=fr_FR)
+
+Merci pour votre soutien ! 💙🚀
