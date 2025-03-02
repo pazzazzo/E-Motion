@@ -1,6 +1,6 @@
 # Projet E-Motion
 
-Le projet E-Motion est une initiative passionnante visant à créer un buggy électrique entièrement personnalisé, doté de fonctionnalités high-tech et de pointe. Conçu pour offrir une expérience de conduite électrique innovante et écologique, le buggy E-Motion combine technologies de pointe, performances exceptionnelles et design élégant.
+E-Motion est un projet ambitieux visant à concevoir un buggy électrique sur mesure, intégrant des technologies de pointe. Conçu pour offrir une expérience de conduite électrique innovante et écologique, le buggy E-Motion combine technologies de pointe, performances et design élégant.
 
 ## Objectif
 
@@ -10,7 +10,7 @@ L'objectif principal du projet E-Motion est de concevoir et de construire un bug
 
 - **Motorisation Électrique :** Le buggy sera propulsé par un système de motorisation électrique, offrant une conduite fluide, silencieuse et respectueuse de l'environnement.
 
-- **Tableau de Bord High-Tech :** Un grand écran tactile servira de tableau de bord interactif, fournissant des informations sur la vitesse, l'autonomie, la navigation, et bien plus encore.
+- **Tableau de Bord High-Tech :** Un écran tactile interactif affichera des informations essentielles comme la vitesse, l’autonomie et la navigation.
 
 - **Système de Surveillance :** Des capteurs intégrés surveilleront en temps réel les performances du véhicule, y compris l'état de la batterie, la température, et d'autres paramètres essentiels.
 
@@ -52,7 +52,7 @@ En plus des fonctionnalités extérieures, l'intérieur du véhicule comprendra 
 
 ## Dashboard Electron JS
 
-Le dashboard est une composante essentielle du projet E-Motion. Il s'agit d'un écran de 16 pouces d'une résolution de 1024x600 pixels, conçu pour offrir une interface utilisateur intuitive et informative pour les utilisateurs du buggy électrique.
+Le dashboard est un élément essentiel du projet E-Motion. Il s'agit d'un écran de 16 pouces d'une résolution de 1024x600 pixels, conçu pour offrir une interface utilisateur intuitive et informative pour les utilisateurs du buggy électrique.
 
 ### Caractéristiques du Dashboard :
 
@@ -72,17 +72,23 @@ Le dashboard est une composante essentielle du projet E-Motion. Il s'agit d'un �
 ### Aperçu :
 
 ![Aperçu du Dashboard](./dashboard/Preview.png)
-![Aperçu du Dashboard](./dashboard/Preview-2.png)
+L'image ci-dessus donne un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
 
-Les images ci-dessus donnent un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
+### Mode test et développement :
+Afin de tester les différents composants du véhicule, une interface est mise à disposition simulant la connexion avec les éléments de celui-ci permettant d'avoir un accès facile au débogage
+
+![Aperçu du Mode test et développement](./dashboard/Preview-2.png)
+L'image ci-dessus donne un aperçu visuel de l'interface du mode test et développement Electron JS. Avec ses fonctionnalités avancées, le mode test et développement améliore l'expérience de débogage et offre un contrôle total sur la communication avec buggy électrique.
 
 ### Dépendances :
-L'application possèdes plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executer le fichier `dashboard/install.sh`.
+L'application possède plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executez le fichier `dashboard/install.sh`.
 
-L'application nécéssite des tokens placés dans un fichier nommé `dashboard/src/database.json`. Le contenu fichier ce présente ainsi:
+L'application nécessite des tokens placés dans un fichier nommé `dashboard/src/database.json`. Le contenu du fichier se présente ainsi:
 ```json
 {
-    "mapbox-token": "..."
+    "mapbox-token": "...",          //token de mapbox (50 000 req/mois)
+    "spotify-refresh-token": "...", //refresh token de l'utilisateur spotify
+    "spotify-secret": "..."         //id secret de l'app spotify
 }
 ```
 
@@ -92,9 +98,9 @@ L'application nécéssite des tokens placés dans un fichier nommé `dashboard/s
 
 ## License
 
-Ce projet est protégé par une licence Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0), à l'exception du dossier "chassis". En ajoutant ce dépôt, vous acceptez les termes de cette licence pour tous les éléments du projet, sauf ceux spécifiquement exclus dans le dossier "chassis". Vous êtes autorisé à partager et à utiliser ce projet à des fins non commerciales, à condition de citer l'auteur original et de ne pas apporter de modifications au projet, à l'exception des éléments contenus dans le dossier "chassis". Pour plus d'informations sur cette licence, veuillez consulter le fichier `LICENSE` à la racine du dépôt.
+Le projet E-Motion est sous licence Creative Commons (CC BY-NC-ND 4.0), à l’exception du dossier 'chassis'. En téléchargeant ce dépôt, vous acceptez les termes de cette licence pour tous les éléments du projet, sauf ceux spécifiquement exclus dans le dossier "chassis". Le projet peut être partagé et utilisé à des fins non commerciales, avec mention de l’auteur et sans modification, sauf pour le dossier 'chassis'. Pour plus d'informations sur cette licence, veuillez consulter le fichier `LICENSE` à la racine du dépôt.
 
 
 ## Conclusion
 
-Le projet E-Motion vise à repousser les limites de la mobilité électrique en créant un buggy électrique innovant et futuriste, équipé des dernières technologies et conçu pour répondre aux besoins des conducteurs modernes. Suivez notre progression alors que nous travaillons à réaliser notre vision d'un avenir plus propre, plus sûr et plus connecté pour la conduite électrique.
+Le projet E-Motion vise à repousser les limites de la mobilité électrique en créant un buggy électrique innovant et futuriste, équipé des dernières technologies et conçu pour répondre aux besoins des conducteurs modernes. Suivez notre progression alors que nous travaillons à réaliser notre vision d'un avenir plus propre, plus sûre et plus connecté pour la conduite électrique.
