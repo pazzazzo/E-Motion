@@ -3,7 +3,7 @@ let hidden = ["remove", "hidden", "add"]
 
 class View {
     #actual = "main"
-    #pages_command = {"main": active, "rear-cam": active, "data-graph": active}
+    #pages_command = {"main": active, "rear-cam": active, "data-graph": active, "search": active}
     constructor() {
     }
     get actual() {
@@ -13,6 +13,12 @@ class View {
         document.getElementById(this.#actual + "-view").classList[this.#pages_command[this.#actual][2]](this.#pages_command[this.#actual][1])
         document.getElementById(page + "-view").classList[this.#pages_command[page][0]](this.#pages_command[page][1])
         this.#actual = page
+    }
+    show(page) {
+        document.getElementById(page + "-view").classList[this.#pages_command[page][0]](this.#pages_command[page][1])
+    }
+    hide(page) {
+        document.getElementById(page + "-view").classList[this.#pages_command[page][2]](this.#pages_command[page][1])
     }
 }
 class Page {

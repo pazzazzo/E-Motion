@@ -9,6 +9,9 @@ const DataGraph = require("./DataGraph")
 const InfoBar = require('./InfoBar');
 const InfoCard = require('./InfoCard');
 const Spotify = require('./Spotify');
+const SearchAddress = require('./SearchAddress');
+const Page = require('./Page');
+const Direction = require('./Direction');
 
 
 class MediaLoader extends EventEmitter {
@@ -55,9 +58,12 @@ class MediaLoader extends EventEmitter {
         const cont = () => {
             const t = performance.now()
             let i = 0
+            this.page = new Page()
             this.infoBar = new InfoBar()
             this.infoCard = new InfoCard()
             this.spotify = new Spotify(this.database.data)
+            this.searchAddress = new SearchAddress(this)
+            this.direction = new Direction(this)
             const cb = () => {
                 i++
                 if (i === 4) {

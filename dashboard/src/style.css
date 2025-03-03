@@ -3,6 +3,8 @@
 @import url("./media/styles/keyboard.css");
 @import url("./media/styles/leftpart.css");
 @import url("./media/styles/navbar.css");
+@import url("./media/views/main.css");
+@import url("./media/views/search.css");
 
 :root {
     --speed: 0%;
@@ -165,23 +167,6 @@ video {
     margin-left: 0;
     font-size: .9rem;
     width: 2.5rem;
-}
-
-#map-box {
-    height: 100%;
-    width: 100%;
-}
-
-.mapboxgl-ctrl-bottom-right {
-    display: none !important;
-}
-
-.mapboxgl-ctrl-bottom-left {
-    display: none !important;
-}
-
-.mapboxgl-ctrl-top-right {
-    display: none !important;
 }
 
 .hidden {

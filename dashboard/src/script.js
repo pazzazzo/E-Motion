@@ -16,16 +16,15 @@ const { SimpleKeyboard } = require("simple-keyboard")
 
 const versions = process.versions
 const buggy = new Buggy()
-const page = new Page()
 if (!mediaLoader) {
     var mediaLoader = new MediaLoader()
 }
 mediaLoader.init()
 
-// page.view.change("data-graph")
+// mediaLoader.page.view.change("data-graph")
 
 mediaLoader.on("ready", (t) => {
-    page.change("main")
+    mediaLoader.page.change("main")
     // mediaLoader.playSound("ready")
 
     mediaLoader.map.addControl(
@@ -51,45 +50,15 @@ mediaLoader.on("ready", (t) => {
 
     console.log(`Media loading took ${t}ms`);
 
-    const keyboard = new SimpleKeyboard({
-        onChange: input => onChange(input),
-        onKeyPress: button => onKeyPress(button),
-        theme: "hg-theme-default blackTheme",
-        layout: {
-            default: [
-                "` 1 2 3 4 5 6 7 8 9 0 \u00B0 + {bksp}",
-                "{tab} a z e r t y u i o p ^ $",
-                "{lock} q s d f g h j k l m \u00F9 * {enter}",
-                "{shift} < w x c v b n , ; : ! {shift}",
-                "{space}",
-            ],
-            shift: [
-                "\u00B2 & \u00E9 \" ' ( - \u00E8 _ \u00E7 \u00E0 ) = {bksp}",
-                "{tab} A Z E R T Y U I O P \u00A8 \u00A3",
-                "{lock} Q S D F G H J K L M % \u00B5 {enter}",
-                "{shift} > W X C V B N ? . / \u00A7 {shift}",
-                "{space}",
-            ],
-        },
-
-    });
     // setTimeout(() => {
     //     document.getElementsByClassName("simple-keyboard")[0].classList.add("active")
     // }, 1000);
 
-    mediaLoader.spotify.connect().then((success, err) => {
-        mediaLoader.spotify.getCurrentTrack().then(v => {
-            console.log(v);
-        })
-    })
-
-    function onChange(input) {
-        console.log("Input changed", input);
-    }
-
-    function onKeyPress(button) {
-        console.log("Button pressed", button);
-    }
+    // mediaLoader.spotify.connect().then((success, err) => {
+    //     mediaLoader.spotify.getCurrentTrack().then(v => {
+    //         console.log(v);
+    //     })
+    // })
 })
 
 ipcRenderer.on("control.minus", (event, pressed) => {
@@ -168,7 +137,7 @@ buggy.on("rear.obstacle.detected", (distance) => {
         console.log(s.getVideoTracks()[0]);
         document.getElementById("rear-cam").srcObject = s
         document.getElementById("rear-cam").play()
-        page.view.change("rear-cam")
+        mediaLoader.page.view.change("rear-cam")
     })
 })
 

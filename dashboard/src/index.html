@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="screen fc active first bg-black" id="load-screen">
+    <div class="screen fc first bg-black" id="load-screen">
         <img src="" class="img-logo-text">
     </div>
     <div class="screen active" id="main-screen">
@@ -41,7 +41,8 @@
                     <div class="left-card-title"><span>Trajet restant</span></div>
                 </div>
                 <div class="left-card">
-                    <div class="left-card-value"><span id="time-1-card">17</span><span id="time-u1-card">min</span><span id="time-2-card">32</span><span id="time-u2-card">s</span></div>
+                    <div class="left-card-value"><span id="time-1-card">17</span><span id="time-u1-card">min</span><span
+                            id="time-2-card">32</span><span id="time-u2-card">s</span></div>
                     <div class="left-card-title"><span>Temps écoulé</span></div>
                 </div>
                 <div class="left-card">
@@ -49,11 +50,20 @@
                     <div class="left-card-title"><span>Température interne</span></div>
                 </div>
 
-                
+
             </div>
             <div class="main-part">
                 <div id="main-view" class="view active">
                     <div id="map-box"></div>
+                    <div id="main-search"><span class="material-symbols-outlined">search</span></div>
+                </div>
+                <div id="search-view" class="view">
+                    <form id="search-form">
+                        <input id="search-address" name="address" autocomplete="shipping address-line1"
+                            placeholder="Addresse">
+                        <div id="search-suggest">
+                        </div>
+                    </form>
                 </div>
                 <div id="data-graph-view" class="view">
                     <canvas width="560" height="280" id="data-graph-speed" class="data-graph"></canvas>
@@ -75,7 +85,8 @@
                         <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
                         <div id="info-hour" class="info-content"><span></span></div>
                         <div id="info-temp" class="info-content"><span></span></div>
-                        <div id="info-battery" class="info-content"><span class="material-symbols-outlined">battery_error</span></div>
+                        <div id="info-battery" class="info-content"><span
+                                class="material-symbols-outlined">battery_error</span></div>
                         <div id="info-battery-text" class="info-content"><span>100%</span></div>
                     </div>
                 </div>
