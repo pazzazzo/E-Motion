@@ -11,7 +11,7 @@ class Keyboard extends EventEmitter {
             theme: "hg-theme-default blackTheme",
             layout: {
                 default: [
-                    "` 1 2 3 4 5 6 7 8 9 0 \u00B0 + {bksp}",
+                    "' 1 2 3 4 5 6 7 8 9 0 \u00B0 + {bksp}",
                     "{tab} a z e r t y u i o p ^ $",
                     "{lock} q s d f g h j k l m \u00F9 * {enter}",
                     "{shift} < w x c v b n , ; : ! {shift}",
@@ -35,6 +35,7 @@ class Keyboard extends EventEmitter {
         document.getElementsByClassName("simple-keyboard")[0].classList.remove("active")
     }
     stop() {
+        this.keyboard.clearInput()
         this.keyboard.destroy()
         this.removeAllListeners("change")
         this.removeAllListeners("press")
