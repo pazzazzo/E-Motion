@@ -40,3 +40,5 @@ class Keyboard extends EventEmitter {
         this.removeAllListeners("press")
     }
 }
+
+module.exports = Keyboard
