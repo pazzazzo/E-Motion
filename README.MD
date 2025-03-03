@@ -72,12 +72,13 @@ Le dashboard est un élément essentiel du projet E-Motion. Il s'agit d'un écra
 ### Aperçu :
 
 ![Aperçu du Dashboard](./dashboard/Preview.png)
-L'image ci-dessus donne un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
+![Aperçu de la Recherche](./dashboard/Preview-2.png)
+Les images ci-dessus donnent un aperçu visuel du dashboard Electron JS. Avec son design moderne et ses fonctionnalités avancées, le dashboard améliore l'expérience de conduite et offre un contrôle total sur le buggy électrique.
 
 ### Mode test et développement :
 Afin de tester les différents composants du véhicule, une interface est mise à disposition simulant la connexion avec les éléments de celui-ci permettant d'avoir un accès facile au débogage
 
-![Aperçu du Mode test et développement](./dashboard/Preview-2.png)
+![Aperçu du Mode test et développement](./dashboard/Preview-Dev.png)
 L'image ci-dessus donne un aperçu visuel de l'interface du mode test et développement Electron JS. Avec ses fonctionnalités avancées, le mode test et développement améliore l'expérience de débogage et offre un contrôle total sur la communication avec buggy électrique.
 
 ### Dépendances :
