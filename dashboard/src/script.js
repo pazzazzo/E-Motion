@@ -77,9 +77,10 @@ mediaLoader.on("ready", (t) => {
     //     document.getElementsByClassName("simple-keyboard")[0].classList.add("active")
     // }, 1000);
 
-    mediaLoader.spotify.getCurrentTrack().then(v => {
-        console.log(v);
-        
+    mediaLoader.spotify.connect().then((success, err) => {
+        mediaLoader.spotify.getCurrentTrack().then(v => {
+            console.log(v);
+        })
     })
 
     function onChange(input) {
