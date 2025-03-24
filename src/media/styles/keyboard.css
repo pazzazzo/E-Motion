@@ -1,0 +1,52 @@
+@import url("https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css");
+
+.simple-keyboard {
+    position: absolute;
+    bottom: 0;
+    z-index: 9999;
+    transform: translateY(100%);
+}
+
+.simple-keyboard.active {
+    animation: PopupBottom .500s cubic-bezier(0.65, 0.7, 0, 0.88) 0s 1 normal forwards;
+    
+}
+
+.simple-keyboard.blackTheme {
+    background-color: rgb(10, 10, 10);
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.simple-keyboard.blackTheme .hg-button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(29, 29, 29);
+    color: white;
+    border-bottom-color: rgb(43, 43, 43);
+}
+
+.simple-keyboard.blackTheme .hg-button:active {
+    background: #1c4995;
+    color: white;
+    border-top: rgb(43, 43, 43) solid 1px;
+}
+
+#root .simple-keyboard.blackTheme+.simple-keyboard-preview {
+    background: #1c4995;
+}
+
+@keyframes PopupBottom {
+	0% {
+		transform: scale(0);
+		transform-origin: 50% 100%;
+	}
+
+	100% {
+		transform: scale(1);
+		transform-origin: 50% 100%;
+	}
+}

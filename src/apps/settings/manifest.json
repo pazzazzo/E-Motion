@@ -1,0 +1,6 @@
+{
+    "id": "settings",
+    "name": "Paramètres",
+    "default-icon": "hydix:settings-icon",
+    "default-color": "#0b4fbd"
+}

@@ -1,0 +1,156 @@
+#main-music {
+    background: #191a1e;
+    position: absolute;
+    z-index: 8;
+    top: 3rem;
+    right: 0.6rem;
+    border-radius: 16px;
+    padding: 1rem;
+    padding-bottom: 0;
+    min-width: 200px;
+}
+#main-music-minimize {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.65rem;
+}
+#main-music-minimize > span {
+    font-size: .9rem;
+}
+#main-music-data {
+    display: flex;
+}
+#main-music-image {
+    height: 3rem;
+    border-radius: 10px;
+}
+#main-music-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: .5rem;
+}
+#main-music-title {
+    margin: 0;
+    font-weight: 600;
+}
+#main-music-artist {
+    margin: 0;
+    font-size: .7rem;
+
+}
+#data-music-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: .5rem;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*#main-dir {
+    background: linear-gradient(0deg, #0f1317 0%, #121317 100%);
+    position: absolute;
+    z-index: 8;
+    top: 3rem;
+    left: 0.6rem;
+    border-radius: 15px;
+    width: 15rem;
+}
+#main-dir-head {
+    display: flex;
+    margin: 1rem;
+    margin-bottom: 0;
+}
+#main-dir-img {
+    height: 3rem;
+}
+#main-dir-distance {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#main-dir-unit {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    margin-top: .5rem;
+}
+#main-dir-step > p {
+    margin: 0;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+#main-dir-step{
+    margin: 0;
+    margin-bottom: 1rem;
+}
+#main-dir-lanes {
+    background-color: #191a1e;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-evenly;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.main-dir-lane {
+    height: 2rem;
+    filter: invert(55%);
+}
+.main-dir-lane.correct {
+    filter: invert(0%);
+}
+
+
+#main-speed {
+    background-color: #191a1e;
+    position: absolute;
+    z-index: 8;
+    top: 3rem;
+    left: 16.5rem;
+    border-radius: 5px;
+    display: flex;
+}
+#main-speed-counter {
+    width: 2.6rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-left: .2rem;
+    padding-right: .2rem;
+}
+#main-speed-value {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+#main-speed-max {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(227, 229, 231);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 2.4rem;
+    padding-left: .2rem;
+    padding-right: .2rem;
+    border: 2px solid #191a1e
+}
+#main-speed-max.limit {
+    background-color: rgb(241, 114, 105);
+}
+#main-speed-max > p {
+    margin: 0;
+    color: #191a1e;
+    font-weight: 600;
+}
+#main-speed-max-value {
+    font-size: 1.5rem;
+}
+
+#main-speed-max-unit {
+    font-size: .7rem;
+}*/

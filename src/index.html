@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <title>E-motion</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+    <!-- <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script> -->
+    <div class="screen fc first bg-black" id="load-screen">
+        <img src="./media/images/logo-text.png" class="">
+    </div>
+    <div class="screen active" id="main-screen">
+        <div class="root">
+            <div class="main-part">
+                <div id="main-view" class="view active">
+                    <div id="map-box"></div>
+                    <div id="main-search"><span class="material-symbols-outlined">search</span></div>
+                    <div id="main-recenter" class="hidden"><span class="material-symbols-outlined">near_me</span>
+                        <p>Recentrer</p>
+                    </div>
+                    <div id="main-dir">
+                        <div id="main-dir-head">
+                            <img id="main-dir-img" src="./media/images/dirs/direction_turn_left.png">
+                            <p id="main-dir-distance">900</p>
+                            <p id="main-dir-unit">m</p>
+                        </div>
+                        <div id="main-dir-step">
+                            <p>Crs de l'Yser</p>
+                        </div>
+                        <div id="main-dir-lanes">
+                            <img class="main-dir-lane correct" src="./media/images/dirs/direction_turn_left.png">
+                            <img class="main-dir-lane" src="./media/images/dirs/direction_turn_straight.png">
+                            <img class="main-dir-lane" src="./media/images/dirs/direction_turn_straight.png">
+                            <img class="main-dir-lane" src="./media/images/dirs/direction_turn_right.png">
+
+                        </div>
+                    </div>
+                    <div id="main-speed">
+                        <div id="main-speed-max" class="">
+                            <p id="main-speed-max-value">110</p>
+                            <p id="main-speed-max-unit">km/h</p>
+                        </div>
+                        <div id="main-speed-counter">
+                            <div id="main-speed-value">110</div>
+                        </div>
+                    </div>
+                    <div id="main-music">
+                        <div id="main-music-minimize">
+                            <span class="material-symbols-outlined">
+                                close_fullscreen
+                                </span>
+                        </div>
+                        <div id="main-music-data">
+                            <img id="main-music-image" class="" src="./media/images/music-placeholder.png">
+                            <div id="main-music-text">
+                                <p id="main-music-title">Unknown Title</p>
+                                <p id="main-music-artist">Unknown Artist</p>
+                            </div>
+                        </div>
+                        <div id="data-music-control">
+                            <div id="data-music-previous">
+                                <span class="material-symbols-outlined">skip_previous</span>
+                            </div>
+                            <div id="data-music-pause">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                            </div>
+                            <div id="data-music-next">
+                                <span class="material-symbols-outlined">skip_next</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="search-view" class="view">
+                    <form id="search-form">
+                        <input id="search-address" name="address" autocomplete="shipping address-line1"
+                            placeholder="Addresse">
+                        <div id="search-suggest">
+                        </div>
+                    </form>
+                </div>
+                <div id="data-graph-view" class="view">
+                    <canvas width="560" height="280" id="data-graph-speed" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-power" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-temp" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-battery" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-5" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-6" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-7" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-8" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-9" class="data-graph"></canvas>
+                    <canvas width="560" height="280" id="data-graph-10" class="data-graph"></canvas>
+                </div>
+                <div id="rear-cam-view" class="view fc">
+                    <video id="rear-cam" muted></video>
+                </div>
+                <div id="main-layer">
+                    <div class="info-bar" id="info-bar">
+                        <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
+                        <div id="info-hour" class="info-content"><span></span></div>
+                        <div id="info-temp" class="info-content"><span></span></div>
+                        <div id="info-battery" class="info-content"><span
+                                class="material-symbols-outlined">battery_error</span></div>
+                        <div id="info-battery-text" class="info-content"><span>100%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-icon" id="menu-home">
+                <img class="" src="./media/images/home-icon.png">
+            </div>
+            <div id="menu-separator"></div>
+            <div class="menu-icon" id="menu-phone">
+                <img class="" src="./media/images/phone-icon.png">
+            </div>
+        </div>
+    </div>
+    <div class="screen fc" id="error-screen">
+
+    </div>
+
+    <div class="simple-keyboard"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

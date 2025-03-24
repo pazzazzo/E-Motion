@@ -1,0 +1,22 @@
+{
+    "machine": {
+        "name": "E-motion"
+    },
+    "map": {
+        "color": {
+            "route": {
+                "basic": "#3b27ff",
+                "trafic": "#D4B21D",
+                "heavyTraffic": "#D41D1D"
+            }
+        }
+    },
+    "navbar": [
+        {"id": "settings"}
+    ],
+    "sound": {
+        "mapGo": "selected",
+        "usbConnected": "connected",
+        "usbDisconnected": "disconnected"
+    }
+}

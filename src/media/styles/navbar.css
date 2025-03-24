@@ -1,0 +1,40 @@
+.menu-bar {
+    height: 70px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    padding-left: 1rem;
+    align-items: center;
+}
+
+.menu-icon {
+    height: calc(100% - 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    margin-right: 1.5rem;
+}
+#menu-home {
+    margin-right: 1.2rem !important;
+}
+#menu-music {
+    box-shadow: 0px 0px 0px 2px #0c67cf;
+}
+#menu-ytb {
+    box-shadow: 0px 0px 0px 2px #ff0000;
+}
+#menu-phone {
+    box-shadow: 0px 0px 0px 2px #08c98f;
+}
+#menu-separator {
+    height: calc(100% - 1rem);
+    width: 2px;
+    border-radius: 5px;
+    background-color: #a1a1a1;
+    margin-right: 1.2rem;
+}
+.menu-icon > img {
+    height: calc(100% - 1rem);
+
+}
