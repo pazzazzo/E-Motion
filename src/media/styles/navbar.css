@@ -4,6 +4,8 @@
     display: flex;
     padding-left: 1rem;
     align-items: center;
+    mask: radial-gradient(circle 135px at top, transparent 30%, black 31%);
+    position: relative;
 }
 
 .menu-icon {
@@ -33,6 +35,25 @@
     border-radius: 5px;
     background-color: #a1a1a1;
     margin-right: 1.2rem;
+}
+#menu-voice {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%, 50%);
+    background-color: rgb(7 126 229);
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#menu-voice > span {
+    font-size: 2.5rem;
+}
+#menu-voice.active {
+    box-shadow: 0px 0px 11px 1px #62f367 inset;
 }
 .menu-icon > img {
     height: calc(100% - 1rem);
