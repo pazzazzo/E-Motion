@@ -83,6 +83,19 @@
             "error": "signal_cellular_nodata",
             "off": "signal_cellular_off",
             "pause": "signal_cellular_pause"
+        },
+        "wifi": {
+            "level": {
+                "0": "signal_wifi_0_bar",
+                "1": "network_wifi_1_bar",
+                "2": "network_wifi_2_bar",
+                "3": "network_wifi_3_bar",
+                "4": "signal_wifi_4_bar"
+            },
+            "interrogation": "signal_wifi_statusbar_not_connected",
+            "bad": "signal_wifi_bad",
+            "search": "wifi_find",
+            "off": "signal_wifi_off"
         }
     }
 }
