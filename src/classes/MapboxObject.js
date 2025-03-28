@@ -4,6 +4,7 @@ const MediaLoader = require("./MediaLoader");
 class MapboxObject extends EventEmitter {
     constructor(mediaLoader = new MediaLoader(), imgPath) {
         super()
+        console.log("✅ MapboxObject class invoked");
         this.coordinates = mediaLoader.position.coords.array
         this.bearing = 90
         this.marker = null;
@@ -22,16 +23,15 @@ class MapboxObject extends EventEmitter {
     updateCoords(coords) {
         this.coordinates = coords
         this.marker && this.marker.setLngLat(coords)
-        this.emit("update", this.coordinates, this.bearing)
     }
     updateBearing(bearing) {
         this.bearing = bearing
         this.marker && this.marker.setRotation(bearing)
-        this.emit("update", this.coordinates, this.bearing)
     }
     update(coords, bearing) {
         this.updateCoords(coords)
         this.updateBearing(bearing)
+        this.emit("update", this.coordinates, this.bearing)
     }
 }
 

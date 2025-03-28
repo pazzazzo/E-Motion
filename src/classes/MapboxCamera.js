@@ -4,19 +4,42 @@ const MediaLoader = require("./MediaLoader");
 
 class MapboxCamera {
     constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ MapboxCamera class invoked");
         this.followedObject = null;
         this.mediaLoader = mediaLoader
         this.followCallback = (coordinates, bearing) => {
-            this.mediaLoader.map.easeTo({
+            let b = new mapboxgl.LngLat(...coordinates)
+            mediaLoader.map.fitBounds(b.toBounds(1), {
                 duration: 1500,
+                // speed: .5,
                 easing: (t) => t,
-                center: coordinates,
-                bearing
+                bearing,
+                pitch: 45,
+                maxZoom: 18,
+            }, {
+                tracking: true
             })
+            // this.mediaLoader.map.flyTo({
+            //     duration: 1500,
+            //     // speed: .5,
+            //     easing: (t) => t,
+            //     center: coordinates,
+            //     bearing,
+            //     zoom: 18
+            // }, {
+            //     tracking: true
+            // })
         }
         this.recenterBtn = document.getElementById("main-recenter")
         this.recenterBtn.addEventListener("click", () => {
             this.followUser()
+        })
+        this.mediaLoader.map.on("movestart", (e) => {
+            if (e.originalEvent) {
+                // console.log(e.originalEvent);
+                
+                this.stopFollow()
+            }
         })
     }
     isFollowUser() {
@@ -46,7 +69,7 @@ class MapboxCamera {
         //     }, 1000);
         // }
         let opt = {
-            duration: 5000,
+            duration: 3000,
             center: object.coordinates,
             bearing: object.bearing,
             essential: true
@@ -63,14 +86,6 @@ class MapboxCamera {
             this.recenterBtn.classList.remove("hidden")
         }
         object.on("update", this.followCallback)
-
-        this.mediaLoader.map.on("movestart", (e) => {
-            if (e.originalEvent) {
-                console.log(e.originalEvent);
-                
-                this.stopFollow()
-            }
-        })
     }
     stopFollow() {
         if (this.followedObject) {
