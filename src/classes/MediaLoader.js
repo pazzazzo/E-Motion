@@ -2,7 +2,7 @@ const EventEmitter = require('events');
 const fs = require('fs');
 const path = require('path');
 const Database = require('./Database');
-const DataGraph = require("./DataGraph")
+// const DataGraph = require("./DataGraph")
 const InfoBar = require('./InfoBar');
 const SpotifyClient = require('./SpotifyClient');
 const SearchAddress = require('./SearchAddress');
@@ -29,12 +29,14 @@ class MediaLoader extends EventEmitter {
     }
     constructor(config = {}) {
         super()
+        console.log("✅ MediaLoader class invoked");
         this.preinitied = false;
         this.ready = false;
         this.database = new Database()
-        this.dataGraph = new DataGraph()
+        // this.dataGraph = new DataGraph()
     }
     preinit() {
+        console.log("🟠 MediaLoader class pre init");
         if (!this.preinitied) {
             const t = performance.now()
             let i = 1
@@ -56,11 +58,12 @@ class MediaLoader extends EventEmitter {
         }
     }
     init() {
+        console.log("🟡 MediaLoader class init");
         const cont = () => {
             const t = performance.now()
-            let i = 4
+            let i = 3
             this.page = new Page()
-            this.infoBar = new InfoBar()
+            this.infoBar = new InfoBar(this)
             this.spotify = new SpotifyClient(this)
             this.searchAddress = new SearchAddress(this)
             this.navbar = new Navbar(this)
@@ -73,11 +76,12 @@ class MediaLoader extends EventEmitter {
                     this.#postInit(() => {
                         this.emit("ready", performance.now() - t)
                         this.ready = true
+                        console.log("🟢 MediaLoader ready");
                     })
                 }
             }
             this.#loadMap(this.database.data["mapbox-token"], cb)
-            this.dataGraph.init(cb)
+            // this.dataGraph.init(cb)
             this.spotify.init(cb)
             this.settings.init(cb).reset()
         }
@@ -93,9 +97,9 @@ class MediaLoader extends EventEmitter {
         return this
     }
     #postInit(cb) {
+        console.log("🔵 MediaLoader class post init");
         this.arrow = new Arrow(this)
         this.mapboxCamera = new MapboxCamera(this)
-        
         this.wifi.postInit()
         cb()
     }

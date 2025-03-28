@@ -1,15 +1,12 @@
 const { app, BrowserWindow, ipcMain, session, components } = require('electron')
 const path = require('node:path')
 const Dev = require("./Dev")
-const BuggyConnect = require("./BuggyConnect")
 const VehicleConnect = require("./VehicleConnect")
 let mainWindow;
-let buggyConnect;
 let vehicleConnect;
 let dev;
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
-
 
 app.commandLine.appendSwitch('disable-software-rasterizer');
 app.commandLine.appendSwitch('ignore-gpu-blacklist');
@@ -17,6 +14,10 @@ app.commandLine.appendSwitch('enable-gpu-rasterization');
 app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('enable-native-gpu-memory-buffers');
 app.commandLine.appendSwitch('disk-cache-size', '1024000000');
+
+app.commandLine.appendSwitch('disable-background-timer-throttling');
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.commandLine.appendSwitch('max-gum-fps', '100');
 
 // app.commandLine.appendSwitch('widevine-cdm-version', '4.10.2891.0')
 
@@ -46,8 +47,6 @@ const createWindow = () => {
     }
   })
 
-  buggyConnect = new BuggyConnect({ mainWindow })
-  dev = new Dev({ buggyConnect })
   vehicleConnect = new VehicleConnect({ mainWindow })
   dev = new Dev({ vehicleConnect })
 
