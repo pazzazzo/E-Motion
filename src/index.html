@@ -100,14 +100,24 @@
                 <div id="rear-cam-view" class="view fc">
                     <video id="rear-cam" muted></video>
                 </div>
+                <div id="wifi-view" class="view">
+                    <h1 id="wifi-title">Vous n'êtes pas connecté.</h1>
+                    <h2 id="wifi-subtitle">Veuillez scanner le QR code d'un réseau WiFi.</h2>
+                    <canvas id="wifi-cam"></canvas>
+                    <video class="hidden" id="wifi-video"></video>
+                    <div id="wifi-error">
+                        <h1 id="wifi-error-title">QRCode invalide. Merci de réessayer</h1>
+                        <div id="wifi-error-button">Réesayer</div>
+                    </div>
+                </div>
                 <div id="main-layer">
                     <div class="info-bar" id="info-bar">
                         <div id="info-lock" class="info-content"><span class="material-symbols-outlined"></span></div>
                         <div id="info-hour" class="info-content"><span></span></div>
                         <div id="info-temp" class="info-content"><span></span></div>
-                        <div id="info-battery" class="info-content"><span
-                                class="material-symbols-outlined">battery_error</span></div>
-                        <div id="info-battery-text" class="info-content"><span>100%</span></div>
+                        <div id="info-wifi-text" class="info-content"><span>Chargement du wifi</span></div>
+                        <div id="info-wifi" class="info-content">
+                            <span class="material-symbols-outlined">wifi_find</span>
                     </div>
                 </div>
             </div>
