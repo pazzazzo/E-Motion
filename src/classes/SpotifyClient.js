@@ -94,6 +94,7 @@ class SpotifyClient extends EventEmitter {
                     this.paused = state.paused
                     this.HTML.main.style.background = `linear-gradient(90deg, #494c5b ${percentage - 1}%, #191a1e ${percentage}%)`
                     if (state.track_window) {
+                    if (state.track_window && state.track_window.current_track) {
                         this.HTML.img.src = state.track_window.current_track.album.images[0].url
                         this.HTML.title.innerHTML = state.track_window.current_track.name
                         this.HTML.artist.innerHTML = state.track_window.current_track.artists[0].name
