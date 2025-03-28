@@ -1,11 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path');
-const BuggyConnect = require('./BuggyConnect');
+const VehicleConnect = require('./VehicleConnect');
 
 class Dev {
-    constructor(config = { buggyConnect: new BuggyConnect() }) {
+    constructor(config = { vehicleConnect: new VehicleConnect() }) {
         this.isDev && console.log("Dev mode");
-        this.buggyConnect = config.buggyConnect
+        this.vehicleConnect = config.vehicleConnect
         this.accelInterval;
         this.speed = 0;
 
@@ -16,13 +16,13 @@ class Dev {
                     clearInterval(this.accelInterval)
                     this.accelInterval = setInterval(() => {
                         this.speed = Math.min(this.speed + 1, 160)
-                        this.buggyConnect.speedChange(this.speed)
+                        this.vehicleConnect.speedChange(this.speed)
                     }, 62)
                 } else {
                     clearInterval(this.accelInterval)
                     this.accelInterval = setInterval(() => {
                         this.speed = Math.max(this.speed - 1, 0)
-                        this.buggyConnect.speedChange(this.speed)
+                        this.vehicleConnect.speedChange(this.speed)
                     }, 400)
                 }
             }
@@ -31,18 +31,18 @@ class Dev {
                     clearInterval(this.accelInterval)
                     this.accelInterval = setInterval(() => {
                         this.speed = Math.max(this.speed - 1, 0)
-                        this.buggyConnect.speedChange(this.speed)
+                        this.vehicleConnect.speedChange(this.speed)
                     }, 62)
                 } else {
                     clearInterval(this.accelInterval)
                     this.accelInterval = setInterval(() => {
                         this.speed = Math.max(this.speed - 1, 0)
-                        this.buggyConnect.speedChange(this.speed)
+                        this.vehicleConnect.speedChange(this.speed)
                     }, 400)
                 }
             }
             if (["minus", "up", "plus", "stats", "left", "ok", "right", "mic", "down", "back"].includes(data.name)) {
-                this.buggyConnect.controlClick(data.name, data.pressed)
+                this.vehicleConnect.controlClick(data.name, data.pressed)
             }
         })
         ipcMain.on("dev.switch", (event, data) => {
@@ -51,9 +51,9 @@ class Dev {
         ipcMain.on("dev.cursor", (event, data) => {
             console.log("dt", data);
             if (data.name === "temp") {
-                this.buggyConnect.tempChange(data.value)
+                this.vehicleConnect.tempChange(data.value)
             } else if (data.name === "battery") {
-                this.buggyConnect.batteryChange(data.value)
+                this.vehicleConnect.batteryChange(data.value)
             }
         })
         ipcMain.on("dev.window.open", () => {
