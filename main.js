@@ -2,8 +2,10 @@ const { app, BrowserWindow, ipcMain, session, components } = require('electron')
 const path = require('node:path')
 const Dev = require("./Dev")
 const BuggyConnect = require("./BuggyConnect")
+const VehicleConnect = require("./VehicleConnect")
 let mainWindow;
 let buggyConnect;
+let vehicleConnect;
 let dev;
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
@@ -46,6 +48,8 @@ const createWindow = () => {
 
   buggyConnect = new BuggyConnect({ mainWindow })
   dev = new Dev({ buggyConnect })
+  vehicleConnect = new VehicleConnect({ mainWindow })
+  dev = new Dev({ vehicleConnect })
 
   mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
   mainWindow.on("ready-to-show", () => {
