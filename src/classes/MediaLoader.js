@@ -15,6 +15,8 @@ const Arrow = require('./Arrow');
 const MapboxObject = require('./MapboxObject');
 const MapboxCamera = require('./MapboxCamera');
 const Position = require('./Position');
+const Wifi = require('./Wifi');
+const { default: jsQR } = require('jsqr');
 
 
 class MediaLoader extends EventEmitter {
@@ -49,6 +51,7 @@ class MediaLoader extends EventEmitter {
                 if (err) throw err;
                 cb()
             })
+            this.wifi = new Wifi(this)
             this.#preloadApps()
         }
     }
@@ -93,6 +96,7 @@ class MediaLoader extends EventEmitter {
         this.arrow = new Arrow(this)
         this.mapboxCamera = new MapboxCamera(this)
         
+        this.wifi.postInit()
         cb()
     }
     #preloadApps() {
@@ -169,6 +173,39 @@ class MediaLoader extends EventEmitter {
             source.connect(audioContext.destination);
             source.start();
         }
+    }
+    scanQRCode(canvas, video, cb) {
+        let ctx = canvas.getContext("2d")
+        navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then((stream) => {
+            video.srcObject = stream
+            video.play()
+            let data;
+            let interval = setInterval(() => {
+                canvas.width = video.videoWidth
+                canvas.height = video.videoHeight
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+                if (canvas.width > 0) {
+                    data = jsQR(ctx.getImageData(0, 0, canvas.width, canvas.height).data, canvas.width, canvas.height) || data
+                    if (data) {
+                        clearInterval(interval)
+                        for (const key in data.location) {
+                            if (key.endsWith("Corner")) {
+                                let point = data.location[key]
+                                ctx.fillStyle = "#ff0000"
+                                ctx.fillRect(point.x - 5, point.y - 5, 10, 10)
+                            }
+                        }
+                        video.pause()
+                        stream.getTracks().forEach(function (track) {
+                            track.stop();
+                        });
+                        setTimeout(() => {
+                            cb(data.data, data)
+                        }, 500);
+                    }
+                }
+            }, 5);
+        })
     }
     get soundsList() {
         return Object.keys(this.#sounds_buffer)
