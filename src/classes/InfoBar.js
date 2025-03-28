@@ -2,6 +2,7 @@ const path = require('path');
 const { ipcRenderer } = require("electron");
 const data = require("../data.json");
 const Battery = require('./Battery');
+const MediaLoader = require('./MediaLoader');
 const icons = data.icons
 
 class InfoBar {
@@ -12,26 +13,25 @@ class InfoBar {
 
     #tempElement = document.getElementById("info-temp").firstElementChild
 
-    #batteryElement = document.getElementById("info-battery").firstElementChild
-    #batteryTextElement = document.getElementById("info-battery-text").firstElementChild
+    #wifiElement = document.getElementById("info-wifi").firstElementChild
+    #wifiTextElement = document.getElementById("info-wifi-text").firstElementChild
 
     #DOMElement = document.getElementById("info-bar")
     
-    constructor() {
+    constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ InfoBar class invoked");
         this.#lockElement.innerHTML = icons.lock.close
         this.#hourElement.innerText = "00:00"
         this.#tempElement.innerHTML = "20°C"
-        this.battery = new Battery()
-        this.battery.setMode("charging")
-        this.updateBattery()
+        this.mediaLoader = mediaLoader
         ipcRenderer.on("data.temp", (event, temp) => {
             this.#tempElement.innerHTML = `${temp}°C`
         })
-        ipcRenderer.on("data.battery", (event, percent) => {
+        // ipcRenderer.on("data.battery", (event, percent) => {
 
-            this.battery.setLevel(percent)
-            this.updateBattery()
-        })
+        //     this.battery.setLevel(percent)
+        //     this.updateBattery()
+        // })
 
         setInterval(() => {
             this.updateHour()
@@ -48,9 +48,9 @@ class InfoBar {
     updateHour() {
         this.#hourElement.innerText = `${window.utils.formatNumberLen(new Date().getHours())}:${window.utils.formatNumberLen(new Date().getMinutes())}`
     }
-    updateBattery() {
-        this.#batteryElement.innerHTML = this.battery.getIcon()
-        this.#batteryTextElement.innerText = `${this.battery.level}%`
+    updateWifi(icon, text) {
+        this.#wifiElement.innerHTML = icon
+        this.#wifiTextElement.innerText = text
     }
 }
 
