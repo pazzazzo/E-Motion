@@ -16,10 +16,9 @@ const url = googleTTS.getAudioUrl('police detecté Cours de la Marne.', {
     slow: false,
     host: 'https://translate.google.com',
 });
-console.log(url);
+// console.log(url);
 
-const versions = process.versions
-const buggy = new Buggy()
+const vehicle = new Vehicle()
 if (!mediaLoader) {
     var mediaLoader = new MediaLoader()
 }
@@ -58,7 +57,7 @@ navigator.requestMediaKeySystemAccess('com.widevine.alpha', [{
 
 function sp() {
     mediaLoader.spotify.on("ready", (r) => {
-        console.log("Spotify ready");
+        console.log("Spotify ready", r);
     })
     mediaLoader.spotify.on("player.state", state => {
         if (state) {
@@ -159,7 +158,7 @@ function getUSBData(vendorIdDec, productIdDec) {
         });
 
         rl.on('close', () => {
-            r({ success: false })
+            r({ success: false, vendorIdHex, productIdHex })
         });
 
     })
@@ -180,12 +179,12 @@ usb.usb.on("detach", (device) => {
 })
 
 
-buggy.rearCam.getCams().then(v => {
-    buggy.rearCam.setCam(v[0].id)
+vehicle.rearCam.getCams().then(v => {
+    vehicle.rearCam.setCam(v[0].id)
 })
 
-buggy.on("rear.obstacle.detected", (distance) => {
-    buggy.rearCam.turnOn().then(s => {
+vehicle.on("rear.obstacle.detected", (distance) => {
+    vehicle.rearCam.turnOn().then(s => {
         console.log(s.getVideoTracks()[0]);
         document.getElementById("rear-cam").srcObject = s
         document.getElementById("rear-cam").play()
