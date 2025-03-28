@@ -38,10 +38,7 @@ class SearchAddress {
             let url = `https://api.mapbox.com/search/geocode/v6/forward?q=${encodeURIComponent(query)}&access_token=${mediaLoader.database.data["mapbox-token"]}&autocomplete=true&country=FR&limit=10&types=address`;
 
             // Ajoute la proximité si on a la localisation
-            if (Coords) {
-                let userLocation = new Coords()
-                url += `&proximity=${userLocation.longitude},${userLocation.latitude}`;
-            }
+            url += `&proximity=${this.mediaLoader.position.coords.longitude},${this.mediaLoader.position.coords.latitude}`;
 
             try {
                 const response = await fetch(url);
