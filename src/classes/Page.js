@@ -3,8 +3,9 @@ let hidden = ["remove", "hidden", "add"]
 
 class View {
     #actual = "main"
-    #pages_command = {"main": active, "rear-cam": active, "data-graph": active, "search": active, "youtube": active, "music": active}
+    #pages_command = {"main": active, "rear-cam": active, "data-graph": active, "search": active, "youtube": active, "music": active, "wifi": active}
     constructor() {
+        console.log("✅ View class invoked");
     }
     get actual() {
         return this.#actual
