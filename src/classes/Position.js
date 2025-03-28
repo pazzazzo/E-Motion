@@ -17,9 +17,10 @@ class Coords extends EventEmitter {
                     clearInterval(intervals.up)
                 }
                 intervals.up = setInterval(() => {
-                    this.longitude += 0.00001
+                    this.latitude += 0.0001 * Math.cos(this.heading * (Math.PI / 180))
+                    this.longitude += 0.0001 * Math.sin(this.heading * (Math.PI / 180))
                     this.emit("update")
-                }, 25);
+                }, 250);
             } else {
                 clearInterval(intervals.up)
                 delete intervals.up
@@ -32,7 +33,8 @@ class Coords extends EventEmitter {
                     clearInterval(intervals.down)
                 }
                 intervals.down = setInterval(() => {
-                    this.longitude -= 0.00001
+                    this.latitude -= 0.00001 * Math.cos(this.heading * (Math.PI / 180))
+                    this.longitude -= 0.00001 * Math.sin(this.heading * (Math.PI / 180))
                     this.emit("update")
                 }, 25);
             } else {
@@ -48,9 +50,9 @@ class Coords extends EventEmitter {
                 }
                 intervals.left = setInterval(() => {
                     // this.latitude+=0.00001
-                    this.heading = (this.heading - 1) % 360
+                    this.heading = (this.heading - 5) % 360
                     this.emit("update")
-                }, 5);
+                }, 50);
             } else {
                 clearInterval(intervals.left)
                 delete intervals.left
@@ -64,9 +66,9 @@ class Coords extends EventEmitter {
                 }
                 intervals.right = setInterval(() => {
                     // this.latitude -= 0.00001
-                    this.heading = (this.heading + 1) % 360
+                    this.heading = (this.heading + 5) % 360
                     this.emit("update")
-                }, 5);
+                }, 50);
             } else {
                 clearInterval(intervals.right)
                 delete intervals.right
