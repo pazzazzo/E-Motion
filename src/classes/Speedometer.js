@@ -1,8 +1,10 @@
 class Speedometer {
     constructor(config = {}) {
+        console.log("✅ Speedometer class invoked");
         this.maxSpeed = config.maxSpeed || 40
     }
     init() {
+        console.log("✅ Spotify class init");
         this.textElement = document.getElementById("speedometer-text-value")
         for (let i = 0; i <= this.maxSpeed*4; i++) {
             setTimeout(() => {

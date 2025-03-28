@@ -5,9 +5,11 @@ class Settings {
     #settings_path = path.join(__dirname, "..", "settings.json")
     #settings_default_path = path.join(__dirname, "..", "settings_default.json")
     constructor() {
+        console.log("✅ Settings class invoked");
         this.data = {}
     }
     init(cb) {
+        console.log("✅ Settings class init");
         if (typeof cb != "function") {
             throw new Error("Settings init function require a callback in parameters")
         }

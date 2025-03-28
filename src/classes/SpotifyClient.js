@@ -7,9 +7,11 @@ class SpotifyClient extends EventEmitter {
     #token;
     constructor(mediaLoader = new MediaLoader()) {
         super()
+        console.log("✅ Spotify class invoked");
         this.mediaLoader = mediaLoader
     }
     init(cb = () => { }) {
+        console.log("✅ Spotify class init");
         this.connected = false;
         this.spotifyApi = new SpotifyWebApi({
             clientId: "068bfc52df2f4fd5aecdd639ee6265de",
@@ -93,7 +95,6 @@ class SpotifyClient extends EventEmitter {
                     let percentage = Math.floor((state.position / state.duration) * 100)
                     this.paused = state.paused
                     this.HTML.main.style.background = `linear-gradient(90deg, #494c5b ${percentage - 1}%, #191a1e ${percentage}%)`
-                    if (state.track_window) {
                     if (state.track_window && state.track_window.current_track) {
                         this.HTML.img.src = state.track_window.current_track.album.images[0].url
                         this.HTML.title.innerHTML = state.track_window.current_track.name

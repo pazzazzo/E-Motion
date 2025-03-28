@@ -2,6 +2,7 @@ const MediaLoader = require("./MediaLoader")
 
 class Waze {
     constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ Waze class invoked");
         this.lastFetches = {}
         this.alertPending = false
         this.pendFetches = new Set()
@@ -14,7 +15,6 @@ class Waze {
             if (this.lastFetches[scopes.join("-")]) {
                 return r(this.lastFetches[scopes.join("-")])
             }
-            console.log("a");
             
             fetch(`https://www.waze.com/live-map/api/georss?top=${bounds.getNorth() + 0.01}&bottom=${bounds.getSouth() - 0.01}&left=${bounds.getWest() - 0.01}&right=${bounds.getEast() + 0.01}&env=row&types=${scopes.join(",")}`).then(v => {
                 v.json().then(json => {

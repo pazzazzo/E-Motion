@@ -29,6 +29,7 @@ class Page {
     #actual = "load"
     #pages_command = {"load": active, "main": hidden}
     constructor() {
+        console.log("✅ Page class invoked");
         this.view = new View()
     }
     get actual() {

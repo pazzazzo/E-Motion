@@ -1,6 +1,6 @@
 class Utils {
     constructor(params) {
-        
+        console.log("✅ Utils class invoked");
     }
     formatNumberDec(number) {
         if (Number.isInteger(number)) {

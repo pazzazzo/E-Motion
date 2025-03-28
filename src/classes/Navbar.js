@@ -2,6 +2,7 @@ const MediaLoader = require("./MediaLoader");
 
 class Navbar {
     constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ Navbar class invoked");
         this.buttons = {
             "home": document.getElementById("menu-home"),
             // "spotify": document.getElementById("menu-music"),

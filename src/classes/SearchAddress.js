@@ -4,6 +4,7 @@ const MediaLoader = require("./MediaLoader")
 
 class SearchAddress {
     constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ SearchAddress class invoked");
         this.searchBtn = document.getElementById("main-search")
         this.searchInp = document.getElementById("search-address")
         this.searchSug = document.getElementById("search-suggest")

@@ -1,9 +1,11 @@
 class Powermeter {
     constructor(config = {}) {
+        console.log("✅ Powermeter class invoked");
         this.maxPowerOut= config.maxPowerOut || 1000
         this.maxPowerIn= config.maxPowerOut || 200
     }
     init() {
+        console.log("✅ Powermeter class init");
         this.textElement = document.getElementById("powermeter-text-value")
         for (let i = 0; i <= this.maxPowerOut*4; i++) {
             setTimeout(() => {

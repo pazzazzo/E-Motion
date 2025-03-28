@@ -4,6 +4,7 @@ const { EventEmitter } = require("events");
 class Coords extends EventEmitter {
     constructor() {
         super()
+        console.log("✅ Coords class invoked");
         this.longitude = -0.572768
         this.latitude = 44.817956
         this.altitude = 71.6
@@ -82,6 +83,7 @@ class Coords extends EventEmitter {
 let coords = new Coords()
 class Position {
     constructor() {
+        console.log("✅ Position class invoked");
         this.coords = coords
     }
     get timestamp() {
