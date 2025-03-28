@@ -9,6 +9,7 @@
 
 
 @import url("./media/views/main.css");
+@import url("./media/views/wifi.css");
 @import url("./media/views/music.css");
 @import url("./media/views/search.css");
 @import url("./media/views/youtube.css");
@@ -168,15 +169,14 @@ video {
     width: 2.5rem;
 }
 
-#info-battery {
-    margin-left: auto;
-    margin-right: 0;
+#info-wifi {
+    margin-left: .5rem;
 }
 
-#info-battery-text {
-    margin-left: 0;
+#info-wifi-text {
+    margin-left: auto;
+    margin-right: 0;
     font-size: .9rem;
-    width: 2.5rem;
 }
 
 .hidden {
