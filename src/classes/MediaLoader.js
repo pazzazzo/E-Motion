@@ -17,6 +17,8 @@ const MapboxCamera = require('./MapboxCamera');
 const Position = require('./Position');
 const Wifi = require('./Wifi');
 const { default: jsQR } = require('jsqr');
+const VoiceControl = require('./VoiceControl');
+const PlaceSearch = require('./PlaceSearch');
 
 
 class MediaLoader extends EventEmitter {
@@ -61,7 +63,7 @@ class MediaLoader extends EventEmitter {
         console.log("🟡 MediaLoader class init");
         const cont = () => {
             const t = performance.now()
-            let i = 3
+            let i = 4
             this.page = new Page()
             this.infoBar = new InfoBar(this)
             this.spotify = new SpotifyClient(this)
@@ -70,6 +72,7 @@ class MediaLoader extends EventEmitter {
             this.direction = new Direction(this)
             this.settings = new Settings()
             this.waze = new Waze(this)
+            this.placeSearch = new PlaceSearch(this)
             const cb = () => {
                 i--
                 if (i <= 0) {
@@ -84,6 +87,7 @@ class MediaLoader extends EventEmitter {
             // this.dataGraph.init(cb)
             this.spotify.init(cb)
             this.settings.init(cb).reset()
+            this.placeSearch.init(cb)
         }
         if (!this.ready) {
             if (this.preinitied) {
@@ -100,6 +104,7 @@ class MediaLoader extends EventEmitter {
         console.log("🔵 MediaLoader class post init");
         this.arrow = new Arrow(this)
         this.mapboxCamera = new MapboxCamera(this)
+        this.voiceControl = new VoiceControl(this)
         this.wifi.postInit()
         cb()
     }

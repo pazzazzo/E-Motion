@@ -104,25 +104,6 @@ ipcRenderer.on("data.speed", (event, speed) => {
         maxHTML.classList.remove("limit")
     }
 })
-let mic = document.getElementById("menu-voice")
-mic.addEventListener("click", async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-    const audioContext = new AudioContext();
-    const mediaStreamAudioSourceNode = audioContext.createMediaStreamSource(stream);
-    const analyserNode = audioContext.createAnalyser();
-    mediaStreamAudioSourceNode.connect(analyserNode);
-    const pcmData = new Float32Array(analyserNode.fftSize);
-    const onFrame = () => {
-        analyserNode.getFloatTimeDomainData(pcmData);
-        let sumSquares = 0.0;
-        for (const amplitude of pcmData) { sumSquares += amplitude * amplitude; }
-        let v = (Math.sqrt(sumSquares / pcmData.length)*100).toFixed(2)
-        mic.style.boxShadow = `0px 0px ${v*1.5}px 1px #62f367 inset`
-
-        window.requestAnimationFrame(onFrame);
-    };
-    window.requestAnimationFrame(onFrame);
-})
 
 function getUSBData(vendorIdDec, productIdDec) {
     return new Promise((r, e) => {
