@@ -15,7 +15,7 @@ class MapboxCamera {
                 easing: (t) => t,
                 bearing,
                 pitch: 45,
-                maxZoom: 18,
+                maxZoom: 18
             }, {
                 tracking: true
             })
@@ -36,8 +36,6 @@ class MapboxCamera {
         })
         this.mediaLoader.map.on("movestart", (e) => {
             if (e.originalEvent) {
-                // console.log(e.originalEvent);
-                
                 this.stopFollow()
             }
         })
@@ -85,11 +83,11 @@ class MapboxCamera {
         } else {
             this.recenterBtn.classList.remove("hidden")
         }
-        object.on("update", this.followCallback)
+        object.onUpdate(this.followCallback)
     }
     stopFollow() {
         if (this.followedObject) {
-            this.followedObject.off("update", this.followCallback)
+            this.followedObject.offUpdate()
             if (this.isFollowUser()) {
                 this.recenterBtn.classList.remove("hidden")
             }

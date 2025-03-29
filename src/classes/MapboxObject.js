@@ -8,6 +8,7 @@ class MapboxObject extends EventEmitter {
         this.coordinates = mediaLoader.position.coords.array
         this.bearing = 90
         this.marker = null;
+        this.updateCallback = null;
         let image = new Image()
         image.src = imgPath
         image.addEventListener("load", () => {
@@ -29,9 +30,18 @@ class MapboxObject extends EventEmitter {
         this.marker && this.marker.setRotation(bearing)
     }
     update(coords, bearing) {
-        this.updateCoords(coords)
         this.updateBearing(bearing)
-        this.emit("update", this.coordinates, this.bearing)
+        this.updateCoords(coords)
+        if (typeof this.updateCallback == "function") {
+            this.updateCallback(this.coordinates, this.bearing)
+        }
+        // this.emit("update", this.coordinates, this.bearing)
+    }
+    onUpdate(cb) {
+        this.updateCallback = cb
+    }
+    offUpdate() {
+        this.updateCallback = null
     }
 }
 

@@ -14,6 +14,12 @@ class VehicleConnect {
     batteryChange(percent) {
         this.mainWindow.webContents.send("data.battery", percent)
     }
+    positonChange(long, lat) {
+        this.mainWindow.webContents.send("data.position", long, lat)
+    }
+    headindChange(bearing) {
+        this.mainWindow.webContents.send("data.heading", bearing)
+    }
     controlClick(name, pressed) {
         this.mainWindow.webContents.send(`control.${name}`, pressed)
     }

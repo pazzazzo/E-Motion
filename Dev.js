@@ -8,7 +8,10 @@ class Dev {
         this.vehicleConnect = config.vehicleConnect
         this.accelInterval;
         this.speed = 0;
-
+        this.heading = 90
+        this.longitude = -0.572768
+        this.latitude = 44.817956
+        const intervals = {}
         ipcMain.on("dev.button", (event, data) => {
             console.log("btn", data);
             if (data.name === "accelerator") {
@@ -41,8 +44,69 @@ class Dev {
                     }, 400)
                 }
             }
-            if (["minus", "up", "plus", "stats", "left", "ok", "right", "mic", "down", "back"].includes(data.name)) {
+            if (["minus", "plus", "stats", "ok", "mic", "back"].includes(data.name)) {
                 this.vehicleConnect.controlClick(data.name, data.pressed)
+            }
+            if (data.name == "up") {
+                if (data.pressed) {
+                    if (intervals.up) {
+                        clearInterval(intervals.up)
+                    }
+                    intervals.up = setInterval(() => {
+                        this.latitude += 0.0001 * Math.cos(this.heading * (Math.PI / 180))
+                        this.longitude += 0.0001 * Math.sin(this.heading * (Math.PI / 180))
+                        this.vehicleConnect.positonChange(this.longitude, this.latitude)
+                    }, 250);
+                } else {
+                    clearInterval(intervals.up)
+                    delete intervals.up
+                }
+            }
+
+            if (data.name == "down") {
+                if (data.pressed) {
+                    if (intervals.down) {
+                        clearInterval(intervals.down)
+                    }
+                    intervals.down = setInterval(() => {
+                        this.latitude -= 0.00001 * Math.cos(this.heading * (Math.PI / 180))
+                        this.longitude -= 0.00001 * Math.sin(this.heading * (Math.PI / 180))
+                        this.vehicleConnect.positonChange(this.longitude, this.latitude)
+                    }, 25);
+                } else {
+                    clearInterval(intervals.down)
+                    delete intervals.down
+                }
+            }
+
+            if (data.name == "left") {
+                if (data.pressed) {
+                    if (intervals.left) {
+                        clearInterval(intervals.left)
+                    }
+                    intervals.left = setInterval(() => {
+                        this.heading = (this.heading - 5) % 360
+                        this.vehicleConnect.headindChange(this.heading)
+                    }, 50);
+                } else {
+                    clearInterval(intervals.left)
+                    delete intervals.left
+                }
+            }
+
+            if (data.name == "right") {
+                if (data.pressed) {
+                    if (intervals.right) {
+                        clearInterval(intervals.right)
+                    }
+                    intervals.right = setInterval(() => {
+                        this.heading = (this.heading + 5) % 360
+                        this.vehicleConnect.headindChange(this.heading)
+                    }, 50);
+                } else {
+                    clearInterval(intervals.right)
+                    delete intervals.right
+                }
             }
         })
         ipcMain.on("dev.switch", (event, data) => {
