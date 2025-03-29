@@ -4,6 +4,7 @@ class Battery {
     constructor() {
         this.level = 0
         this.mode = "level"
+        console.log("✅ Battery class invoked");
     }
     setLevel(percent) {
         if (percent < 0 || percent > 100) {

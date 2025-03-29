@@ -2,6 +2,7 @@ const MediaLoader = require("./MediaLoader");
 
 class Direction {
     constructor(mediaLoader = new MediaLoader()) {
+        console.log("✅ Direction class invoked");
         this.mediaLoader = mediaLoader
     }
     async setMap(dest) {

@@ -9,6 +9,7 @@ function save() {
 
 class DataGraph {
     constructor() {
+        console.log("✅ DataGraph class invoked");
     }
     init(cb) {
         console.log(Date.now());

@@ -6,6 +6,7 @@ class Database {
     constructor(config = {}) {
         this.path = config.path || path.join(__dirname, "..", "database.json")
         this.data = {}
+        console.log("✅ Database class invoked");
     }
     save(cb) {
         fs.writeFile(this.path, JSON.stringify(data), (err) => {
