@@ -1,0 +1,269 @@
+<div class="view" id="settings-app">
+    <div id="settings-left-bar">
+        <div id="settings-title">
+            <span class="material-symbols-outlined">
+                settings
+            </span>
+            <span>Paramètres</span>
+        </div>
+        <div class="settings-left-item selected" id="settings-list-nav">
+            <span class="material-symbols-outlined">
+                dock_to_bottom
+            </span>
+            <span>Barre de navigation</span>
+        </div>
+        <div class="settings-left-item" id="settings-list-map">
+            <span class="material-symbols-outlined">
+                map
+            </span>
+            <span>Carte</span>
+        </div>
+        <div class="settings-left-item" id="settings-list-sound">
+            <span class="material-symbols-outlined">
+                graphic_eq
+            </span>
+            <span>Son</span>
+        </div>
+        <div class="settings-left-item" id="settings-list-notifications">
+            <span class="material-symbols-outlined">
+                notifications
+            </span>
+            <span>Alertes</span>
+        </div>
+        <div class="settings-left-item" id="settings-list-system">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+            <span>Système</span>
+        </div>
+    </div>
+    <div id="settings-main">
+        <div id="settings-type">Personnalisation des icônes</div>
+        <div class="settings-card active" id="settings-nav">
+            <div class="settings-title">Icônes de navigation</div>
+            <div class="settings-desc">Modifiez l'apparence et l'ordre des icônes de navigation</div>
+            <div class="settings-nav">
+                <div class="settings-nav-upsidedown">
+                    <div class="settings-nav-upside">
+                        <span class="material-symbols-outlined">
+                            arrow_upward
+                        </span>
+                    </div>
+                    <div class="settings-nav-down">
+                        <span class="material-symbols-outlined">
+                            arrow_downward
+                        </span>
+                    </div>
+                </div>
+                <div class="settings-nav-icon-container">
+                    <div class="settings-nav-icon">
+                        <img src="./media/images/settings-icon.png" alt="">
+                    </div>
+                </div>
+                <div class="settings-nav-main">
+                    <div class="settings-nav-name">Nom de l'icône</div>
+                    <input type="color" class="settings-nav-color" value="#000000">
+                </div>
+                <div class="settings-nav-delete disabled">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+            </div>
+            <div class="settings-nav-add">
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+                <span>Ajouter une application</span>
+            </div>
+        </div>
+        <div class="settings-card" id="settings-map">
+            <div class="settings-title">Apparence de la carte</div>
+            <div class="settings-desc">Personnalisez l'apparence et le comportement de la carte</div>
+            <div class="settings-subtitle">Couleurs des routes</div>
+            <div class="settings-map-colorrow">
+                <span>Normal</span>
+                <input type="color" class="settings-map-color" id="normal-map-color" value="#000000">
+            </div>
+            <div class="settings-map-colorrow">
+                <span>Traffic dense</span>
+                <input type="color" class="settings-map-color" id="traffic-map-color" value="#000000">
+            </div>
+            <div class="settings-map-colorrow">
+                <span>Embouteillage</span>
+                <input type="color" class="settings-map-color" id="heavy-map-color" value="#000000">
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-subtitle">Style de carte</div>
+            <div class="settings-map-style">
+                <div class="settings-map-stylerow">
+                    <input type="radio" name="settings-map-style" id="" checked>
+                    <label for="">Carte standard</label>
+                </div>
+                <div class="settings-map-stylerow">
+                    <input type="radio" name="settings-map-style" id="">
+                    <label for="">Carte sombre</label>
+                </div>
+                <div class="settings-map-stylerow">
+                    <input type="radio" name="settings-map-style" id="">
+                    <label for="">Carte satellite</label>
+                </div>
+                <div class="settings-map-stylerow">
+                    <input type="radio" name="settings-map-style" id="">
+                    <label for="">Mode terrain</label>
+                </div>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Mise à jour du traffic</span>
+                    <span>Fréquence des mises à jour du trafic en temps réel</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <select name="settings-map-refresh-freq" id="settings-map-refresh-freq">
+                        <option value="15s">15 secondes</option>
+                        <option value="30s">30 secondes</option>
+                        <option value="1min">1 minute</option>
+                        <option value="5min">5 minutes</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="settings-card" id="settings-sound">
+            <div class="settings-title">Sons et notifications</div>
+            <div class="settings-desc">Personnalisez les sons de notification et d'alerte</div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Volume principal</span>
+                    <span>Ajustez le volume global de l'application</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <span class="material-symbols-outlined">
+                        volume_up
+                    </span>
+                    <input type="range" name="settings-map-volume" id="settings-map-volume" min="0" max="100"
+                        value="50">
+                </div>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-subtitle">Sons des événements</div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Alerte de trafic</span>
+                    <span>Son joué lors d'un changement important de trafic</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <div class="settings-event-sound-play">
+                        <span class="material-symbols-outlined">
+                            play_arrow
+                        </span>
+                    </div>
+                    <select name="settings-event-sound">
+                        <option value="15s">Son</option>
+                        <option value="30s">Son</option>
+                        <option value="1min">Son</option>
+                        <option value="5min">Son</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Arrivée à destination</span>
+                    <span>Son joué à l'arrivée à destination</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <div class="settings-event-sound-play">
+                        <span class="material-symbols-outlined">
+                            play_arrow
+                        </span>
+                    </div>
+                    <select name="settings-event-sound">
+                        <option value="15s">Son</option>
+                        <option value="30s">Son</option>
+                        <option value="1min">Son</option>
+                        <option value="5min">Son</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Instructions de navigation</span>
+                    <span>Voix pour les instructions de navigation</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <div class="settings-event-sound-play">
+                        <span class="material-symbols-outlined">
+                            play_arrow
+                        </span>
+                    </div>
+                    <select name="settings-event-sound">
+                        <option value="15s">Français (F)</option>
+                        <option value="30s">Son</option>
+                        <option value="1min">Son</option>
+                        <option value="5min">Son</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Mode silencieux</span>
+                    <span>Désactiver tous les sons de l'application</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <input type="checkbox" class="switch">
+                </div>
+            </div>
+        </div>
+        <div class="settings-card" id="settings-spotify">
+            <div class="settings-title">Intégration Spotify</div>
+            <div class="settings-desc">Paramètres pour l'intégration avec Spotify</div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-icon">
+                    <span class="material-symbols-outlined">
+                        phone_android
+                    </span>
+                </div>
+                <div class="settings-map-single-control-text">
+                    <span>Basculement automatique</span>
+                    <span>Basculer automatiquement la lecture Spotify du téléphone au site</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <input type="checkbox" class="switch">
+                </div>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Délai de basculement</span>
+                    <span>Délai avant de basculer la lecture</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <select name="settings-event-sound">
+                        <option value="0">Immédiat</option>
+                        <option value="3">3 secondes</option>
+                        <option value="5">5 secondes</option>
+                        <option value="10">10 secondes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="settings-map-single-control">
+                <div class="settings-map-single-control-text">
+                    <span>Notification de basculement</span>
+                    <span>Afficher une notification lors du basculement</span>
+                </div>
+                <div class="settings-map-single-control-value">
+                    <input type="checkbox" class="switch">
+                </div>
+            </div>
+        </div>
+        <div class="justify-end">
+            <div id="settings-save">
+                <span class="material-symbols-outlined">
+                    save
+                </span>
+                <span>Sauvegarder</span>
+            </div>
+        </div>
+    </div>
+</div>

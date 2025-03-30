@@ -1,24 +1,23 @@
-const EventEmitter = require('events');
-const fs = require('fs');
-const path = require('path');
-const Database = require('./Database');
-// const DataGraph = require("./DataGraph")
-const InfoBar = require('./InfoBar');
 const SpotifyClient = require('./SpotifyClient');
 const SearchAddress = require('./SearchAddress');
-const Page = require('./Page');
-const Direction = require('./Direction');
-const Navbar = require('./Navbar');
-const Settings = require('./Settings');
-const Waze = require('./Waze');
-const Arrow = require('./Arrow');
-const MapboxObject = require('./MapboxObject');
 const MapboxCamera = require('./MapboxCamera');
-const Position = require('./Position');
-const Wifi = require('./Wifi');
-const { default: jsQR } = require('jsqr');
 const VoiceControl = require('./VoiceControl');
 const PlaceSearch = require('./PlaceSearch');
+const { default: jsQR } = require('jsqr');
+const AppLoader = require('./AppLoader');
+const Direction = require('./Direction');
+const EventEmitter = require('events');
+const Position = require('./Position');
+const Settings = require('./Settings');
+const Database = require('./Database');
+const InfoBar = require('./InfoBar');
+const Navbar = require('./Navbar');
+const Arrow = require('./Arrow');
+const Waze = require('./Waze');
+const Wifi = require('./Wifi');
+const Page = require('./Page');
+const path = require('path');
+const fs = require('fs');
 
 
 class MediaLoader extends EventEmitter {
@@ -105,6 +104,8 @@ class MediaLoader extends EventEmitter {
         this.arrow = new Arrow(this)
         this.mapboxCamera = new MapboxCamera(this)
         this.voiceControl = new VoiceControl(this)
+        this.appLoader = new AppLoader(this)
+        this.navbar.postInit()
         this.wifi.postInit()
         cb()
     }

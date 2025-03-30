@@ -6,6 +6,10 @@
     position: absolute;
     height: 100vh;
     width: 100%;
+    z-index: 0;
+}
+.main-widget {
+    z-index: 1;
 }
 
 #main-search {

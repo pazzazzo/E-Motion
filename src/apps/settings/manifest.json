@@ -1,6 +1,8 @@
 {
     "id": "settings",
     "name": "Paramètres",
+    "main": "Settings.js",
+    "css": "settings.css",
     "default-icon": "hydix:settings-icon",
     "default-color": "#0b4fbd"
 }

@@ -6,6 +6,7 @@
     align-items: center;
     mask: radial-gradient(circle 135px at top, transparent 30%, black 31%);
     position: relative;
+    z-index: 3;
 }
 
 .menu-icon {
@@ -20,7 +21,10 @@
 #menu-home {
     margin-right: 1.2rem !important;
 }
-#menu-music {
+.menu-icon:nth-child(9) {
+    margin-right: calc(54px + 3rem);
+}
+/* #menu-music {
     box-shadow: 0px 0px 0px 2px #0c67cf;
 }
 #menu-ytb {
@@ -28,7 +32,7 @@
 }
 #menu-phone {
     box-shadow: 0px 0px 0px 2px #08c98f;
-}
+} */
 #menu-separator {
     height: calc(100% - 1rem);
     width: 2px;
@@ -40,7 +44,7 @@
     position: absolute;
     left: 50%;
     bottom: 0px;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, -50%);
     /* background-color: rgb(7 126 229); */
     background: linear-gradient(49deg, #14d289 13%, #0f57ff 48%, #ea0b59 99%);
 	background-size: 400% 400%;
@@ -52,7 +56,7 @@
     align-items: center;
     justify-content: center;
     mask: radial-gradient(circle 80px at center, transparent 30%, black 31%);
-    z-index: 2;
+    z-index: 4;
 }
 /* #menu-voice > span {
     font-size: 2.5rem;

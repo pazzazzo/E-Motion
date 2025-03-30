@@ -4,7 +4,7 @@
     background-color: rgba(0, 0, 0, 0.247);
     top: 2rem;
     flex-direction: column;
-    z-index: 9;
+    z-index: 2;
 }
 #search-form {
     position: absolute;
@@ -56,7 +56,7 @@
 
 /* Inputs */
 input, .input, textarea{
-    background-color: #dedee2 !important;
+    background-color: #dedee2;
     border: #3d3d3d solid 1px;
     border-radius: 0.1875rem;
     padding: 0.25rem 0.75rem;
