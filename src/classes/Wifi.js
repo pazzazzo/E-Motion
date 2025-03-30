@@ -62,7 +62,7 @@ class Wifi extends EventEmitter {
                 this.mediaLoader.infoBar.updateWifi(data.icons.wifi.off, "Non connecté")
             }
             setTimeout(() => {
-                this.#updateWifi()
+                requestIdleCallback(() => this.#updateWifi());
             }, this.state == 0 ? 1000 : 5000);
         })
     }
