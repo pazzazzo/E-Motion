@@ -44,15 +44,16 @@ En plus des fonctionnalités logicielles, l'intérieur du véhicule comprendra �
 
 - **Taille de l'écran** : 15 pouces
 - **Résolution** : 1366x768 pixels
-- **Frameworks Utilisé** : Electron JS, Waze, Spotify, Mapbox, Google TTS, Chart JS, Wit.AI...
+- **Frameworks Utilisé** : Electron JS, Waze, Spotify, Mapbox, Google TTS, Google Maps, Chart JS, Wit.AI...
 
 ### Fonctionnalités Principales :
 
-1. **Affichage des Informations du Véhicule** : Le dashboard affiche en temps réel des informations vitales sur le véhicule, telles que la vitesse, la température du moteur, le niveau d'essence, etc.
+1. **Intelligence Artificielle Vocale** : Une intelligence artificielle basée sur Wit.AI permet de faire facilement des recherche de lieu et contrôler la musique
+2. **Affichage des Informations du Véhicule** : Le dashboard affiche en temps réel des informations vitales sur le véhicule, telles que la vitesse, la température du moteur, le niveau d'essence, etc.
 
-2. **Contrôle et Gestion** : Il permet aux utilisateurs d'interagir un tas d'applications tel que Spotify, Youtube, Caméra...
+3. **Contrôle et Gestion** : Il permet aux utilisateurs d'interagir un tas d'applications tel que Spotify, Youtube, Caméra...
 
-3. **Navigation Intuitive** : L'interface utilisateur est conçue pour être conviviale et intuitive, offrant une navigation fluide.
+4. **Navigation Intuitive** : L'interface utilisateur est conçue pour être conviviale et intuitive, offrant une navigation fluide.
 
 ### Aperçu :
 
