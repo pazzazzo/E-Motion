@@ -48,7 +48,7 @@ class Direction {
     async getRoute(dest) {
         return new Promise(async (resolve) => {
             let userLocation = this.mediaLoader.position.coords
-            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${dest.longitude}%2C${dest.latitude}?alternatives=false&annotations=duration,congestion,maxspeed&geometries=geojson&notifications=all&language=fr&overview=full&steps=true&&access_token=${mediaLoader.database.data["mapbox-token"]}`
+            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${dest.longitude}%2C${dest.latitude}?alternatives=false&annotations=duration,congestion,maxspeed&geometries=geojson&notifications=all&language=fr&overview=full&steps=true&access_token=${mediaLoader.database.data["mapbox-token"]}`
             console.log(url);
 
 
@@ -161,6 +161,33 @@ class Direction {
 
 
                 resolve([lineSegments, coordinates]);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des adresses :", error);
+                resolve({});
+            }
+        });
+    }
+    getDistance(coordinates) {
+        return new Promise(async (resolve) => {
+            let userLocation = this.mediaLoader.position.coords
+            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${coordinates[0]}%2C${coordinates[1]}?alternatives=false&annotations=distance&access_token=${mediaLoader.database.data["mapbox-token"]}`
+            console.log(url);
+
+
+            try {
+                const response = await fetch(url);
+                const json = await response.json();
+                console.log(json);
+                
+                let distance = Math.floor(json.routes[0].distance)
+                let res = {}
+                if (distance > 1000) {
+                    res.m = distance % 1000
+                    res.km = (distance - res.m) / 1000
+                } else {
+                    res.m = distance
+                }
+                resolve(res)
             } catch (error) {
                 console.error("Erreur lors de la récupération des adresses :", error);
                 resolve({});

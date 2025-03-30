@@ -8,6 +8,7 @@ class VoiceControl {
         this.mediaLoader = mediaLoader
         this.animationFrameID = null;
         this.placesList = document.getElementById("main-places")
+        this.waypointsList = new Set()
         this.mic = document.getElementById("menu-voice")
         this.mic.style.background = `linear-gradient(41deg, #14d289 13%, #0f57ff 48%, #ea0b59 99%);`
         this.mic.addEventListener("click", async () => {
@@ -41,26 +42,34 @@ class VoiceControl {
                     if (res.entities?.waypoint_name?.length) {
                         let placeName = res.entities.waypoint_name[0].value
                         mediaLoader.placeSearch.searchName(placeName, (places) => {
+                            this.clearWaypoints()
+                            const bounds = new mapboxgl.LngLatBounds(
+                                [places[0].location.lng(), places[0].location.lat()],
+                                [places[0].location.lng(), places[0].location.lat()],
+                            );
                             this.placesList.innerHTML = ""
-                            places.forEach(place => {
+                            places.forEach(async place => {
                                 console.log(`Nom: ${place.displayName}\nAdresse: ${place.formattedAddress}`);
-                                this.placesList.innerHTML += `<div class="main-place">
-                            <img src="${place.photos.length ? place.photos[0].getURI({ maxHeight: 400 }) : "./media/images/placeholder.jpg"}" alt="Place picture" class="main-place-image">
-                            <div class="main-place-data">
-                                <div class="main-place-title">${place.displayName}</div>
-                                <div class="main-place-address">${place.formattedAddress}</div>
-                                <div class="main-place-review">
-                                    ${this.formatReview(place)}
-                                </div>
-                            </div>
-                            <div class="main-place-distance"><span>5.2km</span></div>
-                        </div>`
-                                place.photos.forEach(photo => {
-                                    console.log(photo.getURI({ maxHeight: 400 }));
-                                });
+                                this.addWaypoint([place.location.lng(), place.location.lat()], bounds)
+                                let dist = await this.mediaLoader.direction.getDistance([place.location.lng(), place.location.lat()])
+                                this.placesList.innerHTML += `
+                                <div class="main-place">
+                                    <img src="${place.photos.length ? place.photos[0].getURI({ maxHeight: 400 }) : "./media/images/placeholder.jpg"}" alt="Place picture" class="main-place-image">
+                                    <div class="main-place-data">
+                                        <div class="main-place-title">${place.displayName}</div>
+                                        <div class="main-place-address">${place.formattedAddress}</div>
+                                        <div class="main-place-review">
+                                            ${this.formatReview(place)}
+                                        </div>
+                                    </div>
+                                    <div class="main-place-distance"><span>${this.formatDistance(dist)}</span></div>
+                                </div>`
                             });
+                            this.mediaLoader.mapboxCamera.fitBounds(bounds)
                         }, { max: 4 })
                     }
+                } else {
+                    console.log("no result");
                 }
             }
 
@@ -105,6 +114,26 @@ class VoiceControl {
         let result = `<span class="material-symbols-outlined filled">star</span>`.repeat(place.reviews[0].rating)
             + `<span class="material-symbols-outlined filled">star</span>`.repeat(5 - place.reviews[0].rating)
         return result
+    }
+    formatDistance(dist) {
+        if (dist.km) {
+            return `${dist.km}.${(dist.m - (dist.m%100))/100}km`
+        } else {
+            return `${dist.m}m`
+        }
+    }
+    clearWaypoints() {
+        this.waypointsList.forEach(m => {
+            m.remove()
+            this.waypointsList.delete(m)
+        })
+    }
+    addWaypoint(coordinates, bounds) {
+        let m = new mapboxgl.Marker().setLngLat(coordinates)
+        m.addTo(mediaLoader.map)
+        this.waypointsList.add(m)
+
+        bounds.extend(coordinates);
     }
 }
 
