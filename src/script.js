@@ -10,12 +10,6 @@ const Vehicle = require('./classes/Vehicle');
 const usb = require("usb")
 const readline = require('readline');
 const { ipcRenderer } = require('electron');
-const googleTTS = require('google-tts-api');
-const url = googleTTS.getAudioUrl('police detecté Cours de la Marne.', {
-    lang: 'fr',
-    slow: false,
-    host: 'https://translate.google.com',
-});
 // console.log(url);
 
 const vehicle = new Vehicle()
