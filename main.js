@@ -43,7 +43,6 @@ const createWindow = () => {
       plugins: true,
       experimentalFeatures: true,
       webgl: true,
-
     }
   })
 
