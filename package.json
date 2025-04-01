@@ -6,7 +6,7 @@
   "homepage": "https://pazzazzo.github.io/e-motion",
   "scripts": {
     "test": "UV_THREADPOOL_SIZE=$(nproc) electron . -dev --no-zygote --no-sandbox",
-    "start": "UV_THREADPOOL_SIZE=$(nproc) electron . --no-zygote --no-sandbox --no-gpu",
+    "start": "UV_THREADPOOL_SIZE=$(nproc) electron . --no-zygote --no-sandbox",
     "perf": "chrt -r 99 npm test",
     "version": "electron -v",
     "pack": "electron-builder --dir",
