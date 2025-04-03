@@ -1,22 +1,39 @@
 {
     "machine": {
-        "name": "E-motion"
+        "name": "E-motion",
+        "username": "user"
     },
     "map": {
         "color": {
             "route": {
-                "basic": "#3b27ff",
+                "basic": "#4264FB",
                 "traffic": "#D4B21D",
                 "heavyTraffic": "#D41D1D"
             }
-        }
+        },
+        "style": "dark",
+        "updateFrequency": 60
     },
     "navbar": [
         {"id": "settings", "removable": false}
     ],
     "sound": {
         "mapGo": "selected",
+        "mapArrived": "update",
+        "mapTraffic": "warn",
         "usbConnected": "connected",
         "usbDisconnected": "disconnected"
+    },
+    "spotify": {
+        "autoConnect": false,
+        "connectDelay": 5,
+        "connectNotify": true
+    },
+    "camera": {
+        "device": {
+            "dashcam": "bb799aeae3c991da49aac7556a4098d07c0c7a7002be36d41623d6f15d766683",
+            "front": "null",
+            "back": "null"
+        }
     }
 }

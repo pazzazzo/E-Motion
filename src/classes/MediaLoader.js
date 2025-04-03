@@ -136,6 +136,9 @@ class MediaLoader extends EventEmitter {
             })
         })
     }
+    getSounds() {
+        return Object.keys(this.#sounds_buffer)
+    }
     #loadMap(token, cbr) {
         mapboxgl.accessToken = token;
         this.map = new mapboxgl.Map({

@@ -57,7 +57,7 @@
 /* Inputs */
 input, .input, textarea{
     background-color: #dedee2;
-    border: #3d3d3d solid 1px;
+    border: 1px solid var(--border-color);
     border-radius: 0.1875rem;
     padding: 0.25rem 0.75rem;
     font-size: .9375rem;
@@ -78,7 +78,7 @@ input::placeholder, textarea::placeholder {
 }
 
 input:valid {
-    border: #3d3d3d solid 1px;
+    border: 1px solid var(--border-color);
 }
 
 input:disabled {
