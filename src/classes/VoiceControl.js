@@ -9,6 +9,9 @@ class VoiceControl {
         this.animationFrameID = null;
         this.placesList = document.getElementById("main-places")
         this.waypointsList = new Set()
+        this.placesElementList = new Set()
+        this.selectedPlace = null
+        this.clickNum = 0;
         this.mic = document.getElementById("menu-voice")
         this.mic.style.background = `linear-gradient(41deg, #14d289 13%, #0f57ff 48%, #ea0b59 99%);`
         this.mic.addEventListener("click", async () => {
@@ -37,33 +40,91 @@ class VoiceControl {
             const parseResult = (err, resp, body) => {
                 if (err) return console.error(err);
                 let json = JSON.parse(body)
+                console.log("rep", err, resp, body);
+                
                 if (json.outcomes?.length) {
                     let res = json.outcomes[0]
                     if (res.entities?.waypoint_name?.length) {
                         let placeName = res.entities.waypoint_name[0].value
                         mediaLoader.placeSearch.searchName(placeName, (places) => {
                             this.clearWaypoints()
+                            this.clickNum = 0;
+                            this.selectedPlace = null;
                             const bounds = new mapboxgl.LngLatBounds(
-                                [places[0].location.lng(), places[0].location.lat()],
-                                [places[0].location.lng(), places[0].location.lat()],
+                                ...places.map(p => [p.location.lng(), p.location.lat()])
                             );
-                            this.placesList.innerHTML = ""
-                            places.forEach(async place => {
+                            places.forEach(async (place) => {
                                 console.log(`Nom: ${place.displayName}\nAdresse: ${place.formattedAddress}`);
-                                this.addWaypoint([place.location.lng(), place.location.lat()], bounds)
                                 let dist = await this.mediaLoader.direction.getDistance([place.location.lng(), place.location.lat()])
-                                this.placesList.innerHTML += `
-                                <div class="main-place">
-                                    <img src="${place.photos.length ? place.photos[0].getURI({ maxHeight: 400 }) : "./media/images/placeholder.jpg"}" alt="Place picture" class="main-place-image">
-                                    <div class="main-place-data">
-                                        <div class="main-place-title">${place.displayName}</div>
-                                        <div class="main-place-address">${place.formattedAddress}</div>
-                                        <div class="main-place-review">
-                                            ${this.formatReview(place)}
-                                        </div>
-                                    </div>
-                                    <div class="main-place-distance"><span>${this.formatDistance(dist)}</span></div>
-                                </div>`
+                                const placeElement = document.createElement("div");
+                                placeElement.className = "main-place";
+                                placeElement.addEventListener("click", () => {
+                                    mediaLoader.direction.setMap({
+                                        longitude: place.location.lng(),
+                                        latitude: place.location.lat()
+                                    })
+                                    if (this.selectedPlace !== placeElement) {
+                                        this.clickNum = 1
+                                    } else {
+                                        this.clickNum++
+                                    }
+                                    this.selectedPlace = placeElement
+                                    if (this.clickNum == 1) {
+                                        let i = -1
+                                        this.placesElementList.forEach((m) => {
+                                            i++
+                                            if (m !== placeElement) {
+                                                m.classList.add("back")
+                                                m.classList.remove("selected")
+                                            } else {
+                                                m.classList.remove("back")
+                                                m.classList.add("selected")
+                                                this.placesList.classList.add("selected")
+
+
+                                                this.placesList.style.setProperty("--pointer", `${(i*this.placesList.clientHeight/4) + this.placesList.clientHeight/8}px`)
+                                            }
+                                        })
+                                    } else {
+                                        this.clearWaypoints()
+                                        this.placesList.classList.remove("selected")
+                                    }
+                                })
+                                this.addWaypoint([place.location.lng(), place.location.lat()], bounds, placeElement)
+
+                                const placeImage = document.createElement("img");
+                                placeImage.src = place.photos.length ? place.photos[0].getURI({ maxHeight: 400 }) : "./media/images/placeholder.jpg";
+                                placeImage.alt = "Place picture";
+                                placeImage.className = "main-place-image";
+
+                                const placeData = document.createElement("div");
+                                placeData.className = "main-place-data";
+
+                                const placeTitle = document.createElement("div");
+                                placeTitle.className = "main-place-title";
+                                placeTitle.textContent = place.displayName;
+
+                                const placeAddress = document.createElement("div");
+                                placeAddress.className = "main-place-address";
+                                placeAddress.textContent = place.formattedAddress;
+
+                                const placeReview = document.createElement("div");
+                                placeReview.className = "main-place-review";
+                                placeReview.innerHTML = this.formatReview(place);
+
+                                const placeDistance = document.createElement("div");
+                                placeDistance.className = "main-place-distance";
+                                placeDistance.innerHTML = `<span>${this.formatDistance(dist)}</span>`;
+
+                                placeData.appendChild(placeTitle);
+                                placeData.appendChild(placeAddress);
+                                placeData.appendChild(placeReview);
+
+                                placeElement.appendChild(placeImage);
+                                placeElement.appendChild(placeData);
+                                placeElement.appendChild(placeDistance);
+
+                                this.placesList.appendChild(placeElement);
                             });
                             this.mediaLoader.mapboxCamera.fitBounds(bounds)
                         }, { max: 4 })
@@ -117,7 +178,7 @@ class VoiceControl {
     }
     formatDistance(dist) {
         if (dist.km) {
-            return `${dist.km}.${(dist.m - (dist.m%100))/100}km`
+            return `${dist.km}.${(dist.m - (dist.m % 100)) / 100}km`
         } else {
             return `${dist.m}m`
         }
@@ -127,13 +188,18 @@ class VoiceControl {
             m.remove()
             this.waypointsList.delete(m)
         })
+        this.placesElementList.forEach(m => {
+            m.remove()
+            this.placesElementList.delete(m)
+        })
     }
-    addWaypoint(coordinates, bounds) {
+    addWaypoint(coordinates, bounds, placeElement) {
         let m = new mapboxgl.Marker().setLngLat(coordinates)
         m.addTo(mediaLoader.map)
         this.waypointsList.add(m)
+        this.placesElementList.add(placeElement)
 
-        bounds.extend(coordinates);
+        // bounds.extend(coordinates);
     }
 }
 

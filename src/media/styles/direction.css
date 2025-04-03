@@ -125,11 +125,46 @@
 }
 
 .main-place {
+    position: relative;
     display: flex;
     background: #191a1e;
     padding: .5rem;
     border-radius: 13px;
     margin-top: 1rem;
+}
+.main-place.back {
+    background: #16181ee8;
+}
+.main-place.selected {
+    background: #252831;
+}
+.main-place.back::after {    
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000078;
+    border-radius: 13px;
+    opacity: 1;
+    backdrop-filter: blur(1px);
+}
+
+#main-places.selected::after {
+    content: '';
+    position: absolute;
+    top: var(--pointer);
+    /* left: 0; */
+    right: -20px;
+    /* bottom: 0; */
+    background: #ff0000;
+    border-radius: 50%;
+    opacity: 1;
+    /* backdrop-filter: blur(1px); */
+    height: 15px;
+    width: 15px;
+    transition: top .3s ease 0s;
 }
 
 .main-place-image {
