@@ -14,7 +14,7 @@ class PlaceSearch {
     searchName(name, cb, settings = {}) {
         const request = {
             textQuery: name,
-            fields: ["displayName", "location", "businessStatus", "formattedAddress", "reviews", "photos"],
+            fields: ["displayName", "location", "businessStatus", "formattedAddress", "rating", "photos"],
             // includedType: "restaurant",
             locationBias: { lat: this.mediaLoader.position.coords.latitude, lng: this.mediaLoader.position.coords.longitude },
             // isOpenNow: true,

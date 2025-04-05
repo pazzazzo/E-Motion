@@ -12,9 +12,14 @@ class VoiceControl {
         this.placesElementList = new Set()
         this.selectedPlace = null
         this.clickNum = 0;
+        this.recording = null;
         this.mic = document.getElementById("menu-voice")
         this.mic.style.background = `linear-gradient(41deg, #14d289 13%, #0f57ff 48%, #ea0b59 99%);`
         this.mic.addEventListener("click", async () => {
+            if (this.recording) {
+                this.recording.stop()
+                return
+            }
             if (this.animationFrameID) return;
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
             const audioContext = new AudioContext();
@@ -41,7 +46,7 @@ class VoiceControl {
                 if (err) return console.error(err);
                 let json = JSON.parse(body)
                 console.log("rep", err, resp, body);
-                
+
                 if (json.outcomes?.length) {
                     let res = json.outcomes[0]
                     if (res.entities?.waypoint_name?.length) {
@@ -82,7 +87,7 @@ class VoiceControl {
                                                 this.placesList.classList.add("selected")
 
 
-                                                this.placesList.style.setProperty("--pointer", `${(i*this.placesList.clientHeight/4) + this.placesList.clientHeight/8}px`)
+                                                this.placesList.style.setProperty("--pointer", `${(i * this.placesList.clientHeight / 4) + this.placesList.clientHeight / 8}px`)
                                             }
                                         })
                                     } else {
@@ -134,7 +139,7 @@ class VoiceControl {
                 }
             }
 
-            const recording = recorder.record({
+            this.recording = recorder.record({
                 // recordProgram: "rec",
                 silence: 1,
                 // threshold: 0.1,
@@ -142,7 +147,7 @@ class VoiceControl {
                 thresholdEnd: 0.1
             })
 
-            recording.stream().pipe(request.post({
+            this.recording.stream().pipe(request.post({
                 'url': 'https://api.wit.ai/speech?client=chromium&lang=fr-fr&output=json',
                 'headers': {
                     'Accept': 'application/vnd.wit.20160202+json',
@@ -150,7 +155,7 @@ class VoiceControl {
                     'Content-Type': 'audio/wav'
                 }
             }, parseResult))
-            recording.stream().once("finish", () => {
+            this.recording.stream().once("finish", () => {
                 console.log("ok");
 
                 this.mic.style.boxShadow = `0px 0px 0px 1px rgba(0, 0, 0, 0) inset`
@@ -164,16 +169,28 @@ class VoiceControl {
                 stream.getTracks().forEach(function (track) {
                     track.stop();
                 });
+                this.recording = null
+                if (this.stopTimeout) {
+                    clearTimeout(this.stopTimeout)
+                    this.stopTimeout = null
+                }
             })
 
-            setTimeout(() => {
-                recording.stop()
+            this.stopTimeout = setTimeout(() => {
+                if (this.recording) {
+                    this.recording.stop()
+                }
             }, 20000)
         })
     }
     formatReview(place) {
-        let result = `<span class="material-symbols-outlined filled">star</span>`.repeat(place.reviews[0].rating)
-            + `<span class="material-symbols-outlined filled">star</span>`.repeat(5 - place.reviews[0].rating)
+        let rate = place.rating
+        let intRate = Math.floor(rate)
+        let semiRate = (intRate < rate) ? 1 : 0
+        let noRate = 5 - (intRate + semiRate)
+        let result = `<span class="material-symbols-outlined filled">star</span>`.repeat(intRate)
+            + `<span class="material-symbols-outlined filled">star_half</span>`.repeat(semiRate)
+            + `<span class="material-symbols-outlined">star</span>`.repeat(noRate)
         return result
     }
     formatDistance(dist) {

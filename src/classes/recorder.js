@@ -78,6 +78,7 @@ Enable debugging with the environment variable DEBUG=record.`
   stop () {
     assert(this.process, 'Recording not yet started')
 
+    this.process.stdout.emit("finish")
     this.process.kill()
   }
 
