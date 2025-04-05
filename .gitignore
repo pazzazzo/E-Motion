@@ -131,3 +131,4 @@ database.json
 token.json
 test.html
 test/
+.vscode/
