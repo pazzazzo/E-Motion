@@ -16,7 +16,7 @@
     "name": "pazzazzo",
     "email": "azzo.lorenzo@gmail.com"
   },
-  "license": "ISC",
+  "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
     "@google-cloud/speech": "^6.7.1",
     "@tensorflow/tfjs-node": "^4.22.0",
