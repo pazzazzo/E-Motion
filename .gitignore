@@ -133,3 +133,4 @@ test.html
 test/
 .vscode/
 build/
+package-lock.json
