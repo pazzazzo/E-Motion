@@ -44,12 +44,14 @@ class Wifi extends EventEmitter {
         this.#wifi.connect({ ssid, password }, cb);
     }
     #updateWifi() {
+
         this.getConnections((wifi) => {
             this.current = wifi
             if (wifi.length > 0) {
                 if (this.state !== 1) {
                     this.state = 1
                     this.emit("connected")
+                    this.#reConnected()
                 }
                 this.mediaLoader.infoBar.updateWifi(data.icons.wifi.level[Math.min(6, Math.floor(wifi[0].quality / 100 * 4)).toString()], "Connecté")
                 // console.log(`No. ${wifi.length} | Sig. ${wifi[0].quality}`);
@@ -60,9 +62,14 @@ class Wifi extends EventEmitter {
                     this.#notConnected()
                 }
                 this.mediaLoader.infoBar.updateWifi(data.icons.wifi.off, "Non connecté")
+
             }
             setTimeout(() => {
-                requestIdleCallback(() => this.#updateWifi());
+                if (this.state == 0) {
+                    this.#updateWifi()
+                } else {
+                    requestIdleCallback(() => this.#updateWifi());
+                }
             }, this.state == 0 ? 1000 : 5000);
         })
     }
@@ -74,12 +81,19 @@ class Wifi extends EventEmitter {
             })
         })
     }
+    #reConnected() {
+        this.mediaLoader.page.view.change("main")
+        if (this.stopScan) {
+            this.stopScan()
+            this.stopScan = null
+        }
+    }
     scanQRCode(cb) {
         let errHTML = document.getElementById("wifi-error")
         errHTML.classList.add("hidden")
         let canvas = document.getElementById("wifi-cam")
         let video = document.getElementById("wifi-video")
-        this.mediaLoader.scanQRCode(canvas, video, (data) => {
+        this.stopScan = this.mediaLoader.scanQRCode(canvas, video, (data) => {
             let parse = this.qrParse(data)
             if (!parse.valid) {
                 errHTML.classList.remove("hidden")
@@ -88,6 +102,7 @@ class Wifi extends EventEmitter {
                 }
             } else {
                 cb(parse)
+                this.stopScan = null
             }
         })
     }
