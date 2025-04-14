@@ -134,3 +134,5 @@ test/
 .vscode/
 build/
 package-lock.json
+emotion.desktop
+start.sh

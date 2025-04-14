@@ -33,6 +33,7 @@ const createWindow = () => {
     resizable: false,
     autoHideMenuBar: true,
     show: false,
+    icon: path.join(__dirname, "icon.png"),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -56,7 +57,8 @@ const createWindow = () => {
 
 }
 
-app.setAppUserModelId("fr.hydix.e-motion")
+app.setAppUserModelId("E-Motion")
+app.setName("E-Motion")
 
 app.whenReady().then(async () => {
   await components.whenReady();
