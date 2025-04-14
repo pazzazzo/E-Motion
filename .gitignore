@@ -132,3 +132,4 @@ token.json
 test.html
 test/
 .vscode/
+build/
