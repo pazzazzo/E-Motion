@@ -17,6 +17,9 @@
     "waypoint": {
         
     },
+    "ai": {
+        "voice": "Kore"
+    },
     "navbar": [
         {"id": "settings", "removable": false}
     ],

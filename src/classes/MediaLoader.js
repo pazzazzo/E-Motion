@@ -22,10 +22,12 @@ const fs = require('fs');
 
 class MediaLoader extends EventEmitter {
     #sounds_buffer = {}
+    #voices_buffer = {}
     #images_buffer = {}
     #path = {
         media: path.join(__dirname, "..", "media"),
         sounds: path.join(__dirname, "..", "media", "sounds"),
+        voices: path.join(__dirname, "..", "media", "voices"),
         apps: path.join(__dirname, "..", "apps"),
     }
     constructor(config = {}) {
@@ -34,13 +36,17 @@ class MediaLoader extends EventEmitter {
         this.preinitied = false;
         this.ready = false;
         this.database = new Database()
+        this.status = "none"
+        this.lastSpotifyVolume = null
+        this.soundPlaying = 0
         // this.dataGraph = new DataGraph()
     }
     preinit() {
         console.log("🟠 MediaLoader class pre init");
         if (!this.preinitied) {
+            this.status = "preinit"
             const t = performance.now()
-            let i = 1
+            let i = 2
             const cb = () => {
                 i--
                 if (i == 0) {
@@ -49,7 +55,7 @@ class MediaLoader extends EventEmitter {
                 }
             }
             this.position = new Position()
-            this.#loadSounds()
+            this.#loadSounds(cb)
             this.database.load((err) => {
                 if (err) throw err;
                 cb()
@@ -60,6 +66,7 @@ class MediaLoader extends EventEmitter {
     }
     init() {
         console.log("🟡 MediaLoader class init");
+        this.status = "init"
         const cont = () => {
             const t = performance.now()
             let i = 4
@@ -76,6 +83,7 @@ class MediaLoader extends EventEmitter {
                 i--
                 if (i <= 0) {
                     this.#postInit(() => {
+                        this.status = "loaded"
                         this.emit("ready", performance.now() - t)
                         this.ready = true
                         console.log("🟢 MediaLoader ready");
@@ -100,6 +108,7 @@ class MediaLoader extends EventEmitter {
         return this
     }
     #postInit(cb) {
+        this.status = "postinit"
         console.log("🔵 MediaLoader class post init");
         this.arrow = new Arrow(this)
         this.mapboxCamera = new MapboxCamera(this)
@@ -121,23 +130,62 @@ class MediaLoader extends EventEmitter {
             })
         })
     }
-    #loadSounds() {
-        fs.readdir(this.#path.sounds, (err, files) => {
-            if (err) {
-                return this.emit("sounds.load.error", { "type": "dir.read", "error": err })
+    #loadSounds(cb) {
+        let totalFiles = 0;
+        let loadedFiles = 0;
+
+        // Fonction pour vérifier si tout est chargé
+        const checkDone = () => {
+            if (loadedFiles === totalFiles) {
+                cb();
             }
-            files.forEach((file, i) => {
-                const t = performance.now()
-                this.#preloadSound(path.join(this.#path.sounds, file), (data) => {
+        };
+
+        const audioContext = new AudioContext();
+        fs.readdir(this.#path.sounds, (err, soundFiles) => {
+            if (err) {
+                return this.emit("sounds.load.error", { "type": "dir.read", "error": err });
+            }
+            totalFiles += soundFiles.length;
+            if (soundFiles.length === 0) {
+                checkDone();
+            }
+            soundFiles.forEach((file) => {
+                this.#preloadSound(path.join(this.#path.sounds, file), audioContext, (data) => {
                     if (data) {
-                        this.#sounds_buffer[file.replace(/\.\w+/g, "")] = data;
+                        this.#sounds_buffer[file.replace(/\.\w+$/, "")] = data;
                     }
-                })
-            })
-        })
+                    loadedFiles++;
+                    checkDone();
+                });
+            });
+        });
+
+        fs.readdir(this.#path.voices, (err, voiceFiles) => {
+            if (err) {
+                return this.emit("sounds.load.error", { "type": "dir.read", "error": err });
+            }
+            totalFiles += voiceFiles.length;
+            if (voiceFiles.length === 0) {
+                checkDone();
+            }
+            voiceFiles.forEach((file) => {
+                this.#preloadSound(path.join(this.#path.voices, file), audioContext, (data) => {
+                    if (data) {
+                        this.#voices_buffer[file.replace(/\.\w+$/, "")] = data;
+                    }
+                    loadedFiles++;
+                    checkDone();
+                });
+            });
+        });
     }
+
     getSounds() {
         return Object.keys(this.#sounds_buffer)
+    }
+    getVoices() {
+        return Object.keys(this.#voices_buffer)
     }
     #loadMap(token, cbr) {
         mapboxgl.accessToken = token;
@@ -160,7 +208,7 @@ class MediaLoader extends EventEmitter {
         this.map.once("idle", cb)
         this.map.once("renderstart", cb)
     }
-    #preloadSound(path, callback) {
+    #preloadSound(path, audioContext, callback) {
         fs.readFile(path, (err, data) => {
             if (err) {
                 this.emit("sound.preload.error", { "type": "file.read", "error": err })
@@ -168,7 +216,6 @@ class MediaLoader extends EventEmitter {
             }
             const audioData = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
 
-            const audioContext = new AudioContext();
             audioContext.decodeAudioData(audioData, (buffer) => {
                 return callback(buffer)
             }, (err) => {
@@ -177,41 +224,56 @@ class MediaLoader extends EventEmitter {
             });
         })
     }
-    playSound(name, finish) {
-        if (this.#sounds_buffer[name]) {
+    playSound(name, finish, important) {
+        if (this.#sounds_buffer[name] || this.#voices_buffer[name]) {
+            if (this.soundPlaying == 0) {
+                this.spotify.player.getVolume().then(v => {
+                    this.lastSpotifyVolume = v
+                    this.spotify.player.setVolume(important ? v / 8 : v / 3)
+                })
+            }
+            this.soundPlaying++
             const audioContext = new AudioContext();
             const source = audioContext.createBufferSource();
-            finish && source.addEventListener("ended", (ev) => { finish(ev) })
-            source.buffer = this.#sounds_buffer[name];
+            const gainNode = audioContext.createGain();
+            finish && source.addEventListener("ended", (ev) => {
+                finish(ev)
+                this.soundPlaying--
+                if (this.soundPlaying <= 0) {
+                    this.soundPlaying = 0
+                    this.spotify.player.setVolume(this.lastSpotifyVolume)
+                    this.lastSpotifyVolume = null
+                }
+            })
+            source.buffer = this.#sounds_buffer[name] || this.#voices_buffer[name];
             source.connect(audioContext.destination);
             source.start();
         }
     }
     scanQRCode(canvas, video, cb) {
         let ctx = canvas.getContext("2d")
+        let theStream;
+        let interval;
+        let stopScan = () => {
+            clearInterval(interval)
+            video?.pause()
+            theStream?.getTracks().forEach(function (track) {
+                track.stop();
+            });
+        }
         navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then((stream) => {
+            theStream = stream
             video.srcObject = stream
             video.play()
             let data;
-            let interval = setInterval(() => {
+            interval = setInterval(() => {
                 canvas.width = video.videoWidth
                 canvas.height = video.videoHeight
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
                 if (canvas.width > 0) {
                     data = jsQR(ctx.getImageData(0, 0, canvas.width, canvas.height).data, canvas.width, canvas.height) || data
                     if (data) {
-                        clearInterval(interval)
-                        for (const key in data.location) {
-                            if (key.endsWith("Corner")) {
-                                let point = data.location[key]
-                                ctx.fillStyle = "#ff0000"
-                                ctx.fillRect(point.x - 5, point.y - 5, 10, 10)
-                            }
-                        }
-                        video.pause()
-                        stream.getTracks().forEach(function (track) {
-                            track.stop();
-                        });
+                        stopScan()
                         setTimeout(() => {
                             cb(data.data, data)
                         }, 500);
@@ -219,6 +281,7 @@ class MediaLoader extends EventEmitter {
                 }
             }, 5);
         })
+        return stopScan
     }
     get soundsList() {
         return Object.keys(this.#sounds_buffer)
