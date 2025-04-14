@@ -1,4 +1,5 @@
 const MediaLoader = require("../../classes/MediaLoader");
+const fs = require("fs")
 class Settings {
     constructor(mediaLoader = new MediaLoader()) {
         console.log("✅ Settings app invoked");
@@ -55,6 +56,7 @@ class Settings {
         ]
         let sonControls = document.getElementsByClassName("settings-event-sound")
         let sonPreview = document.getElementsByClassName("settings-event-sound-play")
+        let voiceControl = document.getElementById("settings-event-voice")
         let camerasSelect = document.getElementsByClassName("settings-cams-selector")
         let camerasPreview = document.getElementsByClassName("settings-cams-preview")
         this.controls = {
@@ -108,13 +110,16 @@ class Settings {
                 el.innerHTML += `<option value="${sound}" ${this.mediaLoader.settings.data.sound[controlId] === sound ? "selected" : ""}>${sound}</option>`
             })
         }
-        for (let i = 0; i < sonPreview.length - 1; i++) {
+        this.mediaLoader.getVoices().forEach((sound) => {
+            voiceControl.innerHTML += `<option value="${sound}" ${this.mediaLoader.settings.data.ai.voice === sound ? "selected" : ""}>${sound}</option>`
+        })
+        for (let i = 0; i < sonPreview.length; i++) {
             const element = sonPreview[i];
             element.addEventListener("click", () => {
                 element.innerHTML = `<span class="material-symbols-outlined">pause</span>`
-                this.mediaLoader.playSound(sonControls[i].value, () => {
+                this.mediaLoader.playSound(sonControls[i]?.value || voiceControl.value, () => {
                     element.innerHTML = `<span class="material-symbols-outlined">play_arrow</span>`
-                })
+                }, sonControls[i] ? false : true)
             })
         }
         this.controls.spotify.autoConnect.checked = this.mediaLoader.settings.data.spotify.autoConnect;
