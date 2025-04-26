@@ -18,6 +18,9 @@ const Wifi = require('./Wifi');
 const Page = require('./Page');
 const path = require('path');
 const fs = require('fs');
+const Stats = require('./Stats');
+const MusicPlayer = require('./MusicPlayer');
+const Bluetooth = require('./Bluetooth');
 
 
 class MediaLoader extends EventEmitter {
@@ -29,6 +32,7 @@ class MediaLoader extends EventEmitter {
         sounds: path.join(__dirname, "..", "media", "sounds"),
         voices: path.join(__dirname, "..", "media", "voices"),
         apps: path.join(__dirname, "..", "apps"),
+        datagraph: path.join(__dirname, "..", "datagraph.json"),
     }
     constructor(config = {}) {
         super()
@@ -46,7 +50,7 @@ class MediaLoader extends EventEmitter {
         if (!this.preinitied) {
             this.status = "preinit"
             const t = performance.now()
-            let i = 2
+            let i = 3
             const cb = () => {
                 i--
                 if (i == 0) {
@@ -61,7 +65,9 @@ class MediaLoader extends EventEmitter {
                 cb()
             })
             this.wifi = new Wifi(this)
+            this.stats = new Stats(this)
             this.#preloadApps()
+            cb()
         }
     }
     init() {
@@ -69,10 +75,12 @@ class MediaLoader extends EventEmitter {
         this.status = "init"
         const cont = () => {
             const t = performance.now()
-            let i = 4
+            let i = 5
             this.page = new Page()
             this.infoBar = new InfoBar(this)
             this.spotify = new SpotifyClient(this)
+            this.bluetooth = new Bluetooth(this)
+            this.musicPlayer = new MusicPlayer(this)
             this.searchAddress = new SearchAddress(this)
             this.navbar = new Navbar(this)
             this.direction = new Direction(this)
@@ -93,8 +101,9 @@ class MediaLoader extends EventEmitter {
             this.#loadMap(this.database.data["mapbox-token"], cb)
             // this.dataGraph.init(cb)
             this.spotify.init(cb)
-            this.settings.init(cb).reset()
+            this.settings.init(cb)
             this.placeSearch.init(cb)
+            this.bluetooth.init().then(cb)
         }
         if (!this.ready) {
             if (this.preinitied) {
@@ -285,6 +294,9 @@ class MediaLoader extends EventEmitter {
     }
     get soundsList() {
         return Object.keys(this.#sounds_buffer)
+    }
+    get datagraphPath() {
+        return this.#path.datagraph
     }
 }
 
