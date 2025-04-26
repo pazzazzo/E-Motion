@@ -1,10 +1,15 @@
 const { app, BrowserWindow, ipcMain, session, components } = require('electron')
+const fs = require('fs')
 const path = require('node:path')
 const Dev = require("./Dev")
-const VehicleConnect = require("./VehicleConnect")
+const VehicleConnect = require("./VehicleConnect");
+const { ipcRenderer } = require('electron');
+const Proxy = require('./proxy');
 let mainWindow;
 let vehicleConnect;
 let dev;
+let proxy = new Proxy()
+
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
@@ -23,6 +28,15 @@ app.commandLine.appendSwitch('max-gum-fps', '100');
 
 // app.commandLine.appendSwitch('widevine-cdm-path', './libwidevinecdm.so')
 // app.commandLine.appendSwitch('enable-widevine-cdm');
+
+function pad(n) {
+  return String(n).padStart(2, '0');
+}
+function formatDate(date, opts = { withYear: true, onlyMonth: false }) {
+  const M = pad(date.getMonth() + 1);
+  const D = pad(date.getDate());
+  return opts.onlyMonth ? `${M}/${date.getFullYear()}` : opts.withYear ? `${M}/${D}/${date.getFullYear()}` : `${D}/${M}`;
+}
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -63,6 +77,9 @@ app.setName("E-Motion")
 app.whenReady().then(async () => {
   await components.whenReady();
   console.log('components ready:', components.status());
+  await session.defaultSession.setProxy({
+    proxyRules: proxy.rules
+  })
   // session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
   //   if (details.requestHeaders["User-Agent"]) {
   //     details.requestHeaders["User-Agent"] = details.requestHeaders["User-Agent"].replace("Electron", "EMotionDashboard") 
@@ -84,4 +101,35 @@ app.whenReady().then(async () => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
+})
+
+let datagraph = JSON.parse(fs.readFileSync(path.join(__dirname, "src", "datagraph.json")).toString())
+function saveDatagraph() {
+  fs.writeFileSync(path.join(__dirname, "src", "datagraph.json"), JSON.stringify(datagraph))
+}
+
+ipcMain.on("dataTransfer.get", (event, cb) => {
+  cb(proxy.getData())
+})
+ipcMain.on("dataStats.get", (event, cb) => {
+  cb(proxy.stats)
+})
+
+proxy.on("use.update", (sent, received, stats) => {
+  let statId = formatDate(new Date(), { withYear: true })
+  let base = datagraph["data_use"][statId] || 0
+  datagraph["data_use"][statId] = sent + received + base
+
+  let monthStatId = formatDate(new Date(), { onlyMonth: true })
+  let monthBase = datagraph["monthly_data_use"][monthStatId] || 0
+  datagraph["monthly_data_use"][monthStatId] = sent + received + monthBase
+
+  if (!mainWindow.webContents.isDestroyed()) {
+    mainWindow.webContents.send("proxy.update", {
+      total: (sent + received + base),
+      monthly: (sent + received + monthBase),
+      stats
+    })
+  }
+  saveDatagraph()
 })
