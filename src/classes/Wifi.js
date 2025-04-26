@@ -48,7 +48,7 @@ class Wifi extends EventEmitter {
         this.getConnections((wifi) => {
             this.current = wifi
             if (wifi.length > 0) {
-                if (this.state !== 1) {
+                if (this.state == 0) {
                     this.state = 1
                     this.emit("connected")
                     this.#reConnected()
