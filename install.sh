@@ -10,14 +10,14 @@ for arg in "$@"; do
 done
 
 if [ "$FORCE" -eq 0 ] && [ "$(id -u)" = "0" ]; then
-  echo "⚠️  Ne lancez pas ce script en tant que root utilisez --force pour forcer l'execution." >&2
+  echo "❌  Ne lancez pas ce script en tant que root utilisez --force pour forcer l'execution." >&2
   exit 1
 fi
 
 if [ "$(id -u)" = "0" ]; then
   echo "⚠️  Exécution en root forcée par --force. Installation pour $(whoami)"
 else
-  echo "✅  Installation pour $(whoami)"
+  echo "🔵  Installation pour $(whoami)"
 fi
 # Mettre à jour la liste des paquets
 sudo apt-get update
