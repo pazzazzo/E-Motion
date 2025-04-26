@@ -34,6 +34,7 @@
     "native-sound-mixer": "^3.4.5-win",
     "node-record-lpcm16": "^1.0.1",
     "node-wifi": "^2.0.16",
+    "open": "^10.1.1",
     "path": "^0.12.7",
     "qrcode-reader": "^1.0.4",
     "qrcode-terminal": "^0.12.0",

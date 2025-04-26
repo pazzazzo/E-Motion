@@ -36,4 +36,5 @@ echo "Installation des dépendances du projet Node.js..."
 npm install
 
 echo "Installation terminée."
+node ./config.js
 exit
