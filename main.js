@@ -103,9 +103,19 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-let datagraph = JSON.parse(fs.readFileSync(path.join(__dirname, "src", "datagraph.json")).toString())
+let datagraph = {}
 function saveDatagraph() {
   fs.writeFileSync(path.join(__dirname, "src", "datagraph.json"), JSON.stringify(datagraph))
+}
+if (!fs.existsSync(path.join(__dirname, "src", "datagraph.json"))) {
+  datagraph = {
+    data_use: {},
+    monthly_data_use: {},
+    data_stats: {}
+  }
+  saveDatagraph()
+} else {
+  datagraph = JSON.parse(fs.readFileSync(path.join(__dirname, "src", "datagraph.json")).toString())
 }
 
 ipcMain.on("dataTransfer.get", (event, cb) => {
