@@ -21,9 +21,13 @@
         "voice": "Kore"
     },
     "navbar": [
-        {"id": "settings", "removable": false}
+        {"id": "settings", "removable": false},
+        {"id": "settings", "removable": false, "color": "#D41D1D"},
+        {"id": "settings", "color": "#D4B21D"}
     ],
     "sound": {
+        "mainVolume": 1,
+        "muted": false,
         "mapGo": "selected",
         "mapArrived": "update",
         "mapTraffic": "warn",
@@ -41,5 +45,9 @@
             "front": "null",
             "back": "null"
         }
+    },
+    "sim": {
+        "renew": 27,
+        "maxData": 5
     }
 }
