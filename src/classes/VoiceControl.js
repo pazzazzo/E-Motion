@@ -146,9 +146,9 @@ class VoiceControl {
                 endOnSilence: true,
                 thresholdEnd: 0.1
             })
-
             this.recording.stream().pipe(request.post({
                 'url': 'https://api.wit.ai/speech?client=chromium&lang=fr-fr&output=json',
+                'proxy': 'http://127.0.0.1:3128',
                 'headers': {
                     'Accept': 'application/vnd.wit.20160202+json',
                     'Authorization': `Bearer ${mediaLoader.database.data["wit-token"]}`,
