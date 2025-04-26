@@ -1,0 +1,51 @@
+#main-drive-status {    
+    position: absolute;
+    bottom: .6rem;
+    left: 5.6rem;
+    background: #191a1e;
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+#main-drive-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main-drive-arrive-time {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: .2rem;
+}
+#main-drive-arrive-time.correct {
+    color: #19ff00fc;
+}
+#main-drive-arrive-time.warn {
+    color: #ff9b00fc;
+}
+#main-drive-arrive-time.bad {
+    color: #ff1a00fc;
+}
+
+#main-drive-more-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#main-drive-stop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    padding: .5rem;
+    border-radius: 50%;
+    background: #7b202052;
+    margin-left: .5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+}
+#main-drive-stop > span {
+
+}
