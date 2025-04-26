@@ -36,6 +36,12 @@
             </span>
             <span>Caméra</span>
         </div>
+        <div class="settings-left-item" id="settings-list-sim">
+            <span class="material-symbols-outlined">
+                sim_card
+            </span>
+            <span>Carte SIM</span>
+        </div>
         <div class="settings-left-item" id="settings-list-system">
             <span class="material-symbols-outlined">
                 person
@@ -48,33 +54,7 @@
         <div class="settings-card active" id="settings-nav">
             <div class="settings-title">Icônes de navigation</div>
             <div class="settings-desc">Modifiez l'apparence et l'ordre des icônes de navigation</div>
-            <div class="settings-nav">
-                <div class="settings-nav-upsidedown">
-                    <div class="settings-nav-upside">
-                        <span class="material-symbols-outlined">
-                            arrow_upward
-                        </span>
-                    </div>
-                    <div class="settings-nav-down">
-                        <span class="material-symbols-outlined">
-                            arrow_downward
-                        </span>
-                    </div>
-                </div>
-                <div class="settings-nav-icon-container">
-                    <div class="settings-nav-icon">
-                        <img src="./media/images/settings-icon.png" alt="">
-                    </div>
-                </div>
-                <div class="settings-nav-main">
-                    <div class="settings-nav-name">Nom de l'icône</div>
-                    <input type="color" class="settings-nav-color" value="#000000">
-                </div>
-                <div class="settings-nav-delete disabled">
-                    <span class="material-symbols-outlined">
-                        delete
-                    </span>
-                </div>
+            <div id="settings-navs">
             </div>
             <div class="settings-nav-add">
                 <span class="material-symbols-outlined">
@@ -147,8 +127,7 @@
                     <span class="material-symbols-outlined">
                         volume_up
                     </span>
-                    <input type="range" name="settings-map-volume" id="settings-map-volume" min="0" max="100"
-                        value="50">
+                    <input type="range" name="settings-event-volume" id="settings-event-volume" min="0" max="1" step="0.01">
                 </div>
             </div>
             <div class="settings-separator"></div>
@@ -250,7 +229,7 @@
                     <span>Désactiver tous les sons de l'application</span>
                 </div>
                 <div class="settings-map-single-control-value">
-                    <input type="checkbox" class="switch">
+                    <input type="checkbox" class="switch" id="settings-event-muted">
                 </div>
             </div>
         </div>
@@ -493,6 +472,65 @@
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-updates-history">
                 </div>
+            </div>
+        </div>
+        <div class="settings-selector" id="settings-sim-select">
+            <div id="settings-sim-select-limit" class="active"><span>Consomation & Limites</span></div>
+            <div id="settings-sim-select-config"><span>Configuration SIM</span></div>
+        </div>
+        <div class="settings-card" id="settings-sim-conso">
+            <div class="settings-title">Consommation de données</div>
+            <div class="settings-desc">Suivez votre consommation de données mobiles</div>
+            <div class="settings-progress-bar-label">
+                <div class="settings-label">Utilisation des données</div>
+                <div class="settings-progress-bar-value">2.5 GB utilisé</div>
+            </div>
+            <div class="settings-progress-bar-container">
+                <div class="settings-progress-bar-fill" style="width: 50%;"></div>
+            </div>
+            <div class="settings-progress-bar-text">
+                <span>0 GB</span>
+                <span>5 GB</span>
+            </div>
+            <div class="settings-map-row">
+                <div class="settings-map-row-card">
+                    <span class="material-symbols-outlined">rotate_right</span>
+                    <div class="settings-dataset">
+                        <div class="settings-dataset-title">Données restantes</div>
+                        <div class="settings-dataset-value">1.8 GB</div>
+                    </div>
+                </div>
+                <div class="settings-map-row-card">
+                    <span class="material-symbols-outlined">event_repeat</span>
+                    <div class="settings-dataset">
+                        <div class="settings-dataset-title">Renouvellement dans</div>
+                        <div class="settings-dataset-value">22 jours</div>
+                    </div>
+                </div>
+                <div class="settings-map-row-card">
+                    <span class="material-symbols-outlined">cloud_download</span>
+                    <div class="settings-dataset">
+                        <div class="settings-dataset-title">Utilisation moyenne</div>
+                        <div class="settings-dataset-value">400 MB/jour</div>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-warn-card">
+                <span class="material-symbols-rounded">warning</span>
+                <div class="settings-warn-texts">
+                    <p>Alerte de consommation</p>
+                    <p>À ce rythme, vous dépasserez votre limite de données avant le prochain renouvellement. Utilisation estimée: <span>8.7 GB</span></p>
+                </div>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-subtitle">Historique d'utilisation</div>
+            <div class="settings-chart-parent">
+                <canvas id="settings-sim-use-chart" class="settings-chart"></canvas>
+            </div>
+            <div class="settings-separator"></div>
+            <div class="settings-subtitle">Répartition par URLs</div>
+            <div class="settings-chart-parent">
+                <canvas id="settings-sim-type-chart" class="settings-chart"></canvas>
             </div>
         </div>
         <div class="justify-end">

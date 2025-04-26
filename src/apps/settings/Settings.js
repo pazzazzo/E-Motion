@@ -1,19 +1,59 @@
+const Chart = require("../../classes/Chart.js");
 const MediaLoader = require("../../classes/MediaLoader");
-const fs = require("fs")
+const fs = require("fs");
+const Navbar = require("./Navbar.js");
+const Maps = require("./Maps.js");
+const Sound = require("./Sound.js");
+const Alerts = require("./Alerts.js");
+const Camera = require("./Camera.js");
+const SIM = require("./SIM.js");
+const System = require("./System.js");
+
 class Settings {
     constructor(mediaLoader = new MediaLoader()) {
-        console.log("✅ Settings app invoked");
+        console.log("✅ SettingsApp invoked");
         this.mediaLoader = mediaLoader;
     }
     init() {
-        console.log("app init");
+        console.log("✅ SettingsApp init");
         this.cards = [
-            [document.getElementById("settings-nav")],
-            [document.getElementById("settings-map")],
-            [document.getElementById("settings-sound"), document.getElementById("settings-spotify")],
-            [],
-            [document.getElementById("settings-cam-select"), document.getElementById("settings-cams-select"), document.getElementById("settings-record")],
-            [document.getElementById("settings-account"), document.getElementById("settings-services"), document.getElementById("settings-updates")],
+            {
+                "elements": [[document.getElementById("settings-nav")]],
+                "sub": 0,
+                "title": "Personalisation de la barre de navigation",
+            },
+            {
+                "elements": [[document.getElementById("settings-map")]],
+                "sub": 0,
+                "title": "Paramètres de la carte",
+            },
+            {
+                "elements": [[document.getElementById("settings-sound"), document.getElementById("settings-spotify")]],
+                "sub": 0,
+                "title": "Paramètres sonores",
+            },
+            {
+                "elements": [[]],
+                "sub": 0,
+                "title": "Paramètres des alertes",
+            },
+            {
+                "elements": [[document.getElementById("settings-cams-select"), document.getElementById("settings-record")], []],
+                "sub": 0,
+                "selector": document.getElementById("settings-cam-select"),
+                "title": "Paramètres des caméras",
+            },
+            {
+                "elements": [[document.getElementById("settings-sim-conso")], []],
+                "sub": 0,
+                "selector": document.getElementById("settings-sim-select"),
+                "title": "Paramètres de la carte SIM",
+            },
+            {
+                "elements": [[document.getElementById("settings-account"), document.getElementById("settings-services"), document.getElementById("settings-updates")]],
+                "sub": 0,
+                "title": "Paramètres système",
+            },
         ]
 
         this.currentModal = null;
@@ -37,14 +77,6 @@ class Settings {
         document.getElementById("settings-updates-download").addEventListener("click", () => {
             this.openModal("update")
         })
-        this.titles = [
-            "Personalisation de la barre de navigation",
-            "Paramètres de la carte",
-            "Paramètres sonores",
-            "Paramètres des alertes",
-            "Paramètres des caméras",
-            "Paramètres système",
-        ]
         this.title = document.getElementById("settings-type")
         this.nav = [
             document.getElementById("settings-list-nav"),
@@ -52,81 +84,75 @@ class Settings {
             document.getElementById("settings-list-sound"),
             document.getElementById("settings-list-notifications"),
             document.getElementById("settings-list-camera"),
+            document.getElementById("settings-list-sim"),
             document.getElementById("settings-list-system"),
         ]
-        let sonControls = document.getElementsByClassName("settings-event-sound")
-        let sonPreview = document.getElementsByClassName("settings-event-sound-play")
-        let voiceControl = document.getElementById("settings-event-voice")
         let camerasSelect = document.getElementsByClassName("settings-cams-selector")
         let camerasPreview = document.getElementsByClassName("settings-cams-preview")
         this.controls = {
-            "nav": {},
-            "map": {
-                color: {
-                    normal: document.getElementById("normal-map-color"),
-                    traffic: document.getElementById("traffic-map-color"),
-                    heavy: document.getElementById("heavy-map-color"),
-                },
-                style: {
-                    standard: document.getElementById("map-style-standard"),
-                    dark: document.getElementById("map-style-dark"),
-                    satellite: document.getElementById("map-style-satellite"),
-                    terrain: document.getElementById("map-style-terrain"),
-                },
-                "update-frequency": {
-                    "15": document.getElementById("update-frequency-15"),
-                    "30": document.getElementById("update-frequency-30"),
-                    "60": document.getElementById("update-frequency-60"),
-                    "300": document.getElementById("update-frequency-300"),
-                },
-            },
-            "sounds": {
-                "mapGo": sonControls[0],
-                "mapArrived": sonControls[1],
-                "mapTraffic": sonControls[2],
-                "usbConnected": sonControls[3],
-                "usbDisconnected": sonControls[4]
-            },
-            "spotify": {
-                "autoConnect": document.getElementById("settings-spotify-autoconnect"),
-                "connectDelay": document.getElementById("settings-spotify-connectdelay"),
-                "connectNotify": document.getElementById("settings-spotify-connectnotify"),
-            },
             "camerasSelecors": {
                 "dashcam": camerasSelect[0],
                 "front": camerasSelect[1],
                 "back": camerasSelect[2],
             }
         }
-
-        this.controls.map.color.normal.value = this.mediaLoader.settings.data.map.color.route.basic;
-        this.controls.map.color.traffic.value = this.mediaLoader.settings.data.map.color.route.traffic;
-        this.controls.map.color.heavy.value = this.mediaLoader.settings.data.map.color.route.heavyTraffic;
-        this.controls.map.style[this.mediaLoader.settings.data.map.style].checked = true;
-        this.controls.map["update-frequency"][this.mediaLoader.settings.data.map.updateFrequency].selected = true;
-        for (const controlId in this.controls.sounds) {
-            let el = this.controls.sounds[controlId]
-            this.mediaLoader.getSounds().forEach((sound) => {
-                el.innerHTML += `<option value="${sound}" ${this.mediaLoader.settings.data.sound[controlId] === sound ? "selected" : ""}>${sound}</option>`
-            })
-        }
-        this.mediaLoader.getVoices().forEach((sound) => {
-            voiceControl.innerHTML += `<option value="${sound}" ${this.mediaLoader.settings.data.ai.voice === sound ? "selected" : ""}>${sound}</option>`
+        this.simChart = new Chart(document.getElementById("settings-sim-use-chart").getContext("2d"), {
+            unit: " MB",
         })
-        for (let i = 0; i < sonPreview.length; i++) {
-            const element = sonPreview[i];
-            element.addEventListener("click", () => {
-                element.innerHTML = `<span class="material-symbols-outlined">pause</span>`
-                this.mediaLoader.playSound(sonControls[i]?.value || voiceControl.value, () => {
-                    element.innerHTML = `<span class="material-symbols-outlined">play_arrow</span>`
-                }, sonControls[i] ? false : true)
-            })
-        }
-        this.controls.spotify.autoConnect.checked = this.mediaLoader.settings.data.spotify.autoConnect;
-        this.controls.spotify.connectDelay.value = this.mediaLoader.settings.data.spotify.connectDelay;
-        this.controls.spotify.connectNotify.checked = this.mediaLoader.settings.data.spotify.connectNotify;
-        document.getElementById("settings-spotify-connect").addEventListener("click", () => {
-            this.spotifyConnect()
+        this.simChart.addStat(this.mediaLoader.stats.dataUse, {
+            type: "getDatasetsByDatesNumber", args: [new Date(), -13], params: {
+                label: "Utilisation",
+                rounded: true,
+                fill: true
+            },
+            convertCallback: ((data) => Math.round(data / 1024 / 1024)),
+        })
+        const typeData = [
+            2.00,   // audio-ak.spotifycdn.com: 2 096 684 / 1 048 576 ≈ 2.00 Mo
+            0.68,   // web-sdk-assets.spotifycdn.com: 710 420 / 1 048 576 ≈ 0.68 Mo
+            0.30,   // i.scdn.co: 315 065 / 1 048 576 ≈ 0.30 Mo
+            0.30,   // api.mapbox.com: 312 446 / 1 048 576 ≈ 0.30 Mo
+            0.23,   // www.waze.com: 242 388 / 1 048 576 ≈ 0.23 Mo
+            0.03,   // api.wit.ai: 36 560 / 1 048 576 ≈ 0.03 Mo
+            0.03,   // cpapi.spotify.com: 35 212 / 1 048 576 ≈ 0.03 Mo
+            0.03,   // places.googleapis.com: 31 144 / 1 048 576 ≈ 0.03 Mo
+            0.03,   // api.spotify.com: 28 208 / 1 048 576 ≈ 0.03 Mo
+            0.02,   // gew1-dealer.spotify.com: 25 354 / 1 048 576 ≈ 0.02 Mo
+            0.01,   // seektables.scdn.co: 10 149 / 1 048 576 ≈ 0.01 Mo
+            0.01,   // events.mapbox.com: 8 894 / 1 048 576 ≈ 0.01 Mo
+            0.01,   // maps.googleapis.com: 8 389 / 1 048 576 ≈ 0.01 Mo
+            0.01    // apresolve.spotify.com: 7 063 / 1 048 576 ≈ 0.01 Mo
+        ]
+        const typeLabels = [
+            "audio-ak.spotifycdn.com",
+            "web-sdk-assets.spotifycdn.com",
+            "i.scdn.co",
+            "api.mapbox.com",
+            "www.waze.com",
+            "api.wit.ai",
+            "cpapi.spotify.com",
+            "places.googleapis.com",
+            "api.spotify.com",
+            "gew1-dealer.spotify.com",
+            "seektables.scdn.co",
+            "events.mapbox.com",
+            "maps.googleapis.com",
+            "apresolve.spotify.com"
+        ]
+        this.typeChart = new Chart(document.getElementById("settings-sim-type-chart").getContext("2d"), {
+            x: typeLabels,
+            y: [
+                {
+                    data: typeData,
+                    label: "Utilisation",
+                    rounded: true,
+                    fill: true
+                }
+            ],
+            unit: " MB",
+            type: "bar",
+            horizontal: true,
+            height: `${2 * typeLabels.length}rem`
         })
 
         //Récupérer toutes les caméras du navigateur et les ajouter à la liste
@@ -171,21 +197,61 @@ class Settings {
 
         this.nav.forEach((el, index) => {
             el.addEventListener("click", () => {
-                this.title.innerHTML = this.titles[index];
                 this.cards.forEach((cards, cardIndex) => {
-                    cards.forEach((el) => {
-                        el.classList.remove("active");
+                    if (cards.selector) {
+                        cards.selector.classList.remove("active")
+                    }
+                    cards.elements.forEach((row) => {
+                        row.forEach(el => {
+                            el.classList.remove("active");
+                        })
                     });
                     this.nav[cardIndex].classList.remove("selected");
                     if (cardIndex === index) {
-                        cards.forEach((el) => {
+                        if (cards.selector) {
+                            cards.selector.classList.add("active")
+                        }
+                        this.title.innerHTML = cards.title
+                        let row = cards.elements[cards.sub]
+                        row.forEach(el => {
                             el.classList.add("active");
-                        });
+                        })
                     }
                 });
                 el.classList.add("selected");
             });
         });
+        this.cards.forEach((cards, cardIndex) => {
+            if (cards.selector) {
+                for (let i = 0; i < cards.selector.children.length; i++) {
+                    const node = cards.selector.children[i];
+                    node.addEventListener("click", () => {
+                        cards.elements.forEach((row, rowi) => {
+                            if (rowi == i) {
+                                row.forEach(el => {
+                                    el.classList.add("active")
+                                })
+                            } else {
+                                row.forEach(el => {
+                                    el.classList.remove("active")
+                                })
+                            }
+                        })
+                        cards.selector.children[cards.sub].classList.remove("active")
+                        cards.sub = i
+                        node.classList.add("active")
+                    })
+                }
+            }
+        });
+
+        this.navbar = new Navbar(this)
+        this.maps = new Maps(this)
+        this.sound = new Sound(this)
+        this.alerts = new Alerts(this)
+        this.camera = new Camera(this)
+        this.sim = new SIM(this)
+        this.system = new System(this)
     }
     onShow() {
         console.log("app show");
@@ -193,9 +259,6 @@ class Settings {
     onClose() {
         console.log("app close");
         // this.closeModal()
-    }
-    spotifyConnect() {
-        this.openModal("spotify-load")
     }
     openModal(modalId) {
         this.closeModal()
