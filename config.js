@@ -144,6 +144,7 @@ async function main() {
   await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
   await fs.writeFile(DB_PATH, JSON.stringify(config, null, 2), 'utf-8');
   console.log('✅ src/database.json mis à jour.');
+  process.exit(1);
 }
 
 main().catch(err => {
