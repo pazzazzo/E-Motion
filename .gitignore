@@ -136,4 +136,4 @@ build/
 package-lock.json
 emotion.desktop
 start.sh
-src/datagraph.json
+datagraph.json
