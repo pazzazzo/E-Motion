@@ -129,6 +129,7 @@ dist
 # Custom
 database.json
 datagraph.json
+src/datagraph.json
 token.json
 test.html
 test/
