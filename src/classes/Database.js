@@ -9,8 +9,10 @@ class Database {
         console.log("✅ Database class invoked");
     }
     save(cb) {
-        fs.writeFile(this.path, JSON.stringify(data), (err) => {
-            cb(err)
+        fs.writeFile(this.path, JSON.stringify(this.data, null, 2), (err) => {
+            if (typeof cb === "function") {
+                cb(err)
+            }
         })
     }
     load (cb) {
