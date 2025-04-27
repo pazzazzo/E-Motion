@@ -68,12 +68,14 @@ Afin de tester les différents composants du véhicule, une interface est mise �
 ### Dépendances :
 L'application possède plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executez le fichier `./install.sh`.
 
-L'application nécessite des tokens placés dans un fichier nommé `./src/database.json`. Le contenu du fichier se présente ainsi:
+L'application nécessite des tokens placés dans un fichier nommé `./src/database.json`. Lors de l'éxecution du `./install.sh` le script config.js va vous demander les tokens et lancer un OAuth pour récupérer le token spotify. Vous pouvez toujours créer le fichier de configuration vous-meme.
+Le contenu du fichier se présente ainsi:
 ```json
 {
-    "mapbox-token": "...",          //token de mapbox (50 000 req/mois)
-    "spotify-refresh-token": "...", //refresh token de l'utilisateur spotify
-    "spotify-secret": "..."         //id secret de l'app spotify
+  "mapbox-token":           "VOTRE_MAPBOX_TOKEN",
+  "wit-token":              "VOTRE_WIT_TOKEN",
+  "map-api-key":            "VOTRE_GOOGLE_MAPS_API_KEY",
+  "spotify-refresh-token":  "VOTRE_SPOTIFY_REFRESH_TOKEN"
 }
 ```
 
