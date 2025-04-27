@@ -5,8 +5,10 @@ const { Throttle } = require('stream-throttle');
 const EventEmitter = require('events');
 
 class Proxy extends EventEmitter {
-    constructor() {
+    constructor(host = 'localhost', port = 3128) {
         super()
+        this.host = host;
+        this.port = port;
         this.stats = {};
         this.totalSent = 0;
         this.totalReceived = 0;
@@ -28,7 +30,7 @@ class Proxy extends EventEmitter {
             this.lastTotalSent = this.totalSent;
             this.lastTotalReceived = this.totalReceived;
         }, 1000);
-        this.proxy.listen(3128, () => console.log('Proxy sur 3128'));
+        this.proxy.listen(this.port, () => console.log('Proxy sur ${this.host}:${this.port}'));
     }
 
     // HTTP “normales”
@@ -116,7 +118,7 @@ class Proxy extends EventEmitter {
     }
 
     get rules() {
-        return 'http=localhost:3128;https=localhost:3128'
+        return `http=${this.host}:${this.port};https=${this.host}:${this.port};`;
     }
 }
 
