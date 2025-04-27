@@ -1,11 +1,16 @@
 #!/usr/bin/env node
-// ensureConfig.js (CommonJS, sans open@ESM)
+// config.js (CommonJS, sans open@ESM)
 
-const fs       = require('fs').promises;
-const path     = require('path');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fs = require('fs').promises;
+const path = require('path');
 const readline = require('readline');
-const http     = require('http');
+const http = require('http');
 const { exec } = require('child_process');
+const Proxy = require("./proxy")
+const os = require('os');
+const qr = require("qrcode-terminal")
+const { URLSearchParams } = require('url');
 
 const DB_PATH = path.join(__dirname, 'src', 'database.json');
 
@@ -27,18 +32,113 @@ const SPOTIFY_SCOPES = [
   'app-remote-control',
 ];
 
-function openUrl(url) {
-  let cmd;
-  if (process.platform === 'win32') {
-    cmd = `start "" "${url}"`;
-  } else if (process.platform === 'darwin') {
-    cmd = `open "${url}"`;
-  } else {
-    cmd = `xdg-open "${url}"`;
-  }
-  exec(cmd, err => {
-    if (err) console.error('Erreur ouverture navigateur :', err);
+const SPOTIFY_CLIENT_ID = '65b708073fc0480ea92a077233ca87bd';
+const DEVICE_AUTHORIZE_URL = 'https://accounts.spotify.com/oauth2/device/authorize';
+const TOKEN_URL = 'https://accounts.spotify.com/api/token';
+
+async function oauthAuthorize() {
+  const params = new URLSearchParams({
+    client_id: SPOTIFY_CLIENT_ID,
+    creation_point: 'https://login.app.spotify.com/?client_id=' +
+      SPOTIFY_CLIENT_ID +
+      '&utm_source=spotify&utm_medium=desktop-win32&utm_campaign=organic',
+    intent: 'login',
+    scope: [
+      'app-remote-control',
+      'playlist-modify',
+      'playlist-modify-private',
+      'playlist-modify-public',
+      'playlist-read',
+      'playlist-read-collaborative',
+      'playlist-read-private',
+      'streaming',
+      'ugc-image-upload',
+      'user-follow-modify',
+      'user-follow-read',
+      'user-library-modify',
+      'user-library-read',
+      'user-modify',
+      'user-modify-playback-state',
+      'user-modify-private',
+      'user-personalized',
+      'user-read-birthdate',
+      'user-read-currently-playing',
+      'user-read-email',
+      'user-read-play-history',
+      'user-read-playback-position',
+      'user-read-playback-state',
+      'user-read-private',
+      'user-read-recently-played',
+      'user-top-read',
+    ].join(','),
   });
+
+  const res = await fetch(DEVICE_AUTHORIZE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'User-Agent': 'Spotify/125700463 Win32_x86_64/0 (CarThing)',
+      'Accept-Language': 'en-Latn-US,en-US;q=0.9',
+    },
+    body: params.toString(),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Device auth failed (${res.status}): ${err}`);
+  }
+
+  return res.json();
+}
+
+async function checkAuthStatus(deviceCode) {
+  const params = new URLSearchParams({
+    client_id: SPOTIFY_CLIENT_ID,
+    device_code: deviceCode,
+    grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+  });
+
+  const res = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+
+  // 400 + error=authorization_pending means keep polling
+  if (res.status === 400) {
+    const body = await res.json();
+    if (body.error === 'authorization_pending') {
+      return {};
+    }
+    throw new Error(body.error_description || body.error);
+  }
+
+  if (!res.ok) {
+    throw new Error(`Token poll failed (${res.status})`);
+  }
+
+  return res.json();
+}
+
+async function refreshAccessToken(refreshToken) {
+  const params = new URLSearchParams({
+    grant_type: 'refresh_token',
+    refresh_token: refreshToken,
+    client_id: SPOTIFY_CLIENT_ID,
+  });
+
+  const res = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Refresh failed (${res.status}): ${err}`);
+  }
+
+  return res.json();
 }
 
 function ask(question) {
@@ -54,59 +154,29 @@ function ask(question) {
   );
 }
 
-async function getSpotifyRefreshToken(config) {
-  const clientId     = config['spotify-client-id'];
-  const clientSecret = config['spotify-secret'];
-  const redirectUri  = 'http://localhost:8888/callback';
-
-  const authUrl = 'https://accounts.spotify.com/authorize?' +
-    new URLSearchParams({
-      response_type: 'code',
-      client_id:     clientId,
-      scope:         SPOTIFY_SCOPES.join(' '),
-      redirect_uri:  redirectUri,
-    });
-
-  const server = http.createServer(async (req, res) => {
-    if (!req.url.startsWith('/callback')) return;
-    const url  = new URL(req.url, `http://${req.headers.host}`);
-    const code = url.searchParams.get('code');
-
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('✔️ Authentification Spotify réussie, vous pouvez fermer cet onglet.');
-
-    server.close();
-
-    // Échange du code contre le refresh_token
-    const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' +
-          Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        grant_type:   'authorization_code',
-        code,
-        redirect_uri: redirectUri,
-      }),
-    });
-    const data = await tokenRes.json();
-    if (data.refresh_token) {
-      config['spotify-refresh-token'] = data.refresh_token;
-      console.log('✅ Spotify refresh token obtenu.');
-    } else {
-      console.error('❌ Impossible d’obtenir le refresh token :', data);
-      process.exit(1);
+function getSpotifyRefreshToken(config) {
+  return new Promise(async (resolve, reject) => {
+    let d = await oauthAuthorize()
+    console.log(`🔑 Authentification Spotify, ouvrez ${d.verification_uri} sur un navigateur et entrez le code: ${d.user_code} ou scannez le QRCode:`);
+    qr.generate(d.verification_uri_complete, { small: true })
+    let deviceCode = d.device_code
+    let interval = d.interval
+    async function poll() {
+      d = await checkAuthStatus(deviceCode)
+      if (d.access_token) {
+        console.log("✅ Authentification réussie !")
+        console.log("✅ Refresh token réussi !")
+        config['spotify-refresh-token'] = d.refresh_token;
+        resolve(config)
+      } else {
+        console.log('Waiting for authorization...')
+        setTimeout(async () => {
+          await poll()
+        }, interval * 1000);
+      }
     }
-  });
-
-  server.listen(8888, () => {
-    console.log('➡️ Lancement du navigateur pour Spotify OAuth…');
-    openUrl(authUrl);
-  });
-
-  await new Promise(resolve => server.on('close', resolve));
+    await poll()
+  })
 }
 
 async function main() {
@@ -124,7 +194,6 @@ async function main() {
 
   const keys = [
     'mapbox-token',
-    'spotify-secret',
     'wit-token',
     'map-api-key',
   ];
@@ -136,15 +205,14 @@ async function main() {
 
   // Flow OAuth pour spotify-refresh-token s'il manque
   if (!config['spotify-refresh-token']) {
-    config["spotify-client-id"] = await ask(`Entrez votre ${"spotify-client-id"}: `);
-    await getSpotifyRefreshToken(config);
+    config = await getSpotifyRefreshToken(config);
   }
 
   // Écriture finale
   await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
   await fs.writeFile(DB_PATH, JSON.stringify(config, null, 2), 'utf-8');
   console.log('✅ src/database.json mis à jour.');
-  process.exit(1);
+  process.exit(0);
 }
 
 main().catch(err => {
