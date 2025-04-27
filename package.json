@@ -27,6 +27,7 @@
     "ffi-napi": "^2.5.0",
     "google-tts-api": "^0.0.6",
     "gpt4js": "^1.7.8",
+    "http-proxy": "^1.18.1",
     "jsqr": "^1.4.0",
     "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^3.11.0",
