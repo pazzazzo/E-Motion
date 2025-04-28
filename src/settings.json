@@ -21,9 +21,7 @@
         "voice": "Kore"
     },
     "navbar": [
-        {"id": "settings", "removable": false},
-        {"id": "settings", "removable": false, "color": "#D41D1D"},
-        {"id": "settings", "color": "#D4B21D"}
+        {"id": "settings", "removable": false}
     ],
     "sound": {
         "mainVolume": 1,
