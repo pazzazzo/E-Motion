@@ -1,9 +1,14 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
-
+// const can = require('socketcan');
 
 class VehicleConnect {
-    constructor(config = {mainWindow: new BrowserWindow()}) {
+    constructor(config = { mainWindow: new BrowserWindow() }) {
         this.mainWindow = config.mainWindow
+        // try {
+        //     this.channel = can.createRawChannel("vcan0", true);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
     speedChange(speed) {
         this.mainWindow.webContents.send("data.speed", speed)

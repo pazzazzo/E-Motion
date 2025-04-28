@@ -41,7 +41,7 @@ if ! command -v node &>/dev/null; then
     exit 1
   fi
   # download and install Node.js (you may need to restart the terminal)
-  nvm install 20
+  nvm install 22.15.0
   # verifies the right Node.js version is in the environment
   node -v # should print `v20.16.0`
   # verifies the right npm version is in the environment
