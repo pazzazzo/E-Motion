@@ -1,16 +1,22 @@
 {
-  "name": "e-motion_dashboard",
+  "name": "e-motion",
   "version": "0.0.1",
-  "description": "Dashboard of Hydix E-Motion",
+  "description": "Dashboard for vehicles",
   "main": "main.js",
   "homepage": "https://pazzazzo.github.io/e-motion",
   "scripts": {
-    "dev": "UV_THREADPOOL_SIZE=$(nproc) electron . -dev --no-zygote --no-sandbox",
-    "start": "UV_THREADPOOL_SIZE=$(nproc) electron . --no-zygote --no-sandbox",
-    "perf": "chrt -r 99 npm test",
+    "dev": "electron . -dev --no-zygote --no-sandbox",
+    "start": "electron . --no-zygote --no-sandbox",
+    "perf": "nice -n -20 npm run dev",
+    "setProc": "UV_THREADPOOL_SIZE=$(nproc)",
     "version": "electron -v",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build:linux": "electron-builder --linux deb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pazzazzo/E-Motion.git"
   },
   "author": {
     "name": "pazzazzo",
@@ -28,6 +34,9 @@
     "google-tts-api": "^0.0.6",
     "gpt4js": "^1.7.8",
     "http-proxy": "^1.18.1",
+    "i18next": "^25.0.2",
+    "i18next-electron-fs-backend": "^3.0.3",
+    "i18next-fs-backend": "^2.6.0",
     "install": "^0.13.0",
     "jsqr": "^1.4.0",
     "mapbox": "^1.0.0-beta10",
@@ -52,7 +61,10 @@
   },
   "build": {
     "productName": "HydixEMotion",
-    "appId": "fr.hydix.e-motion",
+    "appId": "fr.hydix.emotion",
+    "electronDownload": {
+      "mirror": "https://github.com/castlabs/electron-releases/releases/download/v"
+    },
     "directories": {
       "output": "dist"
     },
@@ -60,13 +72,37 @@
       "target": [
         "deb"
       ],
+      "publish": [
+        "github"
+      ],
+      "maintainer": "Lorenzo Azzopardi <contact@hydix.fr>",
+      "vendor": "Hydix",
+      "description": "E-Motion - Real time map",
       "category": "System"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "pazzazzo",
+        "repo": "E-Motion"
+      }
+    ],
+    "deb": {
+      "depends": [
+        "bluetooth",
+        "bluez",
+        "libbluetooth-dev",
+        "libudev-dev",
+        "curl",
+        "ofono"
+      ]
     }
   },
   "devDependencies": {
     "electron": "github:castlabs/electron-releases#v33.4.3+wvcus",
     "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9",
+    "electron-updater": "^6.6.2",
     "express": "^4.21.2"
   }
 }

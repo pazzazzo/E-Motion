@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+html {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+#welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    opacity: 1;
+    will-change: opacity, transform;
+    transform: none;
+    font-weight: 700;
+
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin: 0;
+    margin-bottom: 1.5rem;
+    color: #f8fafc;
+}
+
+#welcome-desc {
+    color: #9ca3af;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+p {
+    margin: 0;
+}
+
+.button {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    padding: .5rem 2rem;
+    border-radius: .5rem;    
+    white-space: nowrap;
+    gap: 0.5rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.button > svg {
+    margin-left: 0.5rem;
+}
+.button > * {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #0F172A;
+}
+
+.primary {
+    background-color: hsl(221.2 83.2% 53.3%);
+    color: hsl(210 40% 98%);
+}
+
+.secondary {
+    background-color: hsl(240 4% 16%);
+    color: hsl(0 0% 100%);
+}
+
+.muted {
+    background-color: #27272a;
+    color: #a1a1aa;
+}

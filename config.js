@@ -5,10 +5,6 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 const fs = require('fs').promises;
 const path = require('path');
 const readline = require('readline');
-const http = require('http');
-const { exec } = require('child_process');
-const Proxy = require("./proxy")
-const os = require('os');
 const qr = require("qrcode-terminal")
 const { URLSearchParams } = require('url');
 

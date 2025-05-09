@@ -21,6 +21,7 @@ const fs = require('fs');
 const Stats = require('./Stats');
 const MusicPlayer = require('./MusicPlayer');
 const Bluetooth = require('./Bluetooth');
+const Lang = require('./Lang');
 
 
 class MediaLoader extends EventEmitter {
@@ -87,6 +88,7 @@ class MediaLoader extends EventEmitter {
             this.settings = new Settings()
             this.waze = new Waze(this)
             this.placeSearch = new PlaceSearch(this)
+            this.lang = new Lang(this)
             const cb = () => {
                 i--
                 if (i <= 0) {

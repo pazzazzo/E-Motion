@@ -4,11 +4,14 @@ const path = require('node:path')
 const Dev = require("./Dev")
 const VehicleConnect = require("./VehicleConnect");
 const { ipcRenderer } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const Proxy = require('./proxy');
 let mainWindow;
 let vehicleConnect;
 let dev;
 let proxy = new Proxy()
+const i18next = require('i18next');
+const Backend = require('i18next-fs-backend')
 
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
@@ -29,6 +32,8 @@ app.commandLine.appendSwitch('max-gum-fps', '100');
 // app.commandLine.appendSwitch('widevine-cdm-path', './libwidevinecdm.so')
 // app.commandLine.appendSwitch('enable-widevine-cdm');
 
+const DB_PATH = path.join(__dirname, 'src', 'database.json');
+
 function pad(n) {
   return String(n).padStart(2, '0');
 }
@@ -38,7 +43,20 @@ function formatDate(date, opts = { withYear: true, onlyMonth: false }) {
   return opts.onlyMonth ? `${M}/${date.getFullYear()}` : opts.withYear ? `${M}/${D}/${date.getFullYear()}` : `${D}/${M}`;
 }
 
-const createWindow = () => {
+const createWindow = async () => {
+  await i18next
+    .use(Backend)
+    .init({
+      backend: {
+        // dossier où sont les traductions
+        loadPath: path.join(__dirname, 'locales/{{lng}}.json')
+      },
+      lng: app.getLocale(),   // récupère la langue du système
+      fallbackLng: 'en',
+      interpolation: { escapeValue: false }
+    });
+  console.log(i18next.t("welcome", {user: "John"}));
+  
   mainWindow = new BrowserWindow({
     // width: 1024,
     // height: 600,
@@ -63,16 +81,20 @@ const createWindow = () => {
 
   vehicleConnect = new VehicleConnect({ mainWindow })
   dev = new Dev({ vehicleConnect })
-
-  mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
+  if (fs.existsSync(DB_PATH)) {
+    mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
+  } else {
+    // require("./disableAppArmor")()
+    mainWindow.loadFile(path.join(__dirname, "config", "index.html"))
+  }
   mainWindow.on("ready-to-show", () => {
     mainWindow.show()
   })
 
 }
 
-app.setAppUserModelId("E-Motion")
-app.setName("E-Motion")
+app.setAppUserModelId("fr.hydix.emotion")
+app.setName("fr.hydix.emotion")
 
 app.whenReady().then(async () => {
   await components.whenReady();
@@ -97,6 +119,24 @@ app.whenReady().then(async () => {
       dev.createDevWindow();
     }
   })
+  autoUpdater.checkForUpdates();
+  autoUpdater.on('update-available', (info) => {
+    mainWindow.webContents.send("update.available", info)
+  })
+  autoUpdater.on('update-not-available', (info) => {
+    console.log("update not available", info);
+  })
+  autoUpdater.on('update-downloaded', () => {
+    const choice = dialog.showMessageBoxSync(mainWindow, {
+      type: 'info',
+      buttons: ['Redémarrer et installer', 'Plus tard'],
+      title: 'Mise à jour prête',
+      message: 'Une nouvelle version a été téléchargée.'
+    });
+    if (choice === 0) {
+      autoUpdater.quitAndInstall();
+    }
+  });
 })
 
 app.on('window-all-closed', () => {
@@ -124,6 +164,15 @@ ipcMain.on("dataTransfer.get", (event, cb) => {
 ipcMain.on("dataStats.get", (event, cb) => {
   cb(proxy.stats)
 })
+
+ipcMain.handle('i18n-t', (event, key, opts) => {
+  return i18next.t(key, opts);
+});
+ipcMain.handle('i18n-changeLanguage', async (event, lng) => {
+  await i18next.changeLanguage(lng);
+  return i18next.language;
+});
+ipcMain.handle('i18n-getLanguage', () => i18next.language);
 
 proxy.on("use.update", (sent, received, stats) => {
   let statId = formatDate(new Date(), { withYear: true })

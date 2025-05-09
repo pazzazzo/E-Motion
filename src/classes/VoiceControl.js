@@ -151,7 +151,7 @@ class VoiceControl {
                 'proxy': 'http://127.0.0.1:3128',
                 'headers': {
                     'Accept': 'application/vnd.wit.20160202+json',
-                    'Authorization': `Bearer ${mediaLoader.database.data["wit-token"]}`,
+                    'Authorization': `Bearer HSJ4VCCYHZRS6E4WEEEG5UYNDXU7ILIK`,
                     'Content-Type': 'audio/wav'
                 }
             }, parseResult))

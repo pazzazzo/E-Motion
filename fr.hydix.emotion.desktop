@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=E-Motion - Dashboard
+Exec=emotion
+Type=Application
+Terminal=false
+Comment=The ultimate dashboard
+Categories=Utility;
+Icon=~/.local/share/icons/emotion/icon.png
+StartupWMClass=fr.hydix.emotion

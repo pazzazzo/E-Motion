@@ -1,0 +1,22 @@
+{
+    "music": {
+        "unknown": {
+            "title": "Titre inconnu",
+            "artist": "Artiste inconnu"
+        }
+    },
+    "wifi": {
+        "connected": "Connecté",
+        "load": "Chargement"
+    },
+    "time": {
+        "hh:mm/24": "{{h}}:{{m}}",
+        "hh:mm/12": "{{h}}:{{m}}"
+    },
+    "search": {
+        "address": "Adresse"
+    },
+    "welcome": {
+        
+    }
+}
