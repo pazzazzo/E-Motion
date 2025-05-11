@@ -232,3 +232,10 @@
     display: flex;
     align-items: center;
 }
+
+.mapboxgl-popup-tip {
+    border-top-color: #0f1317 !important
+}
+.mapboxgl-popup-content {
+    background-color: #0f1317 !important;
+}
