@@ -1,6 +1,7 @@
 const EventEmitter = require('events');
 const SpotifyWebApi = require('spotify-web-api-node');
 const MediaLoader = require('./MediaLoader');
+const { ipcRenderer } = require('electron');
 
 
 class SpotifyClient extends EventEmitter {
@@ -9,59 +10,64 @@ class SpotifyClient extends EventEmitter {
         super()
         console.log("✅ Spotify class invoked");
         this.mediaLoader = mediaLoader
+        this.webApi = new SpotifyWebApi()
     }
     init(cb = () => { }) {
         console.log("✅ Spotify class init");
         this.connected = false;
+        this.connecting = false;
         this.synced = false;
         this.clientId = "65b708073fc0480ea92a077233ca87bd"
+        this.currentState;
         cb()
     }
     connect() {
-        return new Promise((r, e) => {
-            this.player = new Spotify.Player({
-                name: this.mediaLoader.settings.data.machine.name,
-                getOAuthToken: async cb => {
-                    this.connected = false
-                    const token = await this.refreshAccessToken(this.mediaLoader.database.data["spotify-refresh-token"])
-                    console.log(token);
-                    
-                    if (token.access_token) {
-                        cb(token.access_token)
-                        this.mediaLoader.database.data["spotify-refresh-token"] = token.refresh_token
-                        this.#token = token
-                        this.connected = true
-                        console.log('The access token has been refreshed!');
-                        this.mediaLoader.database.save()
-                    }
-                }
-            });
-            this.player.addListener("ready", ({ device_id }) => {
-                // fetch("https://api.spotify.com/v1/me/player", {
-                //     method: "PUT",
-                //     headers: {
-                //         "Authorization": `Bearer ${this.#token}`,
-                //         "Content-Type": "application/json"
-                //     },
-                //     body: JSON.stringify({
-                //         device_ids: [device_id],
-                //         play: true
-                //     })
-                // });
-                this.emit("ready", device_id)
-            })
-            this.player.addListener("player_state_changed", state => {
-                if (state) {
-                    console.log(state);
+        if (this.connected || this.connecting) {
+            return
+        }
+        this.connecting = true
+        return new Promise(async (r, e) => {
+            const token = await this.refreshAccessToken(this.mediaLoader.database.data["spotify-refresh-token"])
+            console.log(token);
 
-                    this.emit("player.state", state)
-                }
-            });
-            this.player.connect()
+            if (token.access_token) {
+                ipcRenderer.send("spotify.start", {
+                    "name": this.mediaLoader.settings.data.machine.name,
+                    "token": token.access_token
+                })
+                this.webApi.setAccessToken(token.access_token)
+                this._updateCurrentState()
+                this.mediaLoader.database.data["spotify-refresh-token"] = token.refresh_token
+                this.#token = token
+                this.connected = true
+                console.log('The access token has been refreshed!', token.access_token);
+                this.mediaLoader.database.save()
+
+            } else {
+                this.connected = false
+                this.connecting = false
+            }
             r()
-        }, (err) => {
-            e(err)
         });
+    }
+    _updateCurrentState() {
+        this.webApi.getMyCurrentPlaybackState().then(d => {
+            this.currentState = d.body
+            setTimeout(() => {
+                this._updateCurrentState()
+            }, 1000);
+        }).catch(e => {
+            console.error(e);
+            setTimeout(() => {
+                this._updateCurrentState()
+            }, 1000);
+        })
+    }
+    getVolume() {
+        return this.currentState?.device?.volume_percent
+    }
+    setVolume(percent) {
+        this.webApi.setVolume(percent)
     }
     async oauthAuthorize() {
         const params = new URLSearchParams({
@@ -166,6 +172,19 @@ class SpotifyClient extends EventEmitter {
         }
 
         return res.json();
+    }
+    playHere() {
+        fetch("https://api.spotify.com/v1/me/player", {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${this.#token.access_token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                device_ids: [device_id],
+                play: true
+            })
+        });
     }
 }
 
