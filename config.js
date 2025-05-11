@@ -188,17 +188,6 @@ async function main() {
     }
   }
 
-  const keys = [
-    'mapbox-token',
-    'wit-token',
-    'map-api-key',
-  ];
-  for (const key of keys) {
-    if (!config[key]) {
-      config[key] = await ask(`Entrez votre ${key}: `);
-    }
-  }
-
   // Flow OAuth pour spotify-refresh-token s'il manque
   if (!config['spotify-refresh-token']) {
     config = await getSpotifyRefreshToken(config);
