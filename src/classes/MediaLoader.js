@@ -1,3 +1,4 @@
+const textToSpeech = require('@google-cloud/text-to-speech');
 const SpotifyClient = require('./SpotifyClient');
 const SearchAddress = require('./SearchAddress');
 const MapboxCamera = require('./MapboxCamera');
@@ -67,6 +68,7 @@ class MediaLoader extends EventEmitter {
             })
             this.wifi = new Wifi(this)
             this.stats = new Stats(this)
+            this.ttsClient = new textToSpeech.TextToSpeechClient();
             this.#preloadApps()
             cb()
         }
@@ -238,21 +240,22 @@ class MediaLoader extends EventEmitter {
     playSound(name, finish, important) {
         if (this.#sounds_buffer[name] || this.#voices_buffer[name]) {
             if (this.soundPlaying == 0) {
-                this.spotify.player.getVolume().then(v => {
+                const v = this.spotify.getVolume()
+                if (v) {
                     this.lastSpotifyVolume = v
-                    this.spotify.player.setVolume(important ? v / 8 : v / 3)
-                })
+                    this.spotify.setVolume(important ? v / 3 : v / 1.5)
+                }
             }
             this.soundPlaying++
             const audioContext = new AudioContext();
             const source = audioContext.createBufferSource();
-            const gainNode = audioContext.createGain();
-            finish && source.addEventListener("ended", (ev) => {
-                finish(ev)
+            // const gainNode = audioContext.createGain();
+            source.addEventListener("ended", (ev) => {
+                finish && finish(ev)
                 this.soundPlaying--
                 if (this.soundPlaying <= 0) {
                     this.soundPlaying = 0
-                    this.spotify.player.setVolume(this.lastSpotifyVolume)
+                    this.spotify.setVolume(this.lastSpotifyVolume)
                     this.lastSpotifyVolume = null
                 }
             })
@@ -260,6 +263,45 @@ class MediaLoader extends EventEmitter {
             source.connect(audioContext.destination);
             source.start();
         }
+    }
+
+    async tts(text, finish, important) {
+        if (this.soundPlaying == 0) {
+            // this.spotify.player.getVolume().then(v => {
+            //     this.lastSpotifyVolume = v
+            //     this.spotify.player.setVolume(important ? v / 8 : v / 3)
+            // })
+        }
+        const [response] = await this.ttsClient.synthesizeSpeech({
+            input: { text: text },
+            // Select the language and SSML voice gender (optional)
+            voice: { languageCode: 'fr-FR', ssmlGender: 'FEMALE' },
+            // select the type of audio encoding
+            audioConfig: { audioEncoding: 'MP3' },
+        });
+        const audioContext = new AudioContext();
+        const source = audioContext.createBufferSource();
+        source.addEventListener("ended", (ev) => {
+            finish && finish(ev)
+            this.soundPlaying--
+            if (this.soundPlaying <= 0) {
+                this.soundPlaying = 0
+                // this.spotify.player.setVolume(this.lastSpotifyVolume)
+                this.lastSpotifyVolume = null
+            }
+        })
+        
+        const data = response.audioContent
+        const audioData = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+        audioContext.decodeAudioData(audioData, (buffer) => {
+            console.log("ee");
+            
+            source.buffer = buffer
+            source.connect(audioContext.destination);
+            source.start();
+        }, (err) => {
+            console.error(err)
+        });
     }
     scanQRCode(canvas, video, cb) {
         let ctx = canvas.getContext("2d")
