@@ -1,0 +1,10 @@
+/home/pazzazzo/Documents/E-Motion/librespot-0.6.0/target/release/deps/libsymphonia_utils_xiph-99783f417658339c.rmeta: /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/lib.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/mod.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/metadata.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/vorbis/mod.rs
+
+/home/pazzazzo/Documents/E-Motion/librespot-0.6.0/target/release/deps/libsymphonia_utils_xiph-99783f417658339c.rlib: /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/lib.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/mod.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/metadata.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/vorbis/mod.rs
+
+/home/pazzazzo/Documents/E-Motion/librespot-0.6.0/target/release/deps/symphonia_utils_xiph-99783f417658339c.d: /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/lib.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/mod.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/metadata.rs /home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/vorbis/mod.rs
+
+/home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/lib.rs:
+/home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/mod.rs:
+/home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/flac/metadata.rs:
+/home/pazzazzo/.cargo/registry/src/index.crates.io-6f17d22bba15001f/symphonia-utils-xiph-0.5.4/src/vorbis/mod.rs:

@@ -5,15 +5,18 @@ const Dev = require("./Dev")
 const VehicleConnect = require("./VehicleConnect");
 const { ipcRenderer } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const { spawn } = require('child_process');
 const Proxy = require('./proxy');
 let mainWindow;
 let vehicleConnect;
 let dev;
+let libre;
 let proxy = new Proxy()
 const i18next = require('i18next');
-const Backend = require('i18next-fs-backend')
+const Backend = require('i18next-fs-backend');
+const LocationServer = require('./LocationServer');
 
-
+let locationServer
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
 
 app.commandLine.appendSwitch('disable-software-rasterizer');
@@ -55,8 +58,8 @@ const createWindow = async () => {
       fallbackLng: 'en',
       interpolation: { escapeValue: false }
     });
-  console.log(i18next.t("welcome", {user: "John"}));
-  
+  console.log(i18next.t("welcome", { user: "John" }));
+
   mainWindow = new BrowserWindow({
     // width: 1024,
     // height: 600,
@@ -81,6 +84,13 @@ const createWindow = async () => {
 
   vehicleConnect = new VehicleConnect({ mainWindow })
   dev = new Dev({ vehicleConnect })
+  locationServer = new LocationServer()
+  locationServer.on("update", (data) => {
+    vehicleConnect.positonChange(data.longitude, data.latitude)
+    if (data.direction) {
+      vehicleConnect.headindChange(data.direction)
+    }
+  })
   if (fs.existsSync(DB_PATH)) {
     mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
   } else {
@@ -110,7 +120,7 @@ app.whenReady().then(async () => {
   //   // details.requestHeaders["User-Agent"] = "MonNavigateurElectron/1.0";
   //   callback({ cancel: false, requestHeaders: details.requestHeaders });
   // });
-  createWindow();
+  await createWindow();
   dev.createDevWindow();
 
   app.on('activate', () => {
@@ -158,6 +168,27 @@ if (!fs.existsSync(path.join(__dirname, "src", "datagraph.json"))) {
   datagraph = JSON.parse(fs.readFileSync(path.join(__dirname, "src", "datagraph.json")).toString())
 }
 
+ipcMain.on("spotify.start", (event, opt) => {
+  console.log(opt);
+  if (libre) {
+    return
+  }
+  libre = spawn(path.join(__dirname, "librespot", "librespot"), [
+    '--name', opt.name || "No name",
+    '--device-type', 'automobile',
+    '--bitrate', opt.bitrate || 320,
+    '-k', opt.token,
+    '-c', path.join(__dirname, "spoticache"),
+    '--cache-size-limit', '20G',
+    '-x', `http://${proxy.host}:${proxy.port}`,
+  ]);
+  libre.stdout.on("data", data => {
+    console.log(data.toString());
+  })
+  libre.stderr.on("data", (d) => {
+    console.log(d.toString());
+  })
+})
 ipcMain.on("dataTransfer.get", (event, cb) => {
   cb(proxy.getData())
 })
