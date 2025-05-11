@@ -49,14 +49,15 @@ class Dev {
             }
             if (data.name == "up") {
                 if (data.pressed) {
+                    let speed = 0.00001
                     if (intervals.up) {
                         clearInterval(intervals.up)
                     }
                     intervals.up = setInterval(() => {
-                        this.latitude += 0.0001 * Math.cos(this.heading * (Math.PI / 180))
-                        this.longitude += 0.0001 * Math.sin(this.heading * (Math.PI / 180))
+                        this.latitude += speed * Math.cos(this.heading * (Math.PI / 180))
+                        this.longitude += speed * Math.sin(this.heading * (Math.PI / 180))
                         this.vehicleConnect.positonChange(this.longitude, this.latitude)
-                    }, 250);
+                    }, 25);
                 } else {
                     clearInterval(intervals.up)
                     delete intervals.up
