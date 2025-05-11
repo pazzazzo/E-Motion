@@ -138,3 +138,5 @@ build/
 package-lock.json
 emotion.desktop
 start.sh
+text-to-speech-key.json
+spoticache/
