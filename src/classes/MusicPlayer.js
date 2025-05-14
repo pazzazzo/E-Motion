@@ -46,9 +46,9 @@ class MusicPlayer {
         this.HTML.previous.addEventListener("click", () => {
             if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
                 if (this.current > 3000) {
-                    this.mediaLoader.spotify.player.seek(0)
+                    this.mediaLoader.spotify.seek(0)
                 } else {
-                    this.mediaLoader.spotify.player.previousTrack()
+                    this.mediaLoader.spotify.previous()
                 }
             } else {
                 this.mediaLoader.bluetooth.musicPrevious()
@@ -56,7 +56,14 @@ class MusicPlayer {
         })
         this.HTML.play.addEventListener("click", () => {
             if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
-                this.mediaLoader.spotify.player.togglePlay()
+                if (this.paused) {
+                    this.mediaLoader.spotify.play()
+                    this.HTML.play.children[0].innerHTML = "pause"
+                } else {
+                    this.mediaLoader.spotify.pause()
+
+        this.HTML.play.children[0].innerHTML = "play_arrow"
+                }
             } else {
                 if (this.paused) {
                     this.mediaLoader.bluetooth.musicPlay()
@@ -67,7 +74,7 @@ class MusicPlayer {
         })
         this.HTML.next.addEventListener("click", () => {
             if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
-                this.mediaLoader.spotify.player.nextTrack()
+                this.mediaLoader.spotify.next()
             } else {
                 this.mediaLoader.bluetooth.musicNext()
             }
@@ -76,7 +83,7 @@ class MusicPlayer {
         mediaLoader.spotify.on("player.state", (state) => {
             if (state) {
                 this.currentPlayer = "spotify"
-                this.spotifyPlayerStateChanged(state)
+                this.update(state)
             }
         })
         mediaLoader.bluetooth.on("bluetooth.track", (track) => {
@@ -133,16 +140,6 @@ class MusicPlayer {
         this.updateTrackInfo(track)
         this.updateTrackPosition(track.current, track.duration, track.paused)
         track.image && this.updateTrackImage(track.image)
-    }
-    spotifyPlayerStateChanged(state) {
-        this.update({
-            current: state.position,
-            duration: state.duration,
-            paused: state.paused,
-            image: state.track_window.current_track?.album.images[0].url,
-            name: state.track_window.current_track?.name || "Unknown Title",
-            artist: state.track_window.current_track?.artists[0].name || "Unknown Artist",
-        })
     }
 }
 

@@ -25,7 +25,9 @@
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
     "@google-cloud/speech": "^6.7.1",
+    "@google-cloud/text-to-speech": "^6.0.1",
     "@tensorflow/tfjs-node": "^4.22.0",
+    "@turf/turf": "^7.2.0",
     "chart.js": "^4.4.1",
     "dbus-next": "^0.10.2",
     "deepspeech": "^0.9.3",

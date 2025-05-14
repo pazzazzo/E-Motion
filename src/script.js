@@ -53,15 +53,6 @@ function sp() {
     mediaLoader.spotify.on("ready", (r) => {
         console.log("Spotify ready", r);
     })
-    mediaLoader.spotify.on("player.state", state => {
-        if (state) {
-            if (state.track_window.current_track) {
-                // console.log(state);
-
-                console.log("Changement de piste : ", state.track_window.current_track.name);
-            }
-        }
-    })
     mediaLoader.spotify.connect()
 }
 

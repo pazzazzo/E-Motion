@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const SpotifyWebApi = require('spotify-web-api-node');
+// const WebApiRequest = require('spotify-web-api-node/a');
 const MediaLoader = require('./MediaLoader');
 const { ipcRenderer } = require('electron');
 
@@ -21,8 +22,8 @@ class SpotifyClient extends EventEmitter {
         this.currentState;
         cb()
     }
-    connect() {
-        if (this.connected || this.connecting) {
+    connect(refresh) {
+        if ((this.connected || this.connecting) && !refresh) {
             return
         }
         this.connecting = true
@@ -36,23 +37,42 @@ class SpotifyClient extends EventEmitter {
                     "token": token.access_token
                 })
                 this.webApi.setAccessToken(token.access_token)
-                this._updateCurrentState()
+                if (!refresh) {
+                    this._updateCurrentState()
+                }
                 this.mediaLoader.database.data["spotify-refresh-token"] = token.refresh_token
                 this.#token = token
                 this.connected = true
+                this.synced = true
                 console.log('The access token has been refreshed!', token.access_token);
                 this.mediaLoader.database.save()
-
+                setTimeout(() => {
+                    this.connect(true)
+                }, 59 * 1000 * 60);
             } else {
                 this.connected = false
-                this.connecting = false
+                this.synced = false
             }
+
+            this.connecting = false
             r()
         });
     }
     _updateCurrentState() {
         this.webApi.getMyCurrentPlaybackState().then(d => {
             this.currentState = d.body
+            if (!d.body.item) {
+
+            } else {
+                this.emit("player.state", {
+                    current: d.body.progress_ms,
+                    duration: d.body.item.duration_ms,
+                    paused: d.body.is_playing === undefined ? false : !d.body.is_playing,
+                    image: d.body.item.album.images[0].url,
+                    name: d.body.item.name,
+                    artist: d.body.item.artists.map(a => a.name).join(", "),
+                })
+            }
             setTimeout(() => {
                 this._updateCurrentState()
             }, 1000);
@@ -69,6 +89,25 @@ class SpotifyClient extends EventEmitter {
     setVolume(percent) {
         this.webApi.setVolume(percent)
     }
+    pause() {
+        this.webApi.pause()
+    }
+    play() {
+        this.webApi.play()
+    }
+    next() {
+        this.webApi.skipToNext()
+    }
+    seek(ms) {
+        this.webApi.seek(ms)
+    }
+    previous() {
+        this.webApi.skipToPrevious()
+    }
+    getQueue() {
+        // this.webApi.
+    }
+
     async oauthAuthorize() {
         const params = new URLSearchParams({
             client_id: this.clientId,
