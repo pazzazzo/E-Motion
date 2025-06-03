@@ -101,10 +101,12 @@
     align-items: center;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
 .settings-selector.active {
     display: grid;
 }
-.settings-selector > div {
+
+.settings-selector>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,7 +117,8 @@
     border-radius: 0.5em;
     color: #b0a49e;
 }
-.settings-selector > div.active {
+
+.settings-selector>div.active {
     background: #17181c;
     color: #ffffff;
 }
@@ -158,9 +161,11 @@
         'GRAD'200,
         'opsz'40
 }
+
 .settings-nav:first-child .settings-nav-upsidedown>div:first-child>span {
     color: #6a6a6a;
 }
+
 .settings-nav:last-child .settings-nav-upsidedown>div:last-child>span {
     color: #6a6a6a;
 }
@@ -242,6 +247,7 @@
     font-size: 1.125rem;
     line-height: 1.75rem;
 }
+
 .settings-label {
     margin-top: 30px;
     font-weight: 500;
@@ -279,7 +285,7 @@
     flex-direction: row;
     justify-content: space-around; */
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));    
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
 }
 
@@ -288,7 +294,8 @@
     flex-direction: column;
     align-items: stretch;
 }
-.settings-map-row-element > *:first-child {
+
+.settings-map-row-element>*:first-child {
     margin-bottom: 1rem;
 }
 
@@ -302,7 +309,8 @@
     padding: 0.7rem;
 
 }
-.settings-map-row-card > *:first-child {
+
+.settings-map-row-card>*:first-child {
     margin-right: .5rem;
     margin-left: .5rem;
 
@@ -312,6 +320,7 @@
     font-weight: 500;
     font-size: 1.2rem;
 }
+
 .settings-dataset-value {
     font-weight: 800;
     font-size: 1.5rem;
@@ -324,17 +333,20 @@
     color: hsl(220 10% 50%);
     margin-bottom: 1rem;
 }
+
 .settings-progress-bar-container {
     height: 1rem;
     background: #f0f8ff1f;
     border-radius: 50px;
     margin-bottom: .6rem;
 }
+
 .settings-progress-bar-fill {
     background: #f0f8ff6e;
     height: 100%;
     border-radius: 1rem;
 }
+
 .settings-progress-bar-container {
     display: flex;
     flex-direction: row;
@@ -342,6 +354,7 @@
     align-items: flex-end;
     margin-bottom: .6rem;
 }
+
 .settings-progress-bar-label {
     display: flex;
     flex-direction: row;
@@ -351,8 +364,8 @@
 }
 
 .settings-chart-parent {
-    height: 17rem ;
-    min-height: 17rem ;
+    height: 17rem;
+    min-height: 17rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -372,25 +385,27 @@
     display: flex;
 
 }
-.settings-warn-card > .material-symbols-rounded {
+
+.settings-warn-card>.material-symbols-rounded {
     color: #FBBF24;
     margin-right: 1rem;
     font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 40
+        'FILL'0,
+        'wght'400,
+        'GRAD'0,
+        'opsz'40
 }
-.settings-warn-texts {
-    
-}
-.settings-warn-texts > p {
+
+.settings-warn-texts {}
+
+.settings-warn-texts>p {
     color: #9DA3AF;
     font-size: 0.875rem;
     line-height: 1.25rem;
     margin: 5px 0 0;
 }
-.settings-warn-texts > p:first-child {
+
+.settings-warn-texts>p:first-child {
     color: #FBBF24;
     font-weight: 500;
     margin: 0;
@@ -420,17 +435,19 @@
     border-radius: .8rem;
     background: #84909b14;
 }
-.settings-transparent-card > *:first-child {
+
+.settings-transparent-card>*:first-child {
     margin-top: 0;
 }
 
-.settings-subtitle + .settings-map-single-control {
+.settings-subtitle+.settings-map-single-control {
     margin-top: 1rem;
 }
 
-.orange, .orange > span {
+.orange, .orange>span {
     color: #ff8f00;
 }
+
 #settings-modal-screen {
     display: flex;
     position: fixed;
@@ -445,11 +462,13 @@
     justify-content: center;
     transition: all 0.3s ease-in-out;
 }
+
 #settings-modal-screen.hidden {
     display: none;
     background-color: #00000000;
     backdrop-filter: blur(0px);
 }
+
 .settings-modal {
     display: none;
     flex-direction: column;
@@ -459,27 +478,48 @@
     border: 1px solid var(--border-color);
     padding: 1.5rem;
 }
+
 .settings-modal.active {
     display: flex;
     animation: SlideIn .3s ease 0s 1 normal forwards;
 }
-@keyframes SlideIn {
-	0% {
-		opacity: 0;
-		transform: translateY(250px);
-	}
 
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+.settings-modal-text {
+    font-weight: 500;
+    margin-bottom: .5rem;
 }
+
+.qrcode {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.qrcode>span {
+    white-space: pre;
+    font-family: monospace;
+    letter-spacing: -0.5px;
+}
+
+@keyframes SlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(250px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .settings-modal-title {
     letter-spacing: -0.025em;
     line-height: 1;
     font-weight: 600;
     font-size: 1.125rem;
 }
+
 .settings-modal-desc {
     margin-top: 7.5px;
     font-size: 0.875rem;
@@ -487,40 +527,49 @@
     color: #9da3af;
     margin-bottom: 1rem;
 }
+
 .settings-modal-versions {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .settings-modal-version:last-child {
     text-align: right;
 }
+
 .settings-modal-version {
     display: flex;
     flex-direction: column;
 }
-.settings-modal-version > *:first-child {
+
+.settings-modal-version>*:first-child {
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.25rem;
 }
-.settings-modal-version > *:last-child {
+
+.settings-modal-version>*:last-child {
     font-weight: 700;
     font-size: 1.5rem;
     line-height: 2rem;
 }
-.settings-modal-version:last-child > *:last-child {
+
+.settings-modal-version:last-child>*:last-child {
     color: hsl(220 10% 50%);
 }
+
 .settings-modal-separator {
     height: 1px;
     background: var(--border-color);
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 .settings-modal-subtitle {
     margin-bottom: 0.5rem;
 }
+
 .settings-modal-changelog {
     flex-grow: 1;
     overflow-y: auto;
@@ -529,19 +578,22 @@
     padding: 0.75rem;
     margin-bottom: 20px;
 }
-.settings-modal-changelog > h1 {
+
+.settings-modal-changelog>h1 {
     font-size: 1.5rem;
     font-weight: 500;
     font-size: 0.875rem;
     line-height: 1.25rem;
     margin: 0;
 }
-.settings-modal-changelog > ul {
+
+.settings-modal-changelog>ul {
     font-size: 0.875rem;
     line-height: 1.25rem;
     padding-left: 1.25rem;
     margin-top: 0.25rem;
 }
+
 .settings-modal-action {
     display: flex;
     flex-direction: row;
@@ -549,6 +601,7 @@
     justify-content: space-around;
     gap: 0.5rem;
 }
+
 .settings-modal-button {
     padding: 0.7rem;
     border-radius: 5px;
@@ -559,11 +612,31 @@
     flex: 1 1 0%;
     justify-content: center;
 }
-.settings-modal-button > .material-symbols-outlined {
+
+.settings-modal-button>.material-symbols-outlined {
     margin-right: 0.5rem;
 }
+
 .settings-modal-button.primary {
     background: #1814a7;
+}
+
+.settings-modal-code {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: .4rem;
+}
+.settings-modal-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-modal-code-digit {
+    background: #2d2d42;
+    padding: .2rem .25rem;
+    border-radius: .2rem;
 }
 
 .settings-map-single-control {
@@ -597,6 +670,7 @@
     align-items: center;
     margin-left: auto;
 }
+
 .settings-map-single-control-icon {
     display: flex;
     justify-content: center;
@@ -623,15 +697,17 @@
     align-items: center;
     justify-content: center;
 }
-.settings-slider > input {
+
+.settings-slider>input {
     flex: 1 1 0%;
     margin-left: 0;
 
 }
-.settings-slider > label {
+
+.settings-slider>label {
     width: 6rem;
     display: flex;
-    justify-content: flex-end;    
+    justify-content: flex-end;
     font-weight: 500;
 }
 
@@ -642,6 +718,7 @@
     border: 1px solid var(--border-color);
     color: #ffffff;
 }
+
 .button {
     padding: .6rem;
     display: flex;
@@ -651,12 +728,15 @@
     border: 1px solid var(--border-color);
     border-radius: 0.1875rem;
 }
+
 .button.bigger {
     padding: .8rem;
 }
-.button.bigger >span.material-symbols-outlined {
+
+.button.bigger>span.material-symbols-outlined {
     margin-right: .8rem;
 }
+
 .button>span.material-symbols-outlined {
     margin-right: .5rem;
 }
@@ -680,7 +760,7 @@ select {
 
 select::-ms-expand {
     display: none;
-  }
+}
 
 
 .settings-separator {
