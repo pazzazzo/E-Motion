@@ -4,9 +4,11 @@ const SearchAddress = require('./SearchAddress');
 const MapboxCamera = require('./MapboxCamera');
 const VoiceControl = require('./VoiceControl');
 const PlaceSearch = require('./PlaceSearch');
+const MusicPlayer = require('./MusicPlayer');
 const { default: jsQR } = require('jsqr');
 const AppLoader = require('./AppLoader');
 const Direction = require('./Direction');
+const Bluetooth = require('./Bluetooth');
 const EventEmitter = require('events');
 const Position = require('./Position');
 const Settings = require('./Settings');
@@ -14,15 +16,13 @@ const Database = require('./Database');
 const InfoBar = require('./InfoBar');
 const Navbar = require('./Navbar');
 const Arrow = require('./Arrow');
+const Stats = require('./Stats');
 const Waze = require('./Waze');
 const Wifi = require('./Wifi');
 const Page = require('./Page');
+const Lang = require('./Lang');
 const path = require('path');
 const fs = require('fs');
-const Stats = require('./Stats');
-const MusicPlayer = require('./MusicPlayer');
-const Bluetooth = require('./Bluetooth');
-const Lang = require('./Lang');
 
 
 class MediaLoader extends EventEmitter {
