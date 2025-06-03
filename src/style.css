@@ -284,7 +284,9 @@ input:focus, select:focus {
 }
 
 
-
+.link {
+    text-decoration: underline;
+}
 
 .loadingspinner {
     --square: 60px;
@@ -301,7 +303,7 @@ input:focus, select:focus {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     position: relative;
   }
   
