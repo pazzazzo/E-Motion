@@ -25,9 +25,6 @@ class Sound {
         this.spotifyControl.autoConnect.checked = this.settings.mediaLoader.settings.data.spotify.autoConnect;
         this.spotifyControl.connectDelay.value = this.settings.mediaLoader.settings.data.spotify.connectDelay;
         this.spotifyControl.connectNotify.checked = this.settings.mediaLoader.settings.data.spotify.connectNotify;
-        document.getElementById("settings-spotify-connect").addEventListener("click", () => {
-            this.spotifyConnect()
-        })
 
         this.mainVolume.value = this.settings.mediaLoader.settings.data.sound.mainVolume
         this.mainVolume.addEventListener("change", (e) => {
@@ -63,9 +60,6 @@ class Sound {
                 }, this.sonControls[i] ? false : true)
             })
         }
-    }
-    spotifyConnect() {
-        this.settings.openModal("spotify-load")
     }
 }
 
