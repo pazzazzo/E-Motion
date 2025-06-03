@@ -108,38 +108,47 @@ class SpotifyClient extends EventEmitter {
         // this.webApi.
     }
 
+    /**
+     * 
+     * @returns {Promise<SpotifyApi.CurrentUsersProfileResponse>}
+     */
+    getMe() {
+        return new Promise((r, e) => {
+            this.webApi.getMe((err, res) => {
+                if (err) {
+                    e(err)
+                } else {
+                    r(res.body)
+                }
+            })
+        })
+    }
+
     async oauthAuthorize() {
         const params = new URLSearchParams({
             client_id: this.clientId,
             creation_point: `https://login.app.spotify.com/?client_id=${this.clientId}&utm_source=spotify&utm_medium=desktop-win32&utm_campaign=organic`,
             intent: 'login',
             scope: [
-                'app-remote-control',
-                'playlist-modify',
-                'playlist-modify-private',
-                'playlist-modify-public',
-                'playlist-read',
-                'playlist-read-collaborative',
-                'playlist-read-private',
-                'streaming',
-                'ugc-image-upload',
-                'user-follow-modify',
-                'user-follow-read',
-                'user-library-modify',
-                'user-library-read',
-                'user-modify',
-                'user-modify-playback-state',
-                'user-modify-private',
-                'user-personalized',
-                'user-read-birthdate',
-                'user-read-currently-playing',
-                'user-read-email',
-                'user-read-play-history',
-                'user-read-playback-position',
-                'user-read-playback-state',
-                'user-read-private',
-                'user-read-recently-played',
-                'user-top-read',
+                "ugc-image-upload",
+                "user-read-playback-state",
+                "user-modify-playback-state",
+                "user-read-currently-playing",
+                "app-remote-control",
+                "streaming",
+                "playlist-read-private",
+                "playlist-read-collaborative",
+                "playlist-modify-private",
+                "playlist-modify-public",
+                "user-follow-modify",
+                "user-follow-read",
+                "user-read-playback-position",
+                "user-top-read",
+                "user-read-recently-played",
+                "user-library-modify",
+                "user-library-read",
+                "user-read-email",
+                "user-read-private",
             ].join(','),
         });
 
@@ -212,7 +221,7 @@ class SpotifyClient extends EventEmitter {
 
         return res.json();
     }
-    playHere() {
+    playHere(device_id) {
         fetch("https://api.spotify.com/v1/me/player", {
             method: "PUT",
             headers: {
