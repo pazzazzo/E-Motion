@@ -127,7 +127,8 @@
                     <span class="material-symbols-outlined">
                         volume_up
                     </span>
-                    <input type="range" name="settings-event-volume" id="settings-event-volume" min="0" max="1" step="0.01">
+                    <input type="range" name="settings-event-volume" id="settings-event-volume" min="0" max="1"
+                        step="0.01">
                 </div>
             </div>
             <div class="settings-separator"></div>
@@ -519,7 +520,8 @@
                 <span class="material-symbols-rounded">warning</span>
                 <div class="settings-warn-texts">
                     <p>Alerte de consommation</p>
-                    <p>À ce rythme, vous dépasserez votre limite de données avant le prochain renouvellement. Utilisation estimée: <span>8.7 GB</span></p>
+                    <p>À ce rythme, vous dépasserez votre limite de données avant le prochain renouvellement.
+                        Utilisation estimée: <span>8.7 GB</span></p>
                 </div>
             </div>
             <div class="settings-separator"></div>
@@ -589,8 +591,16 @@
             </div>
             <div class="settings-modal" id="settings-modal-spotify-load">
                 <div class="settings-modal-title">Connexion à Spotify</div>
-                <div class="settings-modal-desc">Lancement du serveur en cours</div>
-                <div class="settings-modal-loader">
+                <div class="settings-modal-desc">En attente d'une connexion</div>
+                <div class="settings-modal-text">Scannez le QR code sur un mobile</div>
+                <div class="settings-modal-center">
+                    <div class="qrcode" id="spotipair-qr"></div>
+                </div>
+                <div class="settings-modal-text">Ou ouvrez <span class="link" id="spotipair-link"></span> et entrez
+                </div>
+                <div class="settings-modal-code" id="spotipair-code">
+                </div>
+                <!-- <div class="settings-modal-loader">
                     <div class="loadingspinner" style="--offset: 25px; --square: 20px">
                         <div class="square1"></div>
                         <div class="square2"></div>
@@ -598,7 +608,7 @@
                         <div class="square4"></div>
                         <div class="square5"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
