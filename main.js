@@ -1,9 +1,8 @@
-const { app, BrowserWindow, ipcMain, session, components } = require('electron')
+const { app, BrowserWindow, ipcMain, session, components, globalShortcut } = require('electron')
 const fs = require('fs')
 const path = require('node:path')
 const Dev = require("./Dev")
 const VehicleConnect = require("./VehicleConnect");
-const { ipcRenderer } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const { spawn } = require('child_process');
 const Proxy = require('./proxy');
@@ -26,14 +25,11 @@ app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('enable-native-gpu-memory-buffers');
 app.commandLine.appendSwitch('disk-cache-size', '1024000000');
 
+// app.commandLine.appendSwitch('enable-features', 'GlobalShortcutsPortal')
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
 app.commandLine.appendSwitch('max-gum-fps', '100');
 
-// app.commandLine.appendSwitch('widevine-cdm-version', '4.10.2891.0')
-
-// app.commandLine.appendSwitch('widevine-cdm-path', './libwidevinecdm.so')
-// app.commandLine.appendSwitch('enable-widevine-cdm');
 
 const DB_PATH = path.join(__dirname, 'src', 'database.json');
 
@@ -91,11 +87,14 @@ const createWindow = async () => {
       vehicleConnect.headindChange(data.direction)
     }
   })
-  if (fs.existsSync(DB_PATH)) {
+  if (fs.existsSync(DB_PATH) /*&& false*/) {
     mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
+    if (!vehicleConnect.checkVIN()) {
+      mainWindow.loadFile(path.join(__dirname, "src", "unauthorized", "index.html"))
+    }
   } else {
     // require("./disableAppArmor")()
-    mainWindow.loadFile(path.join(__dirname, "config", "index.html"))
+    mainWindow.loadFile(path.join(__dirname, "src", "config", "index.html"))
   }
   mainWindow.on("ready-to-show", () => {
     mainWindow.show()
@@ -147,6 +146,11 @@ app.whenReady().then(async () => {
       autoUpdater.quitAndInstall();
     }
   });
+
+  globalShortcut.register("Control+Shift+T", () => {
+    spawn("x-terminal-emulator")
+  })
+  
 })
 
 app.on('window-all-closed', () => {
