@@ -28,6 +28,12 @@ class VehicleConnect {
     controlClick(name, pressed) {
         this.mainWindow.webContents.send(`control.${name}`, pressed)
     }
+    getVIN() {
+        return "ZFF*abcdef*000000"
+    }
+    checkVIN() {
+        return true
+    }
 }
 
 module.exports = VehicleConnect
