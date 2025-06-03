@@ -1,5 +1,4 @@
 const MediaLoader = require("./MediaLoader");
-const request = require('request')
 const recorder = require("./recorder")
 
 class VoiceControl {
@@ -146,15 +145,38 @@ class VoiceControl {
                 endOnSilence: true,
                 thresholdEnd: 0.1
             })
-            this.recording.stream().pipe(request.post({
-                'url': 'https://api.wit.ai/speech?client=chromium&lang=fr-fr&output=json',
-                'proxy': 'http://127.0.0.1:3128',
-                'headers': {
-                    'Accept': 'application/vnd.wit.20160202+json',
-                    'Authorization': `Bearer HSJ4VCCYHZRS6E4WEEEG5UYNDXU7ILIK`,
-                    'Content-Type': 'audio/wav'
-                }
-            }, parseResult))
+            // this.recording.stream().pipe(request.post({
+            //     'url': 'https://api.wit.ai/speech?client=chromium&lang=fr-fr&output=json',
+            //     'proxy': 'http://127.0.0.1:3128',
+            //     'headers': {
+            //         'Accept': 'application/vnd.wit.20160202+json',
+            //         'Authorization': `Bearer HSJ4VCCYHZRS6E4WEEEG5UYNDXU7ILIK`,
+            //         'Content-Type': 'audio/wav'
+            //     }
+            // }, parseResult))
+            const url = "https://api.wit.ai/speech?client=chromium&lang=fr-fr&output=json";
+            const headers = {
+                "Accept": "application/vnd.wit.20160202+json",
+                "Authorization": `Bearer HSJ4VCCYHZRS6E4WEEEG5UYNDXU7ILIK`,
+                "Content-Type": "audio/wav"
+            };
+            fetch(url, {
+                method: "POST",
+                headers,
+                body: this.recording.stream()
+            })
+                .then(response => {
+                    console.log(response);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP ${response.status} – ${response.statusText}`);
+                    }
+                    // return response.json();
+                    parseResult(null, response);
+                })
+                .catch(err => {
+                    parseResult(err);
+                });
             this.recording.stream().once("finish", () => {
                 console.log("ok");
 

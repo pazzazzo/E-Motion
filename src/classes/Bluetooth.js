@@ -2,7 +2,6 @@ const MediaLoader = require("./MediaLoader");
 const dbus = require('dbus-next');
 const { spawn } = require("child_process");
 const { EventEmitter } = require("events");
-const request = require('request');
 
 
 class Bluetooth extends EventEmitter {
@@ -104,7 +103,7 @@ class Bluetooth extends EventEmitter {
         this.playerProxy = await this.systemBus.getProxyObject(this.bluezService, this.playerPath);
         this.playerInterface = this.playerProxy.getInterface('org.freedesktop.DBus.Properties');
         this.playerManager = this.playerProxy.getInterface('org.bluez.MediaPlayer1');
-        
+
         console.log("Interfaces sur le modem :", Object.keys(this.playerProxy.interfaces).join(', '));
         this.playerInterface.on('PropertiesChanged', (iface, changed) => {
             if (iface === 'org.bluez.MediaPlayer1') {
@@ -127,15 +126,26 @@ class Bluetooth extends EventEmitter {
             })
             const query = encodeURIComponent(`${artist} ${title}`);
             const apiUrl = `https://itunes.apple.com/search?term=${query}&limit=1&media=music`;
-            request({ url: apiUrl, json: true, proxy: 'http://127.0.0.1:3128' }, (err, resp, body) => {
-                if (err || !body.results || body.results.length === 0) {
-                    console.error('Pas de pochette trouvée.');
-                    this.emit("bluetooth.cover", null)
-                    return;
-                }
-                const artUrl = body.results[0].artworkUrl100.replace(/100x100/, '600x600');
-                this.emit("bluetooth.cover", artUrl)
-            });
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error ${response.status} – ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(body => {
+                    if (!body.results || body.results.length === 0) {
+                        console.error("Pas de pochette trouvée.");
+                        this.emit("bluetooth.cover", null);
+                        return;
+                    }
+                    const artUrl = body.results[0].artworkUrl100.replace(/100x100/, "600x600");
+                    this.emit("bluetooth.cover", artUrl);
+                })
+                .catch(err => {
+                    console.error("Erreur lors de la requête :", err);
+                    this.emit("bluetooth.cover", null);
+                });
         }
         if (changed.Status) {
             this.emit("bluetooth.status", changed.Status.value)
