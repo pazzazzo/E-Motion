@@ -28,6 +28,14 @@ class Keyboard extends EventEmitter {
             },
     
         });
+        let shortcut = document.createElement("div")
+        shortcut.classList.add("simple-keyboard-shortcuts")
+        let btn = document.createElement("div")
+        btn.classList.add("simple-keyboard-shortcut")
+        btn.innerHTML = "<img src='./media/images/star.png' class='simple-keyboard-shortcut-icon'><span>183 Cours de l'Yser</span>"
+        shortcut.appendChild(btn)
+        console.log(this.keyboard.keyboardDOM.firstChild.appendChild(shortcut));
+        
     }
     show() {
         document.getElementsByClassName("simple-keyboard")[0].classList.add("active")
