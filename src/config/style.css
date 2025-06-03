@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: black;
+    color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,6 +16,10 @@ html {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+.hidden {
+    display: none !important;
 }
 
 #welcome {
@@ -35,6 +40,7 @@ h1 {
     margin: 0;
     margin-bottom: 1.5rem;
     color: #f8fafc;
+    text-align: center;
 }
 
 #welcome-desc {
@@ -53,7 +59,7 @@ p {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
     padding: .5rem 2rem;
-    border-radius: .5rem;    
+    border-radius: .5rem;
     white-space: nowrap;
     gap: 0.5rem;
     height: 2.75rem;
@@ -61,10 +67,12 @@ p {
     align-items: center;
     justify-content: center;
 }
-.button > svg {
+
+.button>svg {
     margin-left: 0.5rem;
 }
-.button > * {
+
+.button>* {
     font-weight: 600;
     font-size: 1rem;
     line-height: 1.25rem;
@@ -84,4 +92,35 @@ p {
 .muted {
     background-color: #27272a;
     color: #a1a1aa;
+}
+
+.modal {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    background-color: #18181B;
+    border: 1px solid #27272a;
+    width: 28rem;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: calc(.5rem - 2px);
+    height: 2.5rem;
+    margin-bottom: 30px;
+    
 }

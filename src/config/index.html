@@ -8,11 +8,22 @@
     <title>E-Motion - Config</title>
 </head>
 <body>
-    <div id="welcome">
+    <div id="welcome" class="hidden">
         <h1>Bienvenue sur E-Motion</h1>
         <p id="welcome-desc">Merci d'utiliser le tableau de bord E-Motion pour votre véhicule</p>
         <div class="button primary">
             <p>Commencer la configuration</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </div>
+    </div>
+    <div class="modal">
+        <h1>Qui êtes vous ?</h1>
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" name="username" type="text" placeholder="Entrez votre nom d'utilisateur">
+        <label for="carname">Nom du véhicule</label>
+        <input id="carname" name="carname" type="text" placeholder="Entrez un nom pour votre véhicule">
+        <div class="button primary">
+            <p>Continuer</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
         </div>
     </div>
