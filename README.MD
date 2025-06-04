@@ -8,7 +8,7 @@ L'objectif principal du projet E-Motion est de concevoir une expérience de cond
 
 ## Principales Caractéristiques
 
-- **Services performants :** Le tableau de bord utilise des services performants et reconnus tel qu'Electron pour la création du logiciel, Waze pour les alertes utiliateurs, Mapbox pour un affichage dynamique et moderne de la carte, Spotify pour la diffusion de la musique et l'accès aux passagers à la playlist.
+- **Services performants :** Le tableau de bord utilise des services performants et reconnus tel qu'Electron pour la création du logiciel, Waze pour les alertes utilisateurs, Mapbox pour un affichage dynamique et moderne de la carte, Spotify pour la diffusion de la musique et l'accès aux passagers à la playlist.
 
 - **Écran 15" :** Actuellement, le logiciel est conçu pour un écran 15" tactile.
 
