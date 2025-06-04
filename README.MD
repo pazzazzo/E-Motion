@@ -78,6 +78,14 @@ Le contenu du fichier se présente ainsi:
   "spotify-refresh-token":  "VOTRE_SPOTIFY_REFRESH_TOKEN"
 }
 ```
+### Exécution des tests
+
+Des tests unitaires simples sont fournis avec **Jest** pour vérifier certaines fonctions d'utilitaires. Pour les lancer, exécutez :
+
+```bash
+npm test
+```
+
 
 ## License
 
