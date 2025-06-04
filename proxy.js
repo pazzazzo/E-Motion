@@ -30,7 +30,7 @@ class Proxy extends EventEmitter {
             this.lastTotalSent = this.totalSent;
             this.lastTotalReceived = this.totalReceived;
         }, 1000);
-        this.proxy.listen(this.port, () => console.log('Proxy sur ${this.host}:${this.port}'));
+        this.proxy.listen(this.port, () => console.log(`Proxy sur ${this.host}:${this.port}`));
     }
 
     // HTTP “normales”
