@@ -44,7 +44,7 @@ class MapboxCamera {
         return this.followedObject instanceof Arrow
     }
     followUser() {
-        this.followObject(mediaLoader.arrow, {
+        this.followObject(this.mediaLoader.arrow, {
             zoom: 18,
             maxZoom: 20,
             pitch: 45
@@ -54,7 +54,7 @@ class MapboxCamera {
         if (!(object instanceof MapboxObject)) {
             return console.error("Object is not a MapboxObject !");
         }
-        if (this.followObject) {
+        if (this.followedObject) {
             this.stopFollow()
         }
         // if (options.zoom) {
