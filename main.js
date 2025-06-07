@@ -1,4 +1,7 @@
-const { app, BrowserWindow, ipcMain, session, components, globalShortcut } = require('electron')
+console.log(process.versions);
+
+
+const { app, BrowserWindow, ipcMain, session, globalShortcut } = require('electron')
 const fs = require('fs')
 const path = require('node:path')
 const Dev = require("./Dev")
@@ -47,14 +50,12 @@ const createWindow = async () => {
     .use(Backend)
     .init({
       backend: {
-        // dossier où sont les traductions
         loadPath: path.join(__dirname, 'locales/{{lng}}.json')
       },
       lng: app.getLocale(),   // récupère la langue du système
       fallbackLng: 'en',
       interpolation: { escapeValue: false }
     });
-  console.log(i18next.t("welcome", { user: "John" }));
 
   mainWindow = new BrowserWindow({
     // width: 1024,
@@ -106,8 +107,6 @@ app.setAppUserModelId("fr.hydix.emotion")
 app.setName("fr.hydix.emotion")
 
 app.whenReady().then(async () => {
-  await components.whenReady();
-  console.log('components ready:', components.status());
   await session.defaultSession.setProxy({
     proxyRules: proxy.rules
   })

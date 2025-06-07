@@ -31,24 +31,6 @@ mediaLoader.on("ready", (t) => {
     console.log(`Media loading took ${t}ms`);
 })
 
-navigator.requestMediaKeySystemAccess('com.widevine.alpha', [{
-    initDataTypes: ['cenc'],
-    audioCapabilities: [{
-        contentType: 'audio/mp4; codecs="mp4a.40.2"',
-        robustness: 'SW_SECURE_CRYPTO'
-    }],
-    videoCapabilities: [{
-        contentType: 'video/mp4; codecs="avc1.42E01E"',
-        robustness: 'SW_SECURE_CRYPTO'
-    }]
-}])
-    .then(() => {
-        console.log("✅ Widevine activé et fonctionnel !");
-    })
-    .catch((err) => {
-        console.error("❌ Widevine échoué :", err);
-    });
-
 function sp() {
     mediaLoader.spotify.on("ready", (r) => {
         console.log("Spotify ready", r);

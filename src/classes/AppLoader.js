@@ -25,6 +25,7 @@ class AppLoader {
         this.classes.forEach((app, id) => {
             app.init()
         })
+        
     }
     appChange(app) {
         if (this.actualApp === app || app === "home") {

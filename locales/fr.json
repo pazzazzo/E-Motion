@@ -1,22 +1,29 @@
 {
-    "music": {
-        "unknown": {
-            "title": "Titre inconnu",
-            "artist": "Artiste inconnu"
-        }
-    },
-    "wifi": {
-        "connected": "Connecté",
-        "load": "Chargement"
-    },
-    "time": {
-        "hh:mm/24": "{{h}}:{{m}}",
-        "hh:mm/12": "{{h}}:{{m}}"
-    },
-    "search": {
-        "address": "Adresse"
-    },
-    "welcome": {
-        
+  "music": {
+    "unknown": {
+      "title": "Titre inconnu",
+      "artist": "Artiste inconnu"
     }
+  },
+  "wifi": {
+    "connected": "Connecté",
+    "load": "Chargement"
+  },
+  "search": {
+    "address": "Adresse"
+  },
+  "welcome": {},
+
+  "settings": {
+    "title": "Paramètres",
+    "list": {
+        "nav": "Barre de navigation",
+        "map": "Carte",
+        "sound": "Son",
+        "notifications": "Alertes",
+        "camera": "Caméra",
+        "sim": "Carte SIM",
+        "system": "Système"
+    }
+  }
 }

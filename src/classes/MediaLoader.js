@@ -90,7 +90,6 @@ class MediaLoader extends EventEmitter {
             this.settings = new Settings()
             this.waze = new Waze(this)
             this.placeSearch = new PlaceSearch(this)
-            this.lang = new Lang(this)
             const cb = () => {
                 i--
                 if (i <= 0) {
@@ -127,6 +126,7 @@ class MediaLoader extends EventEmitter {
         this.mapboxCamera = new MapboxCamera(this)
         this.voiceControl = new VoiceControl(this)
         this.appLoader = new AppLoader(this)
+        this.lang = new Lang(this)
         this.navbar.postInit()
         this.wifi.postInit()
         cb()
@@ -290,12 +290,12 @@ class MediaLoader extends EventEmitter {
                 this.lastSpotifyVolume = null
             }
         })
-        
+
         const data = response.audioContent
         const audioData = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
         audioContext.decodeAudioData(audioData, (buffer) => {
             console.log("ee");
-            
+
             source.buffer = buffer
             source.connect(audioContext.destination);
             source.start();
