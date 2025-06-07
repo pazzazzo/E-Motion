@@ -48,9 +48,9 @@
 .simple-keyboard-shortcuts {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     order: -1;
     margin-bottom: 5px;
+    gap: .30rem;
 }
 
 .simple-keyboard-shortcut {
@@ -65,6 +65,7 @@
     box-shadow: 0 0 3px -1px rgba(0, 0, 0, .3);
     box-sizing: border-box;
     padding: 0 .5rem;
+    flex-grow: 1;
 }
 
 .simple-keyboard-shortcut-icon {

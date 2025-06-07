@@ -26,15 +26,21 @@ class Keyboard extends EventEmitter {
                     "{space}",
                 ],
             },
-    
         });
-        let shortcut = document.createElement("div")
-        shortcut.classList.add("simple-keyboard-shortcuts")
+
+        this.shortcut = document.createElement("div")
+        this.shortcut.classList.add("simple-keyboard-shortcuts")
+        this.keyboard.keyboardDOM.firstChild.appendChild(this.shortcut)
+        this.addShortcut("test A")
+        this.addShortcut("test B")
+        this.addShortcut("test C")
+        
+    }
+    addShortcut(text) {
         let btn = document.createElement("div")
         btn.classList.add("simple-keyboard-shortcut")
-        btn.innerHTML = "<img src='./media/images/star.png' class='simple-keyboard-shortcut-icon'><span>183 Cours de l'Yser</span>"
-        shortcut.appendChild(btn)
-        console.log(this.keyboard.keyboardDOM.firstChild.appendChild(shortcut));
+        btn.innerHTML = `<img src="./media/images/star.png" class="simple-keyboard-shortcut-icon"><span>${text}</span>`
+        this.shortcut.appendChild(btn)
         
     }
     show() {
