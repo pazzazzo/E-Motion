@@ -24,6 +24,111 @@
         "camera": "Caméra",
         "sim": "Carte SIM",
         "system": "Système"
+    },
+    "type": {"icons": "Personnalisation des icônes"},
+    "nav": {"title": "Icônes de navigation", "desc": "Modifiez l'apparence et l'ordre des icônes de navigation", "add": "Ajouter une application"},
+    "map": {
+        "title": "Apparence de la carte",
+        "desc": "Personnalisez l'apparence et le comportement de la carte",
+        "colors": "Couleurs des routes",
+        "normal": "Normal",
+        "traffic": "Traffic dense",
+        "heavy": "Embouteillage",
+        "style": {"title": "Style de carte", "standard": "Carte standard", "dark": "Carte sombre", "satellite": "Carte satellite", "terrain": "Mode terrain"},
+        "refresh": {"title": "Mise à jour du traffic", "desc": "Fréquence des mises à jour du trafic en temps réel", "15s": "15 secondes", "30s": "30 secondes", "1m": "1 minute", "5m": "5 minutes"}
+    },
+    "sound": {
+        "title": "Sons et notifications",
+        "desc": "Personnalisez les sons de notification et d'alerte",
+        "master": "Volume principal",
+        "master_desc": "Ajustez le volume global de l'application",
+        "events": {
+            "title": "Sons des événements",
+            "start": "Lancement de l'itinéraire",
+            "start_desc": "Son joué lors du lancement de l'itinéraire",
+            "traffic": "Alerte de trafic",
+            "traffic_desc": "Son joué lors d'un changement important de trafic",
+            "arrival": "Arrivée à destination",
+            "arrival_desc": "Son joué à l'arrivée à destination",
+            "usb_in": "USB branché",
+            "usb_in_desc": "Son joué lorsqu'un périphérique USB est branché",
+            "usb_out": "USB débranché",
+            "usb_out_desc": "Son joué lorsqu'un périphérique USB est débranché",
+            "voice": "Instructions de navigation",
+            "voice_desc": "Voix pour les instructions de navigation"
+        },
+        "mute": {"title": "Mode silencieux", "desc": "Désactiver tous les sons de l'application"}
+    },
+    "spotify": {
+        "title": "Intégration Spotify",
+        "desc": "Paramètres pour l'intégration avec Spotify",
+        "auto": {"title": "Basculement automatique", "desc": "Basculer automatiquement la lecture Spotify du téléphone au site"},
+        "delay": {"title": "Délai de basculement", "desc": "Délai avant de basculer la lecture", "now": "Immédiat", "3s": "3 secondes", "5s": "5 secondes", "10s": "10 secondes"},
+        "notify": {"title": "Notification de basculement", "desc": "Afficher une notification lors du basculement"}
+    },
+    "cam": {"select": {"config": "Configuration", "record": "Enregistrement"}},
+    "cams": {"title": "Sélection des caméras", "desc": "Configurez les caméras utilisées pour différentes fonctions", "front": "Caméra avant", "front_desc": "Dashcam avant", "driver": "Caméra frontale", "driver_desc": "Dashcam conducteur", "rear": "Caméra de recul", "rear_desc": "Caméra extérieure", "none": "Aucune"},
+    "record": {
+        "title": "Paramètres d'enregistrement",
+        "desc": "Configurez les options d'enregistrement automatique",
+        "auto": {"title": "Enregistrement automatique", "desc": "Enregistrer automatiquement les vidéos"},
+        "segment": {"title": "Durée des segments vidéo", "default": "5 min", "desc": "L'enregistrement sera divisé en segments de cette durée"},
+        "quality": {"title": "Qualité d'enregistrement", "desc": "Sélectionnez la qualité des enregistrements", "sd": "Standard (SD)", "hd": "Haute définition (HD)", "fhd": "Full HD (1080p)"},
+        "location": {"title": "Emplacement d'enregistrement", "desc": "Choisissez où seront enregistrées les vidéos", "internal": "Interne", "usb": "Clé USB"},
+        "loop": {"title": "Enregistrement en boucle", "desc": "Écraser les anciens enregistrements lorsque l'espace est plein"}
+    },
+    "account": {
+        "title": "Compte utilisateur",
+        "desc": "Gérez votre compte et vos informations personnelles",
+        "username": {"label": "Nom d'utilisateur", "placeholder": "Nom d'utilisateur"},
+        "vehicle": {"label": "Nom du véhicule", "placeholder": "Nom du véhicule"}
+    },
+    "services": {
+        "title": "Services connectés",
+        "desc": "Gérez les connexions avec des services externes",
+        "spotify": {"title": "Spotify", "desc": "Non connecté - Connectez-vous pour accéder à votre musique", "connect": "Se connecter"}
+    },
+    "updates": {
+        "title": "Mises à jour et stockage",
+        "desc": "Gérez les mises à jour et les données de l'application",
+        "subtitle": "Mises à jour",
+        "auto": {"title": "Mise à jour automatique", "desc": "Installer automatiquement les mises à jour"},
+        "current_version": "Version actuelle: 2.4.1",
+        "last_update": "Dernière mise à jour: 15/03/2025",
+        "uptodate": "À jour",
+        "available": "Mise à jour disponible",
+        "storage": {
+            "title": "Stockage",
+            "download": {"title": "Télécharger les cartes hors ligne", "desc": "Stocker les cartes pour une utilisation hors ligne"},
+            "history": {"title": "Historique de navigation", "desc": "Enregistrer l'historique des destinations"}
+        }
+    },
+    "sim": {
+        "select": {"limit": "Consomation & Limites", "config": "Configuration SIM"},
+        "conso": {"title": "Consommation de données", "desc": "Suivez votre consommation de données mobiles"},
+        "progress": {"label": "Utilisation des données"},
+        "stats": {"remaining": {"title": "Données restantes"}, "renewal": {"title": "Renouvellement dans"}, "average": {"title": "Utilisation moyenne"}},
+        "warning": {"title": "Alerte de consommation", "desc": "À ce rythme, vous dépasserez votre limite de données avant le prochain renouvellement. Utilisation estimée: <span>8.7 GB</span>"},
+        "history": {"title": "Historique d'utilisation"},
+        "urls": {"title": "Répartition par URLs"}
+    },
+    "save": "Sauvegarder",
+    "modal": {
+        "update": {
+            "title": "Mise à jour disponible",
+            "desc": "Une nouvelle version de l'application est disponible.",
+            "new": "Nouvelle version",
+            "current": "Version actuelle",
+            "changelog": {
+                "title": "Journal des modifications",
+                "new": {"title": "Nouvelles fonctionnalités", "item1": "Support des caméras multiples avec enregistrement simultané", "item2": "Intégration améliorée avec les services de streaming", "item3": "Nouveau mode économie d'énergie pour les longs trajets"},
+                "upgrades": {"title": "Améliorations", "item1": "Interface utilisateur optimisée pour une meilleure lisibilité", "item2": "Temps de chargement des cartes réduit de 30%", "item3": "Précision GPS améliorée dans les zones urbaines denses"},
+                "bugfix": {"title": "Corrections de bugs", "item1": "Résolution du problème de déconnexion aléatoire des appareils Bluetooth", "item2": "Correction des alertes sonores qui ne fonctionnaient pas en arrière-plan", "item3": "Résolution du problème d'affichage sur certains écrans à haute résolution"}
+            },
+            "later": "Plus tard",
+            "install": "Installer maintenant"
+        },
+        "spotify": {"title": "Connexion à Spotify", "desc": "En attente d'une connexion", "scan": "Scannez le QR code sur un mobile", "open": "Ou ouvrez <span class=\"link\" id=\"spotipair-link\"></span> et entrez"}
     }
   }
 }
