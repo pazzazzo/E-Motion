@@ -50,78 +50,78 @@
         </div>
     </div>
     <div id="settings-main">
-        <div id="settings-type">Personnalisation des icônes</div>
+        <div id="settings-type" class="i18n">settings.type.icons</div>
         <div class="settings-card active" id="settings-nav">
-            <div class="settings-title">Icônes de navigation</div>
-            <div class="settings-desc">Modifiez l'apparence et l'ordre des icônes de navigation</div>
+            <div class="settings-title i18n">settings.nav.title</div>
+            <div class="settings-desc i18n">settings.nav.desc</div>
             <div id="settings-navs">
             </div>
             <div class="settings-nav-add">
                 <span class="material-symbols-outlined">
                     add
                 </span>
-                <span>Ajouter une application</span>
+                <span class="i18n">settings.nav.add</span>
             </div>
         </div>
         <div class="settings-card" id="settings-map">
-            <div class="settings-title">Apparence de la carte</div>
-            <div class="settings-desc">Personnalisez l'apparence et le comportement de la carte</div>
-            <div class="settings-subtitle">Couleurs des routes</div>
+            <div class="settings-title i18n">settings.map.title</div>
+            <div class="settings-desc i18n">settings.map.desc</div>
+            <div class="settings-subtitle i18n">settings.map.colors</div>
             <div class="settings-map-colorrow">
-                <span>Normal</span>
+                <span class="i18n">settings.map.normal</span>
                 <input type="color" class="settings-map-color" id="normal-map-color" value="#000000">
             </div>
             <div class="settings-map-colorrow">
-                <span>Traffic dense</span>
+                <span class="i18n">settings.map.traffic</span>
                 <input type="color" class="settings-map-color" id="traffic-map-color" value="#000000">
             </div>
             <div class="settings-map-colorrow">
-                <span>Embouteillage</span>
+                <span class="i18n">settings.map.heavy</span>
                 <input type="color" class="settings-map-color" id="heavy-map-color" value="#000000">
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Style de carte</div>
+            <div class="settings-subtitle i18n">settings.map.style.title</div>
             <div class="settings-map-style">
                 <div class="settings-map-stylerow">
                     <input type="radio" name="settings-map-style" id="map-style-standard">
-                    <label for="">Carte standard</label>
+                    <label for="" class="i18n">settings.map.style.standard</label>
                 </div>
                 <div class="settings-map-stylerow">
                     <input type="radio" name="settings-map-style" id="map-style-dark">
-                    <label for="">Carte sombre</label>
+                    <label for="" class="i18n">settings.map.style.dark</label>
                 </div>
                 <div class="settings-map-stylerow">
                     <input type="radio" name="settings-map-style" id="map-style-satellite">
-                    <label for="">Carte satellite</label>
+                    <label for="" class="i18n">settings.map.style.satellite</label>
                 </div>
                 <div class="settings-map-stylerow">
                     <input type="radio" name="settings-map-style" id="map-style-terrain">
-                    <label for="">Mode terrain</label>
+                    <label for="" class="i18n">settings.map.style.terrain</label>
                 </div>
             </div>
             <div class="settings-separator"></div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Mise à jour du traffic</span>
-                    <span>Fréquence des mises à jour du trafic en temps réel</span>
+                    <span class="i18n">settings.map.refresh.title</span>
+                    <span class="i18n">settings.map.refresh.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <select name="settings-map-refresh-freq" id="settings-map-refresh-freq">
-                        <option value="15" id="update-frequency-15">15 secondes</option>
-                        <option value="30" id="update-frequency-30">30 secondes</option>
-                        <option value="60" id="update-frequency-60">1 minute</option>
-                        <option value="300" id="update-frequency-300">5 minutes</option>
+                        <option value="15" id="update-frequency-15" class="i18n">settings.map.refresh.15s</option>
+                        <option value="30" id="update-frequency-30" class="i18n">settings.map.refresh.30s</option>
+                        <option value="60" id="update-frequency-60" class="i18n">settings.map.refresh.1m</option>
+                        <option value="300" id="update-frequency-300" class="i18n">settings.map.refresh.5m</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="settings-card" id="settings-sound">
-            <div class="settings-title">Sons et notifications</div>
-            <div class="settings-desc">Personnalisez les sons de notification et d'alerte</div>
+            <div class="settings-title i18n">settings.sound.title</div>
+            <div class="settings-desc i18n">settings.sound.desc</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Volume principal</span>
-                    <span>Ajustez le volume global de l'application</span>
+                    <span class="i18n">settings.sound.master</span>
+                    <span class="i18n">settings.sound.master_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <span class="material-symbols-outlined">
@@ -132,11 +132,11 @@
                 </div>
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Sons des événements</div>
+            <div class="settings-subtitle i18n">settings.sound.events.title</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Lancement de l'itinéraire</span>
-                    <span>Son joué lors du lancement de l'itinéraire</span>
+                    <span class="i18n">settings.sound.events.start</span>
+                    <span class="i18n">settings.sound.events.start_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -150,8 +150,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Alerte de trafic</span>
-                    <span>Son joué lors d'un changement important de trafic</span>
+                    <span class="i18n">settings.sound.events.traffic</span>
+                    <span class="i18n">settings.sound.events.traffic_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -165,8 +165,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Arrivée à destination</span>
-                    <span>Son joué à l'arrivée à destination</span>
+                    <span class="i18n">settings.sound.events.arrival</span>
+                    <span class="i18n">settings.sound.events.arrival_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -180,8 +180,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>USB branché</span>
-                    <span>Son joué lorsqu'un périphérique USB est branché</span>
+                    <span class="i18n">settings.sound.events.usb_in</span>
+                    <span class="i18n">settings.sound.events.usb_in_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -195,8 +195,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>USB débranché</span>
-                    <span>Son joué lorsqu'un périphérique USB est débranché</span>
+                    <span class="i18n">settings.sound.events.usb_out</span>
+                    <span class="i18n">settings.sound.events.usb_out_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -210,8 +210,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Instructions de navigation</span>
-                    <span>Voix pour les instructions de navigation</span>
+                    <span class="i18n">settings.sound.events.voice</span>
+                    <span class="i18n">settings.sound.events.voice_desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="settings-event-sound-play">
@@ -226,8 +226,8 @@
             <div class="settings-separator"></div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Mode silencieux</span>
-                    <span>Désactiver tous les sons de l'application</span>
+                    <span class="i18n">settings.sound.mute.title</span>
+                    <span class="i18n">settings.sound.mute.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-event-muted">
@@ -235,8 +235,8 @@
             </div>
         </div>
         <div class="settings-card" id="settings-spotify">
-            <div class="settings-title">Intégration Spotify</div>
-            <div class="settings-desc">Paramètres pour l'intégration avec Spotify</div>
+            <div class="settings-title i18n">settings.spotify.title</div>
+            <div class="settings-desc i18n">settings.spotify.desc</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-icon">
                     <span class="material-symbols-outlined">
@@ -244,8 +244,8 @@
                     </span>
                 </div>
                 <div class="settings-map-single-control-text">
-                    <span>Basculement automatique</span>
-                    <span>Basculer automatiquement la lecture Spotify du téléphone au site</span>
+                    <span class="i18n">settings.spotify.auto.title</span>
+                    <span class="i18n">settings.spotify.auto.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-spotify-autoconnect">
@@ -254,22 +254,22 @@
             <div class="settings-separator"></div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Délai de basculement</span>
-                    <span>Délai avant de basculer la lecture</span>
+                    <span class="i18n">settings.spotify.delay.title</span>
+                    <span class="i18n">settings.spotify.delay.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <select name="settings-event-sound" id="settings-spotify-connectdelay">
-                        <option value="0">Immédiat</option>
-                        <option value="3">3 secondes</option>
-                        <option value="5">5 secondes</option>
-                        <option value="10">10 secondes</option>
+                        <option value="0" class="i18n">settings.spotify.delay.now</option>
+                        <option value="3" class="i18n">settings.spotify.delay.3s</option>
+                        <option value="5" class="i18n">settings.spotify.delay.5s</option>
+                        <option value="10" class="i18n">settings.spotify.delay.10s</option>
                     </select>
                 </div>
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Notification de basculement</span>
-                    <span>Afficher une notification lors du basculement</span>
+                    <span class="i18n">settings.spotify.notify.title</span>
+                    <span class="i18n">settings.spotify.notify.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-spotify-connectnotify">
@@ -277,22 +277,22 @@
             </div>
         </div>
         <div class="settings-selector" id="settings-cam-select">
-            <div id="settings-cam-select-config" class="active"><span>Configuration</span></div>
-            <div id="settings-cam-select-record"><span>Enregistrement</span></div>
+            <div id="settings-cam-select-config" class="active"><span class="i18n">settings.cam.select.config</span></div>
+            <div id="settings-cam-select-record"><span class="i18n">settings.cam.select.record</span></div>
         </div>
         <div class="settings-card" id="settings-cams-select">
-            <div class="settings-title">Sélection des caméras</div>
-            <div class="settings-desc">Configurez les caméras utilisées pour différentes fonctions</div>
+            <div class="settings-title i18n">settings.cams.title</div>
+            <div class="settings-desc i18n">settings.cams.desc</div>
             <div class="settings-map-row">
                 <div class="settings-map-row-element">
                     <div class="settings-map-single-control">
                         <div class="settings-map-single-control-text">
-                            <span>Caméra avant</span>
-                            <span>Dashcam avant</span>
+                            <span class="i18n">settings.cams.front</span>
+                            <span class="i18n">settings.cams.front_desc</span>
                         </div>
                         <div class="settings-map-single-control-value">
                             <select name="settings-cams-selector" class="settings-cams-selector">
-                                <option value="null">Aucune</option>
+                                <option value="null" class="i18n">settings.cams.none</option>
                             </select>
                         </div>
                     </div>
@@ -301,12 +301,12 @@
                 <div class="settings-map-row-element">
                     <div class="settings-map-single-control">
                         <div class="settings-map-single-control-text">
-                            <span>Caméra frontale</span>
-                            <span>Dashcam conducteur</span>
+                            <span class="i18n">settings.cams.driver</span>
+                            <span class="i18n">settings.cams.driver_desc</span>
                         </div>
                         <div class="settings-map-single-control-value">
                             <select name="settings-cams-selector" class="settings-cams-selector">
-                                <option value="null">Aucune</option>
+                                <option value="null" class="i18n">settings.cams.none</option>
                             </select>
                         </div>
                     </div>
@@ -315,12 +315,12 @@
                 <div class="settings-map-row-element">
                     <div class="settings-map-single-control">
                         <div class="settings-map-single-control-text">
-                            <span>Caméra de recul</span>
-                            <span>Caméra extérieure</span>
+                            <span class="i18n">settings.cams.rear</span>
+                            <span class="i18n">settings.cams.rear_desc</span>
                         </div>
                         <div class="settings-map-single-control-value">
                             <select name="settings-cams-selector" class="settings-cams-selector">
-                                <option value="null">Aucune</option>
+                                <option value="null" class="i18n">settings.cams.none</option>
                             </select>
                         </div>
                     </div>
@@ -329,54 +329,54 @@
             </div>
         </div>
         <div class="settings-card" id="settings-record">
-            <div class="settings-title">Paramètres d'enregistrement</div>
-            <div class="settings-desc">Configurez les options d'enregistrement automatique</div>
+            <div class="settings-title i18n">settings.record.title</div>
+            <div class="settings-desc i18n">settings.record.desc</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Enregistrement automatique</span>
-                    <span>Enregistrer automatiquement les vidéos</span>
+                    <span class="i18n">settings.record.auto.title</span>
+                    <span class="i18n">settings.record.auto.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-record-autorecord">
                 </div>
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Durée des segments vidéo</div>
+            <div class="settings-subtitle i18n">settings.record.segment.title</div>
             <div class="settings-slider">
                 <input type="range" name="settings-record-segment" id="settings-record-segment" min="1" max="30"
                     value="5">
-                <label for="settings-record-segment" id="settings-record-segment-text">5 min</label>
+                <label for="settings-record-segment" id="settings-record-segment-text" class="i18n">settings.record.segment.default</label>
             </div>
-            <div class="settings-desc">L'enregistrement sera divisé en segments de cette durée</div>
+            <div class="settings-desc i18n">settings.record.segment.desc</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Qualité d'enregistrement</span>
-                    <span>Sélectionnez la qualité des enregistrements</span>
+                    <span class="i18n">settings.record.quality.title</span>
+                    <span class="i18n">settings.record.quality.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <select name="settings-record-quality" id="settings-record-quality">
-                        <option value="SD">Standard (SD)</option>
-                        <option value="HD">Haute définition (HD)</option>
-                        <option value="FHD">Full HD (1080p)</option>
+                        <option value="SD" class="i18n">settings.record.quality.sd</option>
+                        <option value="HD" class="i18n">settings.record.quality.hd</option>
+                        <option value="FHD" class="i18n">settings.record.quality.fhd</option>
                     </select>
                 </div>
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Emplacement d'enregistrement</span>
-                    <span>Choisissez où seront enregistrées les vidéos</span>
+                    <span class="i18n">settings.record.location.title</span>
+                    <span class="i18n">settings.record.location.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <select name="settings-record-location" id="settings-record-location">
-                        <option value="internal">Interne</option>
-                        <option value="usb">Clé USB</option>
+                        <option value="internal" class="i18n">settings.record.location.internal</option>
+                        <option value="usb" class="i18n">settings.record.location.usb</option>
                     </select>
                 </div>
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Enregistrement en boucle</span>
-                    <span>Écraser les anciens enregistrements lorsque l'espace est plein</span>
+                    <span class="i18n">settings.record.loop.title</span>
+                    <span class="i18n">settings.record.loop.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-record-loop">
@@ -384,39 +384,39 @@
             </div>
         </div>
         <div class="settings-card" id="settings-account">
-            <div class="settings-title">Compte utilisateur</div>
-            <div class="settings-desc">Gérez votre compte et vos informations personnelles</div>
-            <div class="settings-label">Nom d'utilisateur</div>
-            <input type="text" class="settings-input" id="settings-account-username" placeholder="Nom d'utilisateur">
-            <div class="settings-label">Nom du véhicule</div>
-            <input type="text" class="settings-input" id="settings-account-vehicle" placeholder="Nom du véhicule">
+            <div class="settings-title i18n">settings.account.title</div>
+            <div class="settings-desc i18n">settings.account.desc</div>
+            <div class="settings-label i18n">settings.account.username.label</div>
+            <input type="text" class="settings-input i18n" id="settings-account-username" placeholder="settings.account.username.placeholder">
+            <div class="settings-label i18n">settings.account.vehicle.label</div>
+            <input type="text" class="settings-input i18n" id="settings-account-vehicle" placeholder="settings.account.vehicle.placeholder">
         </div>
         <div class="settings-card" id="settings-services">
-            <div class="settings-title">Services connectés</div>
-            <div class="settings-desc">Gérez les connexions avec des services externes</div>
+            <div class="settings-title i18n">settings.services.title</div>
+            <div class="settings-desc i18n">settings.services.desc</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Spotify</span>
-                    <span>Non connecté - Connectez-vous pour accéder à votre musique</span>
+                    <span class="i18n">settings.services.spotify.title</span>
+                    <span class="i18n">settings.services.spotify.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <div class="button" id="settings-spotify-connect">
                         <span class="material-symbols-outlined">
                             link
                         </span>
-                        <span>Se connecter</span>
+                        <span class="i18n">settings.services.spotify.connect</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="settings-card" id="settings-updates">
-            <div class="settings-title">Mises à jour et stockage</div>
-            <div class="settings-desc">Gérez les mises à jour et les données de l'application</div>
-            <div class="settings-subtitle">Mises à jour</div>
+            <div class="settings-title i18n">settings.updates.title</div>
+            <div class="settings-desc i18n">settings.updates.desc</div>
+            <div class="settings-subtitle i18n">settings.updates.subtitle</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Mise à jour automatique</span>
-                    <span>Installer automatiquement les mises à jour</span>
+                    <span class="i18n">settings.updates.auto.title</span>
+                    <span class="i18n">settings.updates.auto.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-updates-autoupdate">
@@ -425,15 +425,15 @@
             <div class="settings-transparent-card">
                 <div class="settings-map-single-control">
                     <div class="settings-map-single-control-text">
-                        <span>Version actuelle: 2.4.1</span>
-                        <span>Dernière mise à jour: 15/03/2025</span>
+                        <span class="i18n">settings.updates.current_version</span>
+                        <span class="i18n">settings.updates.last_update</span>
                     </div>
                     <div class="settings-map-single-control-value">
                         <div class="button bigger" id="settings-updates-check">
                             <span class="material-symbols-outlined">
                                 check
                             </span>
-                            <span>À jour</span>
+                            <span class="i18n">settings.updates.uptodate</span>
                         </div>
                     </div>
                 </div>
@@ -441,25 +441,25 @@
             <div class="settings-transparent-card">
                 <div class="settings-map-single-control">
                     <div class="settings-map-single-control-text">
-                        <span>Version actuelle: 2.4.1</span>
-                        <span>Dernière mise à jour: 15/03/2025</span>
+                        <span class="i18n">settings.updates.current_version</span>
+                        <span class="i18n">settings.updates.last_update</span>
                     </div>
                     <div class="settings-map-single-control-value">
                         <div class="button bigger orange" id="settings-updates-download">
                             <span class="material-symbols-outlined">
                                 download
                             </span>
-                            <span>Mise à jour disponible</span>
+                            <span class="i18n">settings.updates.available</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Stockage</div>
+            <div class="settings-subtitle i18n">settings.updates.storage.title</div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Télécharger les cartes hors ligne</span>
-                    <span>Stocker les cartes pour une utilisation hors ligne</span>
+                    <span class="i18n">settings.updates.storage.download.title</span>
+                    <span class="i18n">settings.updates.storage.download.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-updates-offline">
@@ -467,8 +467,8 @@
             </div>
             <div class="settings-map-single-control">
                 <div class="settings-map-single-control-text">
-                    <span>Historique de navigation</span>
-                    <span>Enregistrer l'historique des destinations</span>
+                    <span class="i18n">settings.updates.storage.history.title</span>
+                    <span class="i18n">settings.updates.storage.history.desc</span>
                 </div>
                 <div class="settings-map-single-control-value">
                     <input type="checkbox" class="switch" id="settings-updates-history">
@@ -476,14 +476,14 @@
             </div>
         </div>
         <div class="settings-selector" id="settings-sim-select">
-            <div id="settings-sim-select-limit" class="active"><span>Consomation & Limites</span></div>
-            <div id="settings-sim-select-config"><span>Configuration SIM</span></div>
+            <div id="settings-sim-select-limit" class="active"><span class="i18n">settings.sim.select.limit</span></div>
+            <div id="settings-sim-select-config"><span class="i18n">settings.sim.select.config</span></div>
         </div>
         <div class="settings-card" id="settings-sim-conso">
-            <div class="settings-title">Consommation de données</div>
-            <div class="settings-desc">Suivez votre consommation de données mobiles</div>
+            <div class="settings-title i18n">settings.sim.conso.title</div>
+            <div class="settings-desc i18n">settings.sim.conso.desc</div>
             <div class="settings-progress-bar-label">
-                <div class="settings-label">Utilisation des données</div>
+                <div class="settings-label i18n">settings.sim.progress.label</div>
                 <div class="settings-progress-bar-value">2.5 GB utilisé</div>
             </div>
             <div class="settings-progress-bar-container">
@@ -497,21 +497,21 @@
                 <div class="settings-map-row-card">
                     <span class="material-symbols-outlined">rotate_right</span>
                     <div class="settings-dataset">
-                        <div class="settings-dataset-title">Données restantes</div>
+                        <div class="settings-dataset-title i18n">settings.sim.stats.remaining.title</div>
                         <div class="settings-dataset-value">1.8 GB</div>
                     </div>
                 </div>
                 <div class="settings-map-row-card">
                     <span class="material-symbols-outlined">event_repeat</span>
                     <div class="settings-dataset">
-                        <div class="settings-dataset-title">Renouvellement dans</div>
+                        <div class="settings-dataset-title i18n">settings.sim.stats.renewal.title</div>
                         <div class="settings-dataset-value">22 jours</div>
                     </div>
                 </div>
                 <div class="settings-map-row-card">
                     <span class="material-symbols-outlined">cloud_download</span>
                     <div class="settings-dataset">
-                        <div class="settings-dataset-title">Utilisation moyenne</div>
+                        <div class="settings-dataset-title i18n">settings.sim.stats.average.title</div>
                         <div class="settings-dataset-value">400 MB/jour</div>
                     </div>
                 </div>
@@ -519,18 +519,17 @@
             <div class="settings-warn-card">
                 <span class="material-symbols-rounded">warning</span>
                 <div class="settings-warn-texts">
-                    <p>Alerte de consommation</p>
-                    <p>À ce rythme, vous dépasserez votre limite de données avant le prochain renouvellement.
-                        Utilisation estimée: <span>8.7 GB</span></p>
+                    <p class="i18n">settings.sim.warning.title</p>
+                    <p class="i18n">settings.sim.warning.desc</p>
                 </div>
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Historique d'utilisation</div>
+            <div class="settings-subtitle i18n">settings.sim.history.title</div>
             <div class="settings-chart-parent">
                 <canvas id="settings-sim-use-chart" class="settings-chart"></canvas>
             </div>
             <div class="settings-separator"></div>
-            <div class="settings-subtitle">Répartition par URLs</div>
+            <div class="settings-subtitle i18n">settings.sim.urls.title</div>
             <div class="settings-chart-parent">
                 <canvas id="settings-sim-type-chart" class="settings-chart"></canvas>
             </div>
@@ -540,25 +539,25 @@
                 <span class="material-symbols-outlined">
                     save
                 </span>
-                <span>Sauvegarder</span>
+                <span class="i18n">settings.save</span>
             </div>
         </div>
         <div id="settings-modal-screen" class="hidden">
             <div class="settings-modal" id="settings-modal-update">
-                <div class="settings-modal-title">Mise à jour disponible</div>
-                <div class="settings-modal-desc">Une nouvelle version de l'application est disponible.</div>
+                <div class="settings-modal-title i18n">settings.modal.update.title</div>
+                <div class="settings-modal-desc i18n">settings.modal.update.desc</div>
                 <div class="settings-modal-versions">
                     <div class="settings-modal-version">
-                        <span>Nouvelle version</span>
+                        <span class="i18n">settings.modal.update.new</span>
                         <span>2.5.0</span>
                     </div>
                     <div class="settings-modal-version">
-                        <span>Version actuelle</span>
+                        <span class="i18n">settings.modal.update.current</span>
                         <span>2.4.1</span>
                     </div>
                 </div>
                 <div class="settings-modal-separator"></div>
-                <div class="settings-modal-subtitle">Journal des modifications</div>
+                <div class="settings-modal-subtitle i18n">settings.modal.update.changelog.title</div>
                 <div class="settings-modal-changelog">
                     <h1>Nouvelles fonctionnalités</h1>
                     <ul>
@@ -580,23 +579,26 @@
                     </ul>
                 </div>
                 <div class="settings-modal-action">
-                    <div class="settings-modal-button" data-action="cancel"><span>Plus tard</span></div>
+                    <div class="settings-modal-button" data-action="cancel"><span class="i18n">settings.modal.update.later</span></div>
                     <div class="settings-modal-button primary" data-action="ok">
                         <span class="material-symbols-outlined">
                             download
                         </span>
-                        <span>Installer maintenant</span>
+                        <span class="i18n">settings.modal.update.install</span>
                     </div>
                 </div>
             </div>
             <div class="settings-modal" id="settings-modal-spotify-load">
-                <div class="settings-modal-title">Connexion à Spotify</div>
-                <div class="settings-modal-desc">En attente d'une connexion</div>
-                <div class="settings-modal-text">Scannez le QR code sur un mobile</div>
+                <div class="settings-modal-title i18n">settings.modal.spotify.title</div>
+                <div class="settings-modal-desc i18n">settings.modal.spotify.desc</div>
+                <div class="settings-modal-text i18n">settings.modal.spotify.scan</div>
                 <div class="settings-modal-center">
                     <div class="qrcode" id="spotipair-qr"></div>
                 </div>
-                <div class="settings-modal-text">Ou ouvrez <span class="link" id="spotipair-link"></span> et entrez
+                <div class="settings-modal-text">
+                    <p class="i18n">settings.modal.spotify.url.open</p>
+                    <span class="link" id="spotipair-link"></span>
+                    <p class="i18n">settings.modal.spotify.url.enter</p>
                 </div>
                 <div class="settings-modal-code" id="spotipair-code">
                 </div>

@@ -487,6 +487,13 @@
 .settings-modal-text {
     font-weight: 500;
     margin-bottom: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.settings-modal-text > p {
+    margin: 0;
+    white-space: pre-wrap;
 }
 
 .qrcode {
