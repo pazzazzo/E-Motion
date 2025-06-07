@@ -13,8 +13,7 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "build:linux": "electron-builder --linux deb",
-    "test": "jest",
-    "postinstall": "electron-rebuild -f -w socketcan"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
