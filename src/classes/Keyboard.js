@@ -3,9 +3,10 @@ const { SimpleKeyboard } = require("simple-keyboard")
 
 
 class Keyboard extends EventEmitter {
-    constructor() {
+    constructor(config = {}) {
         super()
         console.log("✅ Keyboard class invoked");
+        this.config = config
         this.keyboard = new SimpleKeyboard({
             onChange: e => this.emit("change", e),
             onKeyPress: e => this.emit("press", e),
