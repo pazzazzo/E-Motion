@@ -12,7 +12,9 @@ class Bluetooth extends EventEmitter {
         this.ofonoService = "org.ofono"
         this.bluezService = "org.bluez"
         this.objectManagerInterface = "org.freedesktop.DBus.ObjectManager"
+        this.agentManagerInterface = "org.bluez.AgentManager1"
         this.managerPath = "/"
+        this.bluezManagerPath = "/org/bluez"
         this.systemBus = dbus.systemBus();
         this.sessionBus = dbus.sessionBus()
     }
@@ -21,52 +23,14 @@ class Bluetooth extends EventEmitter {
             this.ofonoProxyObject = await this.systemBus.getProxyObject(this.ofonoService, this.managerPath);
             this.ofonoManager = this.ofonoProxyObject.getInterface(this.ofonoService + '.Manager');
             this.ofonoModem = await this.ofonoManager.GetModems();
-            if (this.ofonoModem.length === 0) {
-                console.error("Aucun modem détecté. Vérifiez la configuration d'ofono et l'appairage de votre téléphone.");
-            } else {
-                console.log("Modems disponibles :");
-                this.ofonoModem.forEach(([path, properties]) => {
-                    console.log(`- ${path}`);
-                });
-
-                this.ofonoModemPath = this.ofonoModem[0][0];
-                console.log(`Utilisation du modem : ${this.ofonoModemPath}`);
-
-                this.modemProxy = await this.systemBus.getProxyObject(this.ofonoService, this.ofonoModemPath);
-                console.log("Interfaces sur le modem :", Object.keys(this.modemProxy.interfaces).join(', '));
-                try {
-                    this.callManager = this.modemProxy.getInterface('org.ofono.VoiceCallManager');
-                    this.callManager.on('CallAdded', async (callPath, properties) => {
-                        // Extraire quelques informations de l'appel
-                        const number = properties['LineIdentification']?.value || "Inconnu";
-                        const state = properties['State']?.value || "état inconnu";
-                        console.log(`Nouvel appel détecté : ${number} (état: ${state})`);
-                        this.emit("voicecall.start", { number, state })
-
-                        try {
-                            let callProxy = await this.systemBus.getProxyObject(this.ofonoService, callPath);
-                            this.voiceCall = callProxy.getInterface('org.ofono.VoiceCall');
-                        } catch (err) {
-                            console.error("Erreur lors du traitement de l'appel :", err);
-                        }
-                    });
-
-                    this.callManager.on('CallRemoved', (callPath, properties) => {
-                        console.log(`Appel terminé ou retiré : ${callPath}`);
-                        this.voiceCall = null
-                        this.emit("voicecall.end")
-                    });
-
-                    console.log("En attente d'événements d'appel...");
-                } catch (err) {
-                    console.error("L'interface VoiceCallManager n'est pas disponible sur ce modem.");
-                }
-            }
+            this.handleOfonoInterface()
             this.bluezProxyObject = await this.systemBus.getProxyObject(this.bluezService, this.managerPath);
             this.bluezManager = this.bluezProxyObject.getInterface(this.objectManagerInterface);
             this.bluezManager.on('InterfacesAdded', (path, interfaces) => {
                 if (interfaces['org.bluez.MediaPlayer1']) {
-                    this.handleBluezInterface(path);
+                    this.playerPath = path;
+                    this.handleBluezInterface();
+                    this.handleOfonoInterface()
                 }
             });
 
@@ -80,8 +44,11 @@ class Bluetooth extends EventEmitter {
             if (!this.playerPath) {
                 console.error('Aucun lecteur Bluetooth (MediaPlayer1) trouvé.');
             } else {
-                this.handleBluezInterface(this.playerPath);
+                this.handleBluezInterface();
             }
+
+            this.agentManagerProxy = await this.systemBus.getProxyObject(this.bluezService, this.bluezManagerPath);
+            this.agentManager = this.agentManagerProxy.getInterface(this.agentManagerInterface);
         } catch (error) {
             console.error("Erreur lors de l'initialisation bluetooth :", error);
         }
@@ -97,9 +64,53 @@ class Bluetooth extends EventEmitter {
             return `${minutes}:${String(seconds).padStart(2, '0')}`;
         }
     }
-    async handleBluezInterface(path) {
+    async handleOfonoInterface() {
+        if (this.ofonoModem.length === 0) {
+            console.error("Aucun modem détecté. Vérifiez la configuration d'ofono et l'appairage de votre téléphone.");
+        } else {
+            console.log("Modems disponibles :");
+            this.ofonoModem.forEach(([path, properties]) => {
+                console.log(`- ${path}`);
+            });
+
+            this.ofonoModemPath = this.ofonoModem[0][0];
+            console.log(`Utilisation du modem : ${this.ofonoModemPath}`);
+
+            this.modemProxy = await this.systemBus.getProxyObject(this.ofonoService, this.ofonoModemPath);
+            console.log("Interfaces sur le modem :", Object.keys(this.modemProxy.interfaces).join(', '));
+            try {
+                this.callManager = this.modemProxy.getInterface('org.ofono.VoiceCallManager');
+                this.callManager.on('CallAdded', async (callPath, properties) => {
+                    // Extraire quelques informations de l'appel
+                    const number = properties['LineIdentification']?.value || "Inconnu";
+                    const state = properties['State']?.value || "état inconnu";
+                    console.log(`Nouvel appel détecté : ${number} (état: ${state})`);
+                    this.emit("voicecall.start", { number, state })
+
+                    try {
+                        let callProxy = await this.systemBus.getProxyObject(this.ofonoService, callPath);
+                        this.voiceCall = callProxy.getInterface('org.ofono.VoiceCall');
+                    } catch (err) {
+                        console.error("Erreur lors du traitement de l'appel :", err);
+                    }
+                    this.mediaLoader.spotify.pause()
+                });
+
+                this.callManager.on('CallRemoved', (callPath, properties) => {
+                    console.log(`Appel terminé ou retiré : ${callPath}`);
+                    this.voiceCall = null
+                    this.emit("voicecall.end")
+                    this.mediaLoader.spotify.play()
+                });
+
+                console.log("En attente d'événements d'appel...");
+            } catch (err) {
+                console.error("L'interface VoiceCallManager n'est pas disponible sur ce modem.", err);
+            }
+        }
+    }
+    async handleBluezInterface() {
         console.log("Lecteur Bluetooth trouvé :", this.playerPath);
-        this.playerPath = path;
         this.playerProxy = await this.systemBus.getProxyObject(this.bluezService, this.playerPath);
         this.playerInterface = this.playerProxy.getInterface('org.freedesktop.DBus.Properties');
         this.playerManager = this.playerProxy.getInterface('org.bluez.MediaPlayer1');
