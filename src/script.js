@@ -22,6 +22,7 @@ mediaLoader.init()
 
 mediaLoader.on("ready", (t) => {
     mediaLoader.page.change("main")
+    mediaLoader.map.resize()
     // mediaLoader.playSound("ready")
     mediaLoader.mapboxCamera.followUser()
     mediaLoader.map.on("moveend", () => {
