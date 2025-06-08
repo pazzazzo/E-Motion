@@ -137,7 +137,7 @@ class MediaLoader extends EventEmitter {
             dirs.forEach(dir => {
                 if (dir !== "App.js") {
                     let appPath = path.join(this.#path.apps, dir)
-                    let manifest = require(path.join(appPath, "manifest.json"))
+                    let manifest = JSON.parse(fs.readFileSync(path.join(appPath, "manifest.json"), "utf-8"))
                     this.apps.set(manifest.id, appPath)
                 }
             })
