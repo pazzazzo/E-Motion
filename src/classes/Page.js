@@ -50,7 +50,7 @@ class View {
 }
 class Page {
     #actual = "load"
-    #pages_command = { "load": active, "main": hidden }
+    #pages_command = { "load": active, "main": active }
     constructor() {
         console.log("✅ Page class invoked");
         this.view = new View()
