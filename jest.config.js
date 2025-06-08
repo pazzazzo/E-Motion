@@ -5,7 +5,9 @@ const config = {
   moduleNameMapper: {
     '^electron$': '<rootDir>/__mocks__/electron.js'
   },
-  setupFiles: ['<rootDir>/jest.setup.js']
+  setupFiles: ['<rootDir>/jest.setup.js'],
+  moduleFileExtensions: ['js', 'ts', 'json'],
+  silent: true
 };
 
 module.exports = config
