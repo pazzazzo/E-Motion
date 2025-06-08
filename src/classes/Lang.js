@@ -23,8 +23,6 @@ class Lang {
     }
     async asyncT(element, key, opts = {}) {
         element[key] = await this.t(element[key], opts)
-        console.log(await this.t(element[key], opts));
-        
     }
     t(key, opts = {}) {
         return ipcRenderer.invoke("i18n-t", key, opts);
