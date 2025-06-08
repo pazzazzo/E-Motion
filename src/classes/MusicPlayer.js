@@ -83,7 +83,7 @@ class MusicPlayer {
         mediaLoader.spotify.on("player.state", (state) => {
             if (state) {
                 this.currentPlayer = "spotify"
-                this.update(state)
+                this.update(state, true)
             }
         })
         mediaLoader.bluetooth.on("bluetooth.track", (track) => {
@@ -136,10 +136,10 @@ class MusicPlayer {
         this.HTML.title.innerText = track.name
         this.HTML.artist.innerText = track.artist
     }
-    update(track) {
+    update(track, forceImage) {
         this.updateTrackInfo(track)
-        this.updateTrackPosition(track.current, track.duration, track.paused)
-        track.image && this.updateTrackImage(track.image)
+        this.updateTrackPosition(track.current, track.duration, track.paused);
+        (track.image || forceImage) && this.updateTrackImage(track.image)
     }
 }
 

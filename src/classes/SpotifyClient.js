@@ -59,10 +59,17 @@ class SpotifyClient extends EventEmitter {
         });
     }
     _updateCurrentState() {
-        this.webApi.getMyCurrentPlaybackState().then(d => {
+        this.webApi.getMyCurrentPlaybackState().then(async d => {
             this.currentState = d.body
             if (!d.body.item) {
-
+                this.emit("player.state", {
+                    current: 0,
+                    duration: 1,
+                    paused: true,
+                    image: undefined,
+                    name: await this.mediaLoader.lang.t("music.unknown.title"),
+                    artist: await this.mediaLoader.lang.t("music.unknown.artist"),
+                })
             } else {
                 this.emit("player.state", {
                     current: d.body.progress_ms,

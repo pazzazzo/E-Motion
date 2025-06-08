@@ -18,6 +18,9 @@ class Lang {
                 return 'innerHTML'
         }
     }
+    async updateElement(element, key, opts = {}) {
+        element[this.getKey(element)] = await this.t(key, opts)
+    }
     async asyncT(element, key, opts = {}) {
         element[key] = await this.t(element[key], opts)
         console.log(await this.t(element[key], opts));
