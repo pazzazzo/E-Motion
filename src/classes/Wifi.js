@@ -45,7 +45,7 @@ class Wifi extends EventEmitter {
     }
     #updateWifi() {
 
-        this.getConnections((wifi) => {
+        this.getConnections(async (wifi) => {
             this.current = wifi
             if (wifi.length > 0) {
                 if (this.state == 0) {
@@ -53,7 +53,7 @@ class Wifi extends EventEmitter {
                     this.emit("connected")
                     this.#reConnected()
                 }
-                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.level[Math.min(6, Math.floor(wifi[0].quality / 100 * 4)).toString()], "Connecté")
+                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.level[Math.min(6, Math.floor(wifi[0].quality / 100 * 4)).toString()], await this.mediaLoader.lang.t("wifi.connected"))
                 // console.log(`No. ${wifi.length} | Sig. ${wifi[0].quality}`);
             } else {
                 if (this.state !== 0) {
@@ -61,7 +61,7 @@ class Wifi extends EventEmitter {
                     this.emit("disconnected")
                     this.#notConnected()
                 }
-                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.off, "Non connecté")
+                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.off, await this.mediaLoader.lang.t("wifi.not_connected"));
 
             }
             setTimeout(() => {
