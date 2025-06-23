@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,135 @@
     <link rel="stylesheet" href="style.css">
     <title>E-Motion - Config</title>
 </head>
+
 <body>
-    <div id="welcome" class="hidden">
-        <h1>Bienvenue sur E-Motion</h1>
-        <p id="welcome-desc">Merci d'utiliser le tableau de bord E-Motion pour votre véhicule</p>
-        <div class="button primary">
-            <p>Commencer la configuration</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    <div id="welcome" class="">
+        <h1 class="i18n">welcome.title</h1>
+        <p class="i18n" id="welcome-desc">welcome.desc</p>
+        <div id="welcome-btn" class="button primary">
+            <p class="i18n">welcome.button</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
         </div>
     </div>
-    <div class="modal">
-        <h1>Qui êtes vous ?</h1>
-        <label for="username">Nom d'utilisateur</label>
-        <input id="username" name="username" type="text" placeholder="Entrez votre nom d'utilisateur">
-        <label for="carname">Nom du véhicule</label>
-        <input id="carname" name="carname" type="text" placeholder="Entrez un nom pour votre véhicule">
-        <div class="button primary">
-            <p>Continuer</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    <div id="user-info-modal" class="modal hidden">
+        <h1 class="i18n">welcome.userinfo.title</h1>
+        <label for="username" class="i18n">welcome.userinfo.username.label</label>
+        <input id="username" class="i18n" name="username" type="text" placeholder="welcome.userinfo.username.placeholder">
+        <label for="carname" class="i18n">welcome.userinfo.carname.label</label>
+        <input id="carname"  class="i18n" name="carname" type="text" placeholder="welcome.userinfo.carname.placeholder">
+        <div class="buttons">
+            <div id="user-info-btn" class="button primary">
+                <p class="i18n">welcome.userinfo.button</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </div>
         </div>
     </div>
+    <div id="spotify-modal" class="modal hidden">
+        <h1 class="i18n">welcome.spotify.title</h1>
+        <p class="desc"><span class="i18n">welcome.spotify.desc1</span><span class="link">spotify.com/pair</span><span class="i18n">welcome.spotify.desc2</span></p>
+        <div class="qrcode-container">
+            <div class="qrcode">
+                <span>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span>
+                <span>█ ▄▄▄▄▄ █▄▀ ▀ █▄█ ▄▄▄█ ▄▄▄▄▄ █</span>
+                <span>█ █ █ █ █▀█▀█ ▀▄▄██ █ █ █</span>
+                <span>█ █▄▄▄█ █▄█▀ ▄▀▄█ ▄ ██ █▄▄▄█ █</span>
+                <span>█▄▄▄▄▄▄▄█▄█ █ █▄▀ ▀▄█ █▄▄▄▄▄▄▄█</span>
+                <span>█▄ ▄ ▀█▄▀ █ ▄ ▀▀▀ █ ▀▀ ▄▄█ █</span>
+                <span>█ ▀ ▀▀▄▄█ ▄▄▄██▄█ █▀▀ ██▄▄▀█</span>
+                <span>█▄▀ ▀▄█▄▄▄▄▄▀ █ ▄ █ ▀█▀▄█▄ ▀▀█</span>
+                <span>█▄▄▄▀ ▀▄▄▀▀█ █▄▀▀ ▄█▄ ▄█▄ ▄█</span>
+                <span>██▄▀█ ▄▄▄▀██▄█ █▄▀▄▄ █ ▄ ▀ ██</span>
+                <span>█▄█▀██▀▄▀▀█▄▀█ ▄▀ ▀▀▄ ▄▀▄█ ███</span>
+                <span>██▄▄▄▄▄▄█ ▀ ██▄▄██▄ █ ▄▄▄ ▀▀█</span>
+                <span>█ ▄▄▄▄▄ ██▄█▀▀▀ █▀▄▄▄ █▄█ █▄▀█</span>
+                <span>█ █ █ █▀ ▀ █▀██▀ █▀▄▄▄▄ ▀▄█▀█</span>
+                <span>█ █▄▄▄█ █ ▀ █ ▀▄▀▀█▄▄▀█▀ █▀▄▀▄█</span>
+                <span>█▄▄▄▄▄▄▄█▄█▄▄███▄▄██▄▄█▄▄█▄█▄██</span>
+                <span></span>
+            </div>
+        </div>
+        <div class="code">
+            <p class="digit">7</p>
+            <p class="digit">B</p>
+            <p class="digit">Y</p>
+            <p class="digit">C</p>
+            <p class="digit">9</p>
+            <p class="digit">G</p>
+        </div>
+        <div class="buttons">
+            <div id="spotify-continue-btn" class="button primary">
+                <p class="i18n">welcome.spotify.continue</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </div>
+
+            <div id="spotify-pass-btn" class="button secondary">
+                <p class="i18n">welcome.spotify.skip</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="data-modal" class="modal hidden">
+        <h1 class="i18n">welcome.data.title</h1>
+        <p class="desc i18n">welcome.data.desc</p>
+        <div class="table">
+            <div class="row">
+                <p class="i18n">welcome.data.table.model</p>
+                <p>Tesla Model S</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.registration</p>
+                <p>EM-724-XC</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.email</p>
+                <p>utilisateur@emotion.com</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.spotifyName</p>
+                <p>Utilisateur</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.fuelLevel</p>
+                <p>87%</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.screens</p>
+                <p>2</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.range</p>
+                <p>412 km</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.lastService</p>
+                <p>15/03/2025</p>
+            </div>
+            <div class="row">
+                <p class="i18n">welcome.data.table.vin</p>
+                <p>ZFF*abcdef*000000</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <div id="data-btn" class="button primary">
+                <p class="i18n">welcome.data.button</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="simple-keyboard"></div>
+    <script src="./script.js"></script>
 </body>
+
 </html>
