@@ -136,8 +136,8 @@ class Direction {
                     }
                 }
             })
-            const popup = new mapboxgl.Popup().setHTML("<p>" + txt + "</p>")
-            new mapboxgl.Marker({}).setLngLat(inter.location).addTo(this.mediaLoader.map).setPopup(popup)
+            // const popup = new mapboxgl.Popup().setHTML("<p>" + txt + "</p>")
+            // new mapboxgl.Marker({}).setLngLat(inter.location).addTo(this.mediaLoader.map).setPopup(popup)
         })
 
         if (this.mediaLoader.map.getSource('route')) {
