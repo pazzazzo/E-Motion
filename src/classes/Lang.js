@@ -1,10 +1,8 @@
-const MediaLoader = require("./MediaLoader");
 const { ipcRenderer } = require("electron");
 
 class Lang {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Lang class invoked");
-        this.mediaLoader = mediaLoader;
         this.i18nElements = document.getElementsByClassName("i18n")
         for (const i18nEl of this.i18nElements) {
             this.asyncT(i18nEl, this.getKey(i18nEl))

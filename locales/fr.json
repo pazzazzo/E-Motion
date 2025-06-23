@@ -13,7 +13,77 @@
   "search": {
     "address": "Adresse"
   },
-  "welcome": {},
+
+  "welcome": {
+    "title": "Bienvenue sur E-Motion",
+    "desc": "Merci d'utiliser le tableau de bord E-Motion pour votre véhicule",
+    "button": "Commencer la configuration",
+    "userinfo": {
+      "title": "Qui êtes vous ?",
+      "username": {
+        "label": "Nom d'utilisateur",
+        "placeholder": "Entrez votre nom d'utilisateur"
+      },
+      "carname": {
+        "label": "Nom du véhicule",
+        "placeholder": "Entrez un nom pour votre véhicule"
+      },
+      "button": "Continuer"
+    },
+    "spotify": {
+      "title": "Connexion Spotify",
+      "desc1": "Scannez le QR code ci-dessous ou visitez ",
+      "desc2": " et entrez le code :",
+      "continue": "Continuer",
+      "skip": "Ignorer cette étape"
+    },
+    "data": {
+      "title": "Informations du véhicule",
+      "desc": "Nous avons collecté les informations suivantes sur votre véhicule :",
+      "table": {
+        "insuranceExpiry": "Fin de garantie/assurance :",
+        "serviceHistory": "Historique des entretiens :",
+        "doorLockStatus": "Verrouillage des portes :",
+        "bluetoothConnected": "Bluetooth connecté :",
+        "navigationStatus": "Statut de navigation :",
+        "nextInspection": "Prochaine inspection :",
+        "softwareVersion": "Version du logiciel :",
+        "hardwareVersion": "Version du matériel :",
+        "avgConsumption": "Consommation moyenne :",
+        "screens": "Écrans compatibles E-Motion :",
+        "securitySystem": "Système de sécurité :",
+        "batteryHealth": "État de la batterie :",
+        "lastSync": "Dernière synchronisation :",
+        "engineTemp": "Température du moteur :",
+        "headlightStatus": "État des phares :",
+        "tirePressure": "Pression des pneus :",
+        "tripDistance": "Distance du trajet :",
+        "gpsCoordinates": "Coordonnées GPS :",
+        "windowStatus": "État des fenêtres :",
+        "odometer": "Compteur kilométrique :",
+        "fuelLevel": "Niveau de carburant :",
+        "co2Emissions": "Émissions de CO₂ :",
+        "lastService": "Dernier entretien :",
+        "wifiConnected": "Wi-Fi connecté :",
+        "registration": "Immatriculation :",
+        "fuelType": "Type de carburant :",
+        "manufacturer": "Constructeur :",
+        "maxSpeed": "Vitesse maximale :",
+        "parkingBrake": "Frein à main :",
+        "year": "Année de fabrication :",
+        "spotifyName": "Nom Spotify :",
+        "oilLevel": "Niveau d’huile :",
+        "acStatus": "Climatisation :",
+        "mileage": "Kilométrage :",
+        "range": "Autonomie :",
+        "color": "Couleur :",
+        "model": "Modèle :",
+        "email": "Email :",
+        "vin": "VIN :"
+      },
+      "button": "Terminer la configuration"
+    }
+  },
 
   "settings": {
     "title": "Paramètres",
@@ -229,8 +299,8 @@
         "desc": "En attente d'une connexion",
         "scan": "Scannez le QR code sur un mobile",
         "url": {
-            "open": "Ou ouvrez ",
-            "enter": " et entrez"
+          "open": "Ou ouvrez ",
+          "enter": " et entrez"
         }
       }
     }
