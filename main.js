@@ -1,6 +1,3 @@
-console.log(process.versions);
-
-
 const { app, BrowserWindow, ipcMain, session, globalShortcut } = require('electron')
 const fs = require('fs')
 const path = require('node:path')
@@ -17,6 +14,8 @@ let proxy = new Proxy()
 const i18next = require('i18next');
 const Backend = require('i18next-fs-backend');
 const LocationServer = require('./LocationServer');
+
+console.table(Object.entries(process.versions).map(([process, version]) => ({ process, version })), );
 
 let locationServer
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
