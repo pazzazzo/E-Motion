@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, session, globalShortcut } = require('electron')
+const { app, BrowserWindow, ipcMain, session, globalShortcut, screen } = require('electron')
 const fs = require('fs')
 const path = require('node:path')
 const Dev = require("./Dev")
@@ -15,7 +15,7 @@ const i18next = require('i18next');
 const Backend = require('i18next-fs-backend');
 const LocationServer = require('./LocationServer');
 
-console.table(Object.entries(process.versions).map(([process, version]) => ({ process, version })), );
+console.table(Object.entries(process.versions).map(([process, version]) => ({ process, version })));
 
 let locationServer
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
@@ -87,9 +87,9 @@ const createWindow = async () => {
       vehicleConnect.headindChange(data.direction)
     }
   })
-  if (fs.existsSync(DB_PATH) /*&& false*/) {
+  if (fs.existsSync(DB_PATH) && !process.argv.includes("--welcome")) {
     mainWindow.loadFile(path.join(__dirname, "src", "index.html"))
-    if (!vehicleConnect.checkVIN()) {
+    if (!vehicleConnect.checkVIN() || process.argv.includes("--unauthorized")) {
       mainWindow.loadFile(path.join(__dirname, "src", "unauthorized", "index.html"))
     }
   } else {
@@ -109,16 +109,13 @@ app.whenReady().then(async () => {
   await session.defaultSession.setProxy({
     proxyRules: proxy.rules
   })
-  // session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-  //   if (details.requestHeaders["User-Agent"]) {
-  //     details.requestHeaders["User-Agent"] = details.requestHeaders["User-Agent"].replace("Electron", "EMotionDashboard") 
-  //   }
 
-  //   // details.requestHeaders["User-Agent"] = "MonNavigateurElectron/1.0";
-  //   callback({ cancel: false, requestHeaders: details.requestHeaders });
-  // });
   await createWindow();
   dev.createDevWindow();
+
+  screen.getAllDisplays().forEach((display) => {
+    console.log(`Display: ${display.id}, ${display.size.width}x${display.size.height}, Pos: ${display.bounds.x}x${display.bounds.y} Scale: ${display.scaleFactor}`);
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -148,7 +145,7 @@ app.whenReady().then(async () => {
   globalShortcut.register("Control+Shift+T", () => {
     spawn("x-terminal-emulator")
   })
-  
+
 })
 
 app.on('window-all-closed', () => {

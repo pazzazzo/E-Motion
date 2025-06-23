@@ -7,6 +7,10 @@
   "scripts": {
     "dev": "electron . -dev --no-zygote --no-sandbox",
     "start": "electron . --no-zygote --no-sandbox",
+    "start:devtools": "electron . --inspect --no-zygote --no-sandbox",
+    "start:welcome": "electron . --welcome --no-zygote --no-sandbox",
+    "dev:welcome": "electron . -dev --welcome --no-zygote --no-sandbox",
+    "start:unauthorized": "electron . --unauthorized --no-zygote --no-sandbox",
     "perf": "nice -n -20 npm run dev",
     "setProc": "UV_THREADPOOL_SIZE=$(nproc)",
     "version": "electron -v",
