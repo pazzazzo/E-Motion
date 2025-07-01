@@ -29,12 +29,12 @@ class Keyboard extends EventEmitter {
             },
         });
 
-        this.shortcut = document.createElement("div")
-        this.shortcut.classList.add("simple-keyboard-shortcuts")
-        this.keyboard.keyboardDOM.firstChild.appendChild(this.shortcut)
-        this.addShortcut("test A")
-        this.addShortcut("test B")
-        this.addShortcut("test C")
+        // this.shortcut = document.createElement("div")
+        // this.shortcut.classList.add("simple-keyboard-shortcuts")
+        // this.keyboard.keyboardDOM.firstChild.appendChild(this.shortcut)
+        // this.addShortcut("test A")
+        // this.addShortcut("test B")
+        // this.addShortcut("test C")
         
     }
     addShortcut(text) {
@@ -46,9 +46,11 @@ class Keyboard extends EventEmitter {
     }
     show() {
         document.getElementsByClassName("simple-keyboard")[0].classList.add("active")
+        return this
     }
     hide() {
         document.getElementsByClassName("simple-keyboard")[0].classList.remove("active")
+        return this
     }
     stop() {
         this.keyboard.clearInput()
