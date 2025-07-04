@@ -213,7 +213,7 @@ class Direction {
 
                 resolve([lineSegments, coordinates]);
             } catch (error) {
-                console.error("Erreur lors de la récupération des adresses :", error);
+                console.error("Error retrieving addresses :", error);
                 resolve({});
             }
         });
@@ -240,7 +240,7 @@ class Direction {
                 }
                 resolve(res)
             } catch (error) {
-                console.error("Erreur lors de la récupération des adresses :", error);
+                console.error("Error retrieving addresses :", error);
                 resolve({});
             }
         });

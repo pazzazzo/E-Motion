@@ -17,11 +17,11 @@ class Wifi extends EventEmitter {
     postInit() {
         window.addEventListener("offline", () => {
             this.emit("offline")
-            console.log("❌ Déconnecté du WiFi !");
+            console.log("❌ Disconnected from Wi-Fi !");
         });
         window.addEventListener("online", () => {
             this.emit("online")
-            console.log("✅ Reconnecté au WiFi !");
+            console.log("✅ Reconnected to Wi-Fi");
         });
         console.log("✅ Wifi class post init");
         this.#updateWifi()
@@ -33,7 +33,7 @@ class Wifi extends EventEmitter {
     scan(cb) {
         this.#wifi.scan((error, networks) => {
             if (error) {
-                console.error("❌ Erreur lors du scan wifi :", error);
+                console.error("❌ Error scanning Wi-Fi:", error);
                 return;
             }
             networks.sort((a, b) => b.signal_level - a.signal_level);

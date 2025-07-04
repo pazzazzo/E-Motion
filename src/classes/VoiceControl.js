@@ -169,7 +169,7 @@ class VoiceControl {
                     console.log(response);
                     
                     if (!response.ok) {
-                        throw new Error(`Erreur HTTP ${response.status} – ${response.statusText}`);
+                        throw new Error(`HTTP error ${response.status} – ${response.statusText}`);
                     }
                     // return response.json();
                     parseResult(null, response);

@@ -1,26 +1,23 @@
 class Utils {
-    constructor(params) {
+    constructor() {
         console.log("✅ Utils class invoked");
     }
     formatNumberDec(number) {
         if (Number.isInteger(number)) {
-            return number.toFixed(1); // Ajoute un .0 aux nombres entiers
+            return number.toFixed(1);
         } else {
-            return number.toFixed(2); // Formate les nombres décimaux avec 2 décimales
+            return number.toFixed(2);
         }
     }
     formatNumberLen(number) {
-        // Convertir le nombre en chaîne de caractères
         const numberStr = number.toString();
-      
-        // Ajouter un zéro devant les nombres à un seul chiffre
+
         if (numberStr.length === 1) {
-          return '0' + numberStr;
+            return '0' + numberStr;
         }
-      
-        // Retourner le nombre d'origine s'il contient plusieurs chiffres
+
         return numberStr;
-      }
+    }
 }
 
 module.exports = Utils

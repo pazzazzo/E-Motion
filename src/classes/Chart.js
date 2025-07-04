@@ -89,7 +89,6 @@ class Chart {
                             chartArea: { top, bottom }
                         } = chart;
 
-                        // Paramètres modifiables
                         const color = 'gray';
                         const lineWidth = 1;
 
@@ -97,7 +96,6 @@ class Chart {
                         ctx.strokeStyle = color;
                         ctx.lineWidth = lineWidth;
 
-                        // Pour chaque dataset (index 0 seulement si tu préfères)
                         chart.data.datasets.forEach((_, datasetIndex) => {
                             const meta = chart.getDatasetMeta(datasetIndex);
                             meta.data.forEach((point) => {

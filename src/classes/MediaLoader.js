@@ -147,7 +147,7 @@ class MediaLoader extends EventEmitter {
         let totalFiles = 0;
         let loadedFiles = 0;
 
-        // Fonction pour vérifier si tout est chargé
+        // Function to check if everything is loaded
         const checkDone = () => {
             if (loadedFiles === totalFiles) {
                 cb();

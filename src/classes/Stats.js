@@ -22,7 +22,7 @@ class DataGraph {
             raw = fs.readFileSync(this.mediaLoader.datagraphPath, 'utf8');
             this.fileContent = JSON.parse(raw);
         } catch (err) {
-            console.error('Erreur lecture/parsing datagraph:', err);
+            console.error('Read/parsing datagraph error: ', err);
             this.fileContent = {};
         }
     }

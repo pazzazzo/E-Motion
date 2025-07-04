@@ -50,7 +50,7 @@ class Waze {
                         element: document.createElement("div"),
                     }).setLngLat([alert.location.x, alert.location.y]).addTo(this.mediaLoader.map);
 
-                    // Ajouter une image à l'élément
+                    // Add an image to the element
                     const el = marker.getElement();
                     el.classList.add("map-icon-police")
                     this.polices.add(el)
