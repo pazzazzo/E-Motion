@@ -65,6 +65,8 @@ class Waze {
         } else {
             this.fetch(bounds, ["alerts"]).then(json => {
                 cb(json)
+            }).catch(e => {
+                console.error(e);
             })
         }
     }
