@@ -8,7 +8,15 @@
   "wifi": {
     "connected": "Connecté",
     "not_connected": "Non connecté",
-    "load": "Chargement"
+    "load": "Chargement",
+    "alert": {
+      "title": "Vous n'êtes pas connecté.",
+      "subtitle": "Veuillez scanner le QR code d'un réseau WiFi.",
+      "error": {
+        "title": "QRCode invalide. Merci de réessayer",
+        "button": "Réesayer"
+      }
+    }
   },
   "search": {
     "address": "Adresse"
