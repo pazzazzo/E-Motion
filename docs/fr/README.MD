@@ -57,34 +57,20 @@ En plus des fonctionnalités logicielles, l'intérieur du véhicule comprendra �
 
 ### Aperçu :
 
-![Aperçu du Dashboard](./Preview.png)
-![Aperçu de la Recherche](./Preview-2.png)
+![Aperçu du Dashboard](../../Preview.png)
+![Aperçu de la Recherche](../../Preview-2.png)
 
 ### Mode test et développement :
 Afin de tester les différents composants du véhicule, une interface est mise à disposition simulant la connexion avec les éléments de celui-ci permettant d'avoir un accès facile au débogage
 
-![Aperçu du Mode test et développement](./Preview-Dev.png)
+![Aperçu du Mode test et développement](../../Preview-Dev.png)
 
 ### Dépendances :
 L'application possède plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executez le fichier `./install.sh`.
 
-L'application nécessite des tokens placés dans un fichier nommé `./src/database.json`. Lors de l'éxecution du `./install.sh` le script config.js va vous demander les tokens et lancer un OAuth pour récupérer le token spotify. Vous pouvez toujours créer le fichier de configuration vous-meme.
-Le contenu du fichier se présente ainsi:
-```json
-{
-  "mapbox-token":           "VOTRE_MAPBOX_TOKEN",
-  "wit-token":              "VOTRE_WIT_TOKEN",
-  "map-api-key":            "VOTRE_GOOGLE_MAPS_API_KEY",
-  "spotify-refresh-token":  "VOTRE_SPOTIFY_REFRESH_TOKEN"
-}
-```
 ### Exécution des tests
 
-Des tests unitaires simples sont fournis avec **Jest** pour vérifier certaines fonctions d'utilitaires. Pour les lancer, exécutez :
-
-```bash
-npm test
-```
+Des tests unitaires simples sont fournis avec **Jest** pour vérifier certaines fonctions d'utilitaires. Pour les lancer, exécutez `npm run test`
 
 
 ## License
