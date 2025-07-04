@@ -46,14 +46,14 @@ In addition to software functionality, the vehicle’s interior will include:
 
 ### Previews
 
-![Dashboard Preview](../../Preview.png)
-![Search Preview](../../Preview-2.png)
+![Dashboard Preview](/Preview.png)
+![Search Preview](/Preview-2.png)
 
 ### Test & Development Mode
 
 To test the vehicle’s different components, an interface simulates connections to those elements, facilitating easy debugging.
 
-![Test & Development Mode Preview](../../Preview-Dev.png)
+![Test & Development Mode Preview](/Preview-Dev.png)
 
 ### Dependencies
 

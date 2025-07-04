@@ -57,13 +57,13 @@ En plus des fonctionnalités logicielles, l'intérieur du véhicule comprendra �
 
 ### Aperçu :
 
-![Aperçu du Dashboard](../../Preview.png)
-![Aperçu de la Recherche](../../Preview-2.png)
+![Aperçu du Dashboard](/Preview.png)
+![Aperçu de la Recherche](/Preview-2.png)
 
 ### Mode test et développement :
 Afin de tester les différents composants du véhicule, une interface est mise à disposition simulant la connexion avec les éléments de celui-ci permettant d'avoir un accès facile au débogage
 
-![Aperçu du Mode test et développement](../../Preview-Dev.png)
+![Aperçu du Mode test et développement](/Preview-Dev.png)
 
 ### Dépendances :
 L'application possède plusieurs dépendances dont `Node JS`, `libbluetooth-dev`, etc. Pour les installer, executez le fichier `./install.sh`.
