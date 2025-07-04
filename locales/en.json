@@ -1,0 +1,325 @@
+{
+  "music": {
+    "unknown": {
+      "title": "Unknown Title",
+      "artist": "Unknown Artist"
+    }
+  },
+  "wifi": {
+    "connected": "Connected",
+    "not_connected": "Not Connected",
+    "load": "Loading"
+  },
+  "search": {
+    "address": "Address"
+  },
+  "welcome": {
+    "title": "Welcome to E-Motion",
+    "desc": "Thank you for using the E-Motion dashboard for your vehicle",
+    "button": "Start Setup",
+    "userinfo": {
+      "title": "Who are you?",
+      "username": {
+        "label": "Username",
+        "placeholder": "Enter your username"
+      },
+      "carname": {
+        "label": "Vehicle Name",
+        "placeholder": "Enter a name for your vehicle"
+      },
+      "button": "Continue"
+    },
+    "spotify": {
+      "title": "Spotify Connection",
+      "desc1": "Scan the QR code below or visit ",
+      "desc2": " and enter the code:",
+      "continue": "Continue",
+      "skip": "Skip this step"
+    },
+    "data": {
+      "title": "Vehicle Information",
+      "desc": "We have collected the following information about your vehicle:",
+      "table": {
+        "insuranceExpiry": "Warranty/Insurance Expiry:",
+        "serviceHistory": "Service History:",
+        "doorLockStatus": "Door Lock Status:",
+        "bluetoothConnected": "Bluetooth Connected:",
+        "navigationStatus": "Navigation Status:",
+        "nextInspection": "Next Inspection:",
+        "softwareVersion": "Software Version:",
+        "hardwareVersion": "Hardware Version:",
+        "avgConsumption": "Average Consumption:",
+        "distanceSensor": "Distance Sensors:",
+        "screens": "E-Motion Compatible Screens:",
+        "securitySystem": "Security System:",
+        "batteryHealth": "Battery Health:",
+        "lastSync": "Last Sync:",
+        "engineTemp": "Engine Temperature:",
+        "headlightStatus": "Headlight Status:",
+        "tirePressure": "Tire Pressure:",
+        "tripDistance": "Trip Distance:",
+        "gpsCoordinates": "GPS Coordinates:",
+        "windowStatus": "Window Status:",
+        "odometer": "Odometer:",
+        "fuelLevel": "Fuel Level:",
+        "co2Emissions": "CO₂ Emissions:",
+        "lastService": "Last Service:",
+        "wifiConnected": "Wi-Fi Connected:",
+        "registration": "Registration:",
+        "fuelType": "Fuel Type:",
+        "parkingBrake": "Parking Brake:",
+        "manufacturer": "Manufacturer:",
+        "maxSpeed": "Maximum Speed:",
+        "year": "Year of Manufacture:",
+        "spotifyName": "Spotify Name:",
+        "oilLevel": "Oil Level:",
+        "acStatus": "Air Conditioning:",
+        "mileage": "Mileage:",
+        "cameras": "Cameras:",
+        "range": "Range:",
+        "color": "Color:",
+        "model": "Model:",
+        "email": "Email:",
+        "vin": "VIN:"
+      },
+      "button": "Finish Setup"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "list": {
+      "nav": "Navigation Bar",
+      "map": "Map",
+      "sound": "Sound",
+      "notifications": "Notifications",
+      "camera": "Camera",
+      "sim": "SIM Card",
+      "system": "System"
+    },
+    "type": {
+      "icons": "Icon Customization"
+    },
+    "nav": {
+      "title": "Navigation Icons",
+      "desc": "Modify the appearance and order of navigation icons",
+      "add": "Add an App"
+    },
+    "map": {
+      "title": "Map Appearance",
+      "desc": "Customize the map's appearance and behavior",
+      "colors": "Route Colors",
+      "normal": "Normal",
+      "traffic": "Heavy Traffic",
+      "heavy": "Traffic Jam",
+      "style": {
+        "title": "Map Style",
+        "standard": "Standard Map",
+        "dark": "Dark Map",
+        "satellite": "Satellite Map",
+        "terrain": "Terrain Mode"
+      },
+      "refresh": {
+        "title": "Traffic Updates",
+        "desc": "Frequency of real-time traffic updates",
+        "15s": "15 Seconds",
+        "30s": "30 Seconds",
+        "1m": "1 Minute",
+        "5m": "5 Minutes"
+      }
+    },
+    "sound": {
+      "title": "Sounds & Notifications",
+      "desc": "Customize notification and alert sounds",
+      "master": "Master Volume",
+      "master_desc": "Adjust the app's overall volume",
+      "events": {
+        "title": "Event Sounds",
+        "start": "Route Start",
+        "start_desc": "Sound played when the route starts",
+        "traffic": "Traffic Alert",
+        "traffic_desc": "Sound played when a major traffic change occurs",
+        "arrival": "Arrival at Destination",
+        "arrival_desc": "Sound played upon arrival at destination",
+        "usb_in": "USB Connected",
+        "usb_in_desc": "Sound played when a USB device is plugged in",
+        "usb_out": "USB Disconnected",
+        "usb_out_desc": "Sound played when a USB device is unplugged",
+        "voice": "Navigation Instructions",
+        "voice_desc": "Voice for navigation instructions"
+      },
+      "mute": {
+        "title": "Silent Mode",
+        "desc": "Disable all app sounds"
+      }
+    },
+    "spotify": {
+      "title": "Spotify Integration",
+      "desc": "Settings for Spotify integration",
+      "auto": {
+        "title": "Automatic Switching",
+        "desc": "Automatically switch Spotify playback from phone to car"
+      },
+      "delay": {
+        "title": "Switch Delay",
+        "desc": "Delay before switching playback",
+        "now": "Immediate",
+        "3s": "3 Seconds",
+        "5s": "5 Seconds",
+        "10s": "10 Seconds"
+      },
+      "notify": {
+        "title": "Switch Notification",
+        "desc": "Show a notification when switching"
+      }
+    },
+    "cam": {
+      "select": {
+        "config": "Configuration",
+        "record": "Recording"
+      }
+    },
+    "cams": {
+      "title": "Camera Selection",
+      "desc": "Configure cameras used for different functions",
+      "front": "Front Camera",
+      "front_desc": "Front Dashcam",
+      "driver": "Driver Camera",
+      "driver_desc": "Driver-Facing Dashcam",
+      "rear": "Rear Camera",
+      "rear_desc": "Exterior Camera",
+      "none": "None"
+    },
+    "record": {
+      "title": "Recording Settings",
+      "desc": "Configure automatic recording options",
+      "auto": {
+        "title": "Automatic Recording",
+        "desc": "Automatically record videos"
+      },
+      "segment": {
+        "title": "Video Segment Duration",
+        "default": "5 min",
+        "desc": "Recording will be split into segments of this duration"
+      },
+      "quality": {
+        "title": "Recording Quality",
+        "desc": "Select the quality of recordings",
+        "sd": "Standard (SD)",
+        "hd": "High Definition (HD)",
+        "fhd": "Full HD (1080p)"
+      },
+      "location": {
+        "title": "Recording Location",
+        "desc": "Choose where videos will be saved",
+        "internal": "Internal",
+        "usb": "USB Drive"
+      },
+      "loop": {
+        "title": "Loop Recording",
+        "desc": "Overwrite old recordings when space is low"
+      }
+    },
+    "account": {
+      "title": "User Account",
+      "desc": "Manage your account and personal information",
+      "username": {
+        "label": "Username",
+        "placeholder": "Username"
+      },
+      "vehicle": {
+        "label": "Vehicle Name",
+        "placeholder": "Vehicle Name"
+      }
+    },
+    "services": {
+      "title": "Connected Services",
+      "desc": "Manage connections with external services",
+      "spotify": {
+        "title": "Spotify",
+        "desc": "Not connected – connect to access your music",
+        "connect": "Connect"
+      }
+    },
+    "updates": {
+      "title": "Updates & Storage",
+      "desc": "Manage app updates and data storage",
+      "subtitle": "Updates",
+      "auto": {
+        "title": "Automatic Updates",
+        "desc": "Automatically install updates"
+      },
+      "current_version": "Current Version: 2.4.1",
+      "last_update": "Last Update: 15/03/2025",
+      "uptodate": "Up to Date",
+      "available": "Update Available",
+      "storage": {
+        "title": "Storage",
+        "download": {
+          "title": "Download Offline Maps",
+          "desc": "Store maps for offline use"
+        },
+        "history": {
+          "title": "Navigation History",
+          "desc": "Save destination history"
+        }
+      }
+    },
+    "sim": {
+      "select": {
+        "limit": "Usage & Limits",
+        "config": "SIM Configuration"
+      },
+      "conso": {
+        "title": "Data Usage",
+        "desc": "Track your mobile data usage"
+      },
+      "progress": {
+        "label": "Data Usage"
+      },
+      "stats": {
+        "remaining": {
+          "title": "Remaining Data"
+        },
+        "renewal": {
+          "title": "Renewal In"
+        },
+        "average": {
+          "title": "Average Usage"
+        }
+      },
+      "warning": {
+        "title": "Usage Warning",
+        "desc": "At this rate, you'll exceed your data limit before the next renewal. Estimated usage: <span>8.7 GB</span>"
+      },
+      "history": {
+        "title": "Usage History"
+      },
+      "urls": {
+        "title": "URL Breakdown"
+      }
+    },
+    "save": "Save",
+    "modal": {
+      "update": {
+        "title": "Update Available",
+        "desc": "A new version of the app is available.",
+        "new": "New Version",
+        "current": "Current Version",
+        "changelog": {
+          "title": "Changelog"
+        },
+        "later": "Later",
+        "install": "Install Now"
+      },
+      "spotify": {
+        "title": "Connect to Spotify",
+        "desc": "Waiting for a connection",
+        "scan": "Scan the QR code on your mobile",
+        "url": {
+          "open": "Or open ",
+          "enter": " and enter"
+        }
+      }
+    }
+  }
+}
