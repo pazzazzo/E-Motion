@@ -1,11 +1,9 @@
-const MediaLoader = require("./MediaLoader");
 const path = require("path")
 const fs = require("fs")
 
 class Navbar {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Navbar class invoked");
-        this.mediaLoader = mediaLoader
         this.buttons = {
             "home": document.getElementById("menu-home"),
             // "spotify": document.getElementById("menu-music"),
@@ -14,7 +12,7 @@ class Navbar {
         }
 
         this.buttons.home.addEventListener("click", () => {
-            this.mediaLoader.appLoader.appChange("home")
+            mediaLoader.appLoader.appChange("home")
         })
         /*
             <div class="menu-icon" id="menu-phone">
@@ -35,10 +33,10 @@ class Navbar {
     postInit() {
         this.navBarHTML = document.getElementById("menu-bar")
         this.appsHTML = document.getElementById("apps-view")
-        if (this.mediaLoader.settings.data["navbar"] && this.mediaLoader.settings.data["navbar"].length) {
-            this.mediaLoader.settings.data["navbar"].forEach(nav => {
-                if (this.mediaLoader.apps.has(nav.id)) {
-                    let appPath = this.mediaLoader.apps.get(nav.id)
+        if (mediaLoader.settings.data["navbar"] && mediaLoader.settings.data["navbar"].length) {
+            mediaLoader.settings.data["navbar"].forEach(nav => {
+                if (mediaLoader.apps.has(nav.id)) {
+                    let appPath = mediaLoader.apps.get(nav.id)
                     let manifest = require(path.join(appPath, "manifest.json"))
                     let iconPath = nav.icon || manifest["default-icon"]
                     let color = nav.color || manifest["default-color"]
@@ -54,7 +52,7 @@ class Navbar {
                     element.style.boxShadow = `0px 0px 0px 2px ${color}`
                     element.innerHTML = `<img class="" src="${iconPath}">`
                     element.addEventListener("click", () => {
-                        this.mediaLoader.appLoader.appChange(nav.id)
+                        mediaLoader.appLoader.appChange(nav.id)
                     })
                     this.navBarHTML.appendChild(element)
                 }

@@ -23,7 +23,7 @@ class Camera {
                         let option = document.createElement("option");
                         option.value = device.deviceId;
                         option.innerHTML = device.label;
-                        if (device.deviceId === this.settings.mediaLoader.settings.data.camera.device[deviceType]) {
+                        if (device.deviceId === mediaLoader.settings.data.camera.device[deviceType]) {
                             option.selected = true;
                         }
                         this.controls.camerasSelecors[deviceType].appendChild(option);

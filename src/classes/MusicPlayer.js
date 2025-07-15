@@ -1,9 +1,6 @@
-const MediaLoader = require("./MediaLoader");
-
 class MusicPlayer {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ MusicPlayer class invoked");
-        this.mediaLoader = mediaLoader;
         this.HTML = {
             main: document.getElementById("main-music"),
             minimize: document.getElementById("main-music-minimize"),
@@ -44,39 +41,39 @@ class MusicPlayer {
             }
         })
         this.HTML.previous.addEventListener("click", () => {
-            if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
+            if (mediaLoader.spotify.connected && mediaLoader.spotify.synced) {
                 if (this.current > 3000) {
-                    this.mediaLoader.spotify.seek(0)
+                    mediaLoader.spotify.seek(0)
                 } else {
-                    this.mediaLoader.spotify.previous()
+                    mediaLoader.spotify.previous()
                 }
             } else {
-                this.mediaLoader.bluetooth.musicPrevious()
+                mediaLoader.bluetooth.musicPrevious()
             }
         })
         this.HTML.play.addEventListener("click", () => {
-            if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
+            if (mediaLoader.spotify.connected && mediaLoader.spotify.synced) {
                 if (this.paused) {
-                    this.mediaLoader.spotify.play()
+                    mediaLoader.spotify.play()
                     this.HTML.play.children[0].innerHTML = "pause"
                 } else {
-                    this.mediaLoader.spotify.pause()
+                    mediaLoader.spotify.pause()
 
         this.HTML.play.children[0].innerHTML = "play_arrow"
                 }
             } else {
                 if (this.paused) {
-                    this.mediaLoader.bluetooth.musicPlay()
+                    mediaLoader.bluetooth.musicPlay()
                 } else {
-                    this.mediaLoader.bluetooth.musicPause()
+                    mediaLoader.bluetooth.musicPause()
                 }
             }
         })
         this.HTML.next.addEventListener("click", () => {
-            if (this.mediaLoader.spotify.connected && this.mediaLoader.spotify.synced) {
-                this.mediaLoader.spotify.next()
+            if (mediaLoader.spotify.connected && mediaLoader.spotify.synced) {
+                mediaLoader.spotify.next()
             } else {
-                this.mediaLoader.bluetooth.musicNext()
+                mediaLoader.bluetooth.musicNext()
             }
         })
 

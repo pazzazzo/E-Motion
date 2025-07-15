@@ -1,14 +1,11 @@
-const MediaLoader = require("./MediaLoader");
 const dbus = require('dbus-next');
-const { spawn } = require("child_process");
 const { EventEmitter } = require("events");
 
 
 class Bluetooth extends EventEmitter {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Bluetooth class invoked");
         super()
-        this.mediaLoader = mediaLoader
         this.ofonoService = "org.ofono"
         this.bluezService = "org.bluez"
         this.objectManagerInterface = "org.freedesktop.DBus.ObjectManager"
@@ -93,14 +90,14 @@ class Bluetooth extends EventEmitter {
                     } catch (err) {
                         console.error("Error processing the call: ", err);
                     }
-                    this.mediaLoader.spotify.pause()
+                    mediaLoader.spotify.pause()
                 });
 
                 this.callManager.on('CallRemoved', (callPath, properties) => {
                     console.log(`Call ended or disconnected: ${callPath}`);
                     this.voiceCall = null
                     this.emit("voicecall.end")
-                    this.mediaLoader.spotify.play()
+                    mediaLoader.spotify.play()
                 });
 
                 console.log("Waiting for call events...");

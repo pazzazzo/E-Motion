@@ -52,7 +52,7 @@ class MediaLoader extends EventEmitter {
         if (!this.preinitied) {
             this.status = "preinit"
             const t = performance.now()
-            let i = 3
+            let i = 2
             const cb = () => {
                 i--
                 if (i == 0) {
@@ -62,12 +62,8 @@ class MediaLoader extends EventEmitter {
             }
             this.position = new Position()
             this.#loadSounds(cb)
-            this.database.load((err) => {
-                if (err) throw err;
-                cb()
-            })
-            this.wifi = new Wifi(this)
-            this.stats = new Stats(this)
+            this.wifi = new Wifi()
+            this.stats = new Stats()
             this.ttsClient = new textToSpeech.TextToSpeechClient();
             this.#preloadApps()
             cb()
@@ -80,16 +76,16 @@ class MediaLoader extends EventEmitter {
             const t = performance.now()
             let i = 5
             this.page = new Page()
-            this.infoBar = new InfoBar(this)
-            this.spotify = new SpotifyClient(this)
-            this.bluetooth = new Bluetooth(this)
-            this.musicPlayer = new MusicPlayer(this)
-            this.searchAddress = new SearchAddress(this)
-            this.navbar = new Navbar(this)
-            this.direction = new Direction(this)
+            this.infoBar = new InfoBar()
+            this.spotify = new SpotifyClient()
+            this.bluetooth = new Bluetooth()
+            this.musicPlayer = new MusicPlayer()
+            this.searchAddress = new SearchAddress()
+            this.navbar = new Navbar()
+            this.direction = new Direction()
             this.settings = new Settings()
-            this.waze = new Waze(this)
-            this.placeSearch = new PlaceSearch(this)
+            this.waze = new Waze()
+            this.placeSearch = new PlaceSearch()
             const cb = () => {
                 i--
                 if (i <= 0) {
@@ -101,7 +97,9 @@ class MediaLoader extends EventEmitter {
                     })
                 }
             }
-            this.#loadMap(this.database.data["mapbox-token"], cb)
+            this.database.get("mapbox-token").then(token => {
+            this.#loadMap(token, cb)
+            })
             // this.dataGraph.init(cb)
             this.spotify.init(cb)
             this.settings.init(cb)
@@ -122,11 +120,11 @@ class MediaLoader extends EventEmitter {
     #postInit(cb) {
         this.status = "postinit"
         console.log("🔵 MediaLoader class post init");
-        this.arrow = new Arrow(this)
-        this.mapboxCamera = new MapboxCamera(this)
-        this.voiceControl = new VoiceControl(this)
-        this.appLoader = new AppLoader(this)
-        this.lang = new Lang(this)
+        this.arrow = new Arrow()
+        this.mapboxCamera = new MapboxCamera()
+        this.voiceControl = new VoiceControl()
+        this.appLoader = new AppLoader()
+        this.lang = new Lang()
         this.navbar.postInit()
         this.wifi.postInit()
         cb()

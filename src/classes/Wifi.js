@@ -1,13 +1,11 @@
 const { EventEmitter } = require("events")
-const MediaLoader = require("./MediaLoader");
 const data = require("../data.json");
 
 class Wifi extends EventEmitter {
     #wifi
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         super()
         console.log("✅ Wifi class invoked");
-        this.mediaLoader = mediaLoader
         this.#wifi = require("node-wifi");
         this.#wifi.init({ "iface": null })
         this.current = []
@@ -53,7 +51,7 @@ class Wifi extends EventEmitter {
                     this.emit("connected")
                     this.#reConnected()
                 }
-                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.level[Math.min(6, Math.floor(wifi[0].quality / 100 * 4)).toString()], await this.mediaLoader.lang.t("wifi.connected"))
+                mediaLoader.infoBar.updateWifi(data.icons.wifi.level[Math.min(6, Math.floor(wifi[0].quality / 100 * 4)).toString()], await mediaLoader.lang.t("wifi.connected"))
                 // console.log(`No. ${wifi.length} | Sig. ${wifi[0].quality}`);
             } else {
                 if (this.state !== 0) {
@@ -61,7 +59,7 @@ class Wifi extends EventEmitter {
                     this.emit("disconnected")
                     this.#notConnected()
                 }
-                this.mediaLoader.infoBar.updateWifi(data.icons.wifi.off, await this.mediaLoader.lang.t("wifi.not_connected"));
+                mediaLoader.infoBar.updateWifi(data.icons.wifi.off, await mediaLoader.lang.t("wifi.not_connected"));
 
             }
             setTimeout(() => {
@@ -74,7 +72,7 @@ class Wifi extends EventEmitter {
         })
     }
     #notConnected() {
-        this.mediaLoader.page.view.change("wifi")
+        mediaLoader.page.view.change("wifi")
         this.scanQRCode((options) => {
             this.connect(options.S, options.P, (...r) => {
                 console.log(r);
@@ -82,7 +80,7 @@ class Wifi extends EventEmitter {
         })
     }
     #reConnected() {
-        this.mediaLoader.page.view.change("main")
+        mediaLoader.page.view.change("main")
         if (this.stopScan) {
             this.stopScan()
             this.stopScan = null
@@ -93,7 +91,7 @@ class Wifi extends EventEmitter {
         errHTML.classList.add("hidden")
         let canvas = document.getElementById("wifi-cam")
         let video = document.getElementById("wifi-video")
-        this.stopScan = this.mediaLoader.scanQRCode(canvas, video, (data) => {
+        this.stopScan = mediaLoader.scanQRCode(canvas, video, (data) => {
             let parse = this.qrParse(data)
             if (!parse.valid) {
                 errHTML.classList.remove("hidden")

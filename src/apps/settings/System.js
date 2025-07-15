@@ -5,7 +5,7 @@ class System {
     constructor(settings = new Settings()) {
         console.log("✅ SettingsApp-System class invoked");
         this.settings = settings
-        this.spotify = this.settings.mediaLoader.spotify
+        this.spotify = mediaLoader.spotify
 
         this.qrcodeHTML = document.getElementById("spotipair-qr")
         this.linkHTML = document.getElementById("spotipair-link")

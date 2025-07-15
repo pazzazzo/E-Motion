@@ -9,7 +9,7 @@ class SIM {
         this.simChart = new Chart(document.getElementById("settings-sim-use-chart").getContext("2d"), {
             unit: " MB",
         })
-        this.simChart.addStat(this.settings.mediaLoader.stats.dataUse, {
+        this.simChart.addStat(mediaLoader.stats.dataUse, {
             type: "getDatasetsByDatesNumber", args: [new Date(), -13], params: {
                 label: "Utilisation",
                 rounded: true,

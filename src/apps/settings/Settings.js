@@ -1,5 +1,3 @@
-const MediaLoader = require("../../classes/MediaLoader");
-const fs = require("fs");
 const Navbar = require("./Navbar.js");
 const Maps = require("./Maps.js");
 const Sound = require("./Sound.js");
@@ -10,10 +8,9 @@ const System = require("./System.js");
 const EventEmitter = require("events");
 
 class Settings extends EventEmitter {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ SettingsApp invoked");
         super()
-        this.mediaLoader = mediaLoader;
     }
     init() {
         console.log("✅ SettingsApp init");

@@ -3,10 +3,9 @@ const MapboxObject = require("./MapboxObject");
 const MediaLoader = require("./MediaLoader");
 
 class MapboxCamera {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ MapboxCamera class invoked");
         this.followedObject = null;
-        this.mediaLoader = mediaLoader
         this.followCallback = (coordinates, bearing) => {
             let b = new mapboxgl.LngLat(...coordinates)
             mediaLoader.map.fitBounds(b.toBounds(1), {
@@ -19,7 +18,7 @@ class MapboxCamera {
             }, {
                 tracking: true
             })
-            // this.mediaLoader.map.flyTo({
+            // mediaLoader.map.flyTo({
             //     duration: 1500,
             //     // speed: .5,
             //     easing: (t) => t,
@@ -34,7 +33,7 @@ class MapboxCamera {
         this.recenterBtn.addEventListener("click", () => {
             this.followUser()
         })
-        this.mediaLoader.map.on("movestart", (e) => {
+        mediaLoader.map.on("movestart", (e) => {
             if (e.originalEvent) {
                 this.stopFollow()
             }
@@ -44,7 +43,7 @@ class MapboxCamera {
         return this.followedObject instanceof Arrow
     }
     followUser() {
-        this.followObject(this.mediaLoader.arrow, {
+        this.followObject(mediaLoader.arrow, {
             zoom: 18,
             maxZoom: 20,
             pitch: 45
@@ -61,7 +60,7 @@ class MapboxCamera {
         //     let zoom = options.zoom
         //     delete options.zoom
         //     setTimeout(() => {
-        //         this.mediaLoader.map.zoomTo(zoom, {
+        //         mediaLoader.map.zoomTo(zoom, {
         //             duration: 5000,
         //         })
         //     }, 1000);
@@ -76,7 +75,7 @@ class MapboxCamera {
         if (options) {
             opt = { ...opt, ...options }
         }
-        this.mediaLoader.map.flyTo(opt)
+        mediaLoader.map.flyTo(opt)
         this.followedObject = object
         if (this.isFollowUser()) {
             this.recenterBtn.classList.add("hidden")
@@ -96,7 +95,7 @@ class MapboxCamera {
     }
     fitBounds(bounds) {
         this.stopFollow()
-        this.mediaLoader.map.fitBounds(bounds, {
+        mediaLoader.map.fitBounds(bounds, {
             padding: 200
         });
     }

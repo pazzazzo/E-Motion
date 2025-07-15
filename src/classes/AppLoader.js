@@ -1,9 +1,8 @@
-const MediaLoader = require("./MediaLoader");
 const path = require("path")
 const fs = require("fs")
 
 class AppLoader {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ AppLoader class invoked");
         this.mediaLoader = mediaLoader
         this.classes = new Map()
@@ -15,7 +14,7 @@ class AppLoader {
             let data = fs.readFileSync(path.join(appPath, (manifest["html"] || "index.html")))
             this.appsHTML.innerHTML += data.toString()
             let AppClass = require(path.join(appPath, manifest["main"]))
-            this.classes.set(appId, new AppClass(this.mediaLoader))
+            this.classes.set(appId, new AppClass())
             let style = document.createElement("link")
             style.rel = "stylesheet"
             style.href = path.join(appPath, (manifest["css"] || "style.css"))
@@ -31,12 +30,12 @@ class AppLoader {
         if (this.actualApp === app || app === "home") {
             if (!this.actualApp) return;
             this.classes.get(this.actualApp).onClose()
-            this.mediaLoader.page.apps.close()
+            mediaLoader.page.apps.close()
             this.actualApp = null
             return
         }
         this.classes.get(app).onShow()
-        this.mediaLoader.page.apps.show(app)
+        mediaLoader.page.apps.show(app)
         this.actualApp = app
     }
 }

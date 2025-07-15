@@ -6,6 +6,7 @@
   "homepage": "https://pazzazzo.github.io/e-motion",
   "scripts": {
     "dev": "electron . -dev --no-zygote --no-sandbox",
+    "dev:demo": "electron . -dev --demo --no-zygote --no-sandbox",
     "start": "electron . --no-zygote --no-sandbox",
     "start:devtools": "electron . --inspect --no-zygote --no-sandbox",
     "start:welcome": "electron . --welcome --no-zygote --no-sandbox",
@@ -30,6 +31,7 @@
   },
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
+    "electron-updater": "^6.6.2",
     "@google-cloud/text-to-speech": "^6.0.1",
     "@turf/turf": "^7.2.0",
     "chart.js": "^4.4.1",
@@ -56,6 +58,34 @@
     "directories": {
       "output": "dist"
     },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "locales/**",
+      "dev/**",
+      "*.js",
+      "!**/*.md",
+      "!jest.config.js",
+      "!**/__mocks__/**",
+      "!**/__tests__/**",
+      "!tests/**",
+      "!*.png"
+    ],
+    "extraFiles": [
+      {
+        "from": "database/",
+        "to": "database/"
+      },
+      {
+        "from": "librespot/",
+        "to": "librespot/"
+      },
+      {
+        "from": "install.sh",
+        "to": "install.sh"
+      }
+    ],
     "linux": {
       "target": [
         "deb"
@@ -91,7 +121,6 @@
     "electron": "31.2.0",
     "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9",
-    "electron-updater": "^6.6.2",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0-beta.3",
     "jsdom": "^26.1.0",

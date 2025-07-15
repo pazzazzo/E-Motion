@@ -1,9 +1,8 @@
 const Page = require("./Page")
 const Keyboard = require("./Keyboard")
-const MediaLoader = require("./MediaLoader")
 
 class SearchAddress {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ SearchAddress class invoked");
         this.searchBtn = document.getElementById("main-search")
         this.searchInp = document.getElementById("search-address")
@@ -11,7 +10,10 @@ class SearchAddress {
 
         this.searchView = document.getElementById("search-view")
         this.searchSuggestions = []
-        this.mediaLoader = mediaLoader
+
+        mediaLoader.database.get("mapbox-token").then(t => {
+            this.token = t
+        })
 
         this.searchBtn.addEventListener("click", () => {
             mediaLoader.page.view.show("search")
@@ -36,9 +38,9 @@ class SearchAddress {
         if (!query.trim()) return [];
 
         return new Promise(async (resolve) => {
-            let url = `https://api.mapbox.com/search/geocode/v6/forward?q=${encodeURIComponent(query)}&access_token=${mediaLoader.database.data["mapbox-token"]}&autocomplete=true&country=FR&limit=10&types=address,street`;
+            let url = `https://api.mapbox.com/search/geocode/v6/forward?q=${encodeURIComponent(query)}&access_token=${this.token}&autocomplete=true&country=FR&limit=10&types=address,street`;
 
-            url += `&proximity=${this.mediaLoader.position.coords.longitude},${this.mediaLoader.position.coords.latitude}`;
+            url += `&proximity=${mediaLoader.position.coords.longitude},${mediaLoader.position.coords.latitude}`;
 
             try {
                 const response = await fetch(url);
@@ -72,8 +74,8 @@ class SearchAddress {
     }
     onClick(id) {
         console.log(this.searchSuggestions[id]);
-        this.mediaLoader.direction.setMap(this.searchSuggestions[id])
-        this.mediaLoader.playSound(this.mediaLoader.settings.data.sound.mapGo)
+        mediaLoader.direction.setMap(this.searchSuggestions[id])
+        mediaLoader.playSound(mediaLoader.settings.data.sound.mapGo)
         this.close()
     }
 }

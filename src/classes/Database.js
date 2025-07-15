@@ -1,28 +1,41 @@
-const fs = require('fs');
 const path = require('path');
-
+const DB = require("pouchdb")
 
 class Database {
     constructor(config = {}) {
-        this.path = config.path || path.join(__dirname, "..", "database.json")
-        this.data = {}
         console.log("✅ Database class invoked");
+        this.path = config.path || path.join(__awd, "database")
+        this.engine = new DB(this.path)
     }
-    save(cb) {
-        fs.writeFile(this.path, JSON.stringify(this.data, null, 2), (err) => {
-            if (typeof cb === "function") {
-                cb(err)
-            }
+    get(id) {
+        return new Promise((r, e) => {
+            this.engine.get(id).then(doc => {
+                r(doc.value)
+            }).catch(err => {
+                r(err)
+            })
         })
     }
-    load (cb) {
-        fs.readFile(this.path, (err, data) => {
-            if (!err) {
-                this.data = JSON.parse(data.toString())
-            }
-            cb(err)
+    set(id, value) {
+        return new Promise((r, e) => {
+            this.engine.get(id).then(doc => {
+                doc.value = value
+                this.engine.put(doc).then(() => {
+                    r(true)
+                })
+            }).catch(err => {
+                if (err.status === 404) {
+                    this.engine.put({
+                        _id: id,
+                        value
+                    }).then(() => {
+                        r(true)
+                    })
+                } else {
+                    e(err)
+                }
+            })
         })
-        return this
     }
 }
 

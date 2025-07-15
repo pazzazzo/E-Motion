@@ -22,40 +22,40 @@ class Sound {
             "connectNotify": document.getElementById("settings-spotify-connectnotify"),
         }
 
-        this.spotifyControl.autoConnect.checked = this.settings.mediaLoader.settings.data.spotify.autoConnect;
-        this.spotifyControl.connectDelay.value = this.settings.mediaLoader.settings.data.spotify.connectDelay;
-        this.spotifyControl.connectNotify.checked = this.settings.mediaLoader.settings.data.spotify.connectNotify;
+        this.spotifyControl.autoConnect.checked = mediaLoader.settings.data.spotify.autoConnect;
+        this.spotifyControl.connectDelay.value = mediaLoader.settings.data.spotify.connectDelay;
+        this.spotifyControl.connectNotify.checked = mediaLoader.settings.data.spotify.connectNotify;
 
-        this.mainVolume.value = this.settings.mediaLoader.settings.data.sound.mainVolume
+        this.mainVolume.value = mediaLoader.settings.data.sound.mainVolume
         this.mainVolume.addEventListener("change", (e) => {
-            this.settings.mediaLoader.settings.data.sound.mainVolume = e.target.value;
-            // this.settings.mediaLoader.setVolume(e.target.value);
+            mediaLoader.settings.data.sound.mainVolume = e.target.value;
+            // mediaLoader.setVolume(e.target.value);
         })
-        this.muted.checked = this.settings.mediaLoader.settings.data.sound.muted
+        this.muted.checked = mediaLoader.settings.data.sound.muted
         this.muted.addEventListener("change", (e) => {
-            this.settings.mediaLoader.settings.data.sound.muted = e.target.checked;
-            // this.settings.mediaLoader.setMuted(e.target.checked);
+            mediaLoader.settings.data.sound.muted = e.target.checked;
+            // mediaLoader.setMuted(e.target.checked);
         })
 
 
         for (const controlId in this.controls) {
             let el = this.controls[controlId]
-            this.settings.mediaLoader.getSounds().forEach((sound) => {
-                el.innerHTML += `<option value="${sound}" ${this.settings.mediaLoader.settings.data.sound[controlId] === sound ? "selected" : ""}>${sound}</option>`
+            mediaLoader.getSounds().forEach((sound) => {
+                el.innerHTML += `<option value="${sound}" ${mediaLoader.settings.data.sound[controlId] === sound ? "selected" : ""}>${sound}</option>`
             })
             el.addEventListener("change", (e) => {
-                this.settings.mediaLoader.settings.data.sound[controlId] = e.target.value;
+                mediaLoader.settings.data.sound[controlId] = e.target.value;
             })
         }
 
-        this.settings.mediaLoader.getVoices().forEach((sound) => {
-            this.voiceControl.innerHTML += `<option value="${sound}" ${this.settings.mediaLoader.settings.data.ai.voice === sound ? "selected" : ""}>${sound}</option>`
+        mediaLoader.getVoices().forEach((sound) => {
+            this.voiceControl.innerHTML += `<option value="${sound}" ${mediaLoader.settings.data.ai.voice === sound ? "selected" : ""}>${sound}</option>`
         })
         for (let i = 0; i < this.sonPreview.length; i++) {
             const element = this.sonPreview[i];
             element.addEventListener("click", () => {
                 element.innerHTML = `<span class="material-symbols-outlined">pause</span>`
-                this.settings.mediaLoader.playSound(this.sonControls[i]?.value || this.voiceControl.value, () => {
+                mediaLoader.playSound(this.sonControls[i]?.value || this.voiceControl.value, () => {
                     element.innerHTML = `<span class="material-symbols-outlined">play_arrow</span>`
                 }, this.sonControls[i] ? false : true)
             })

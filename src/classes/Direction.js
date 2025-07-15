@@ -1,10 +1,8 @@
-const MediaLoader = require("./MediaLoader");
 const turf = require("@turf/turf")
 
 class Direction {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Direction class invoked");
-        this.mediaLoader = mediaLoader
         this.isInRoute = false
         this.route = null
         this.currentStep = 0;
@@ -14,9 +12,9 @@ class Direction {
         this.mainDirStep = document.getElementById("main-dir-step")
         this.mainDirDistance = document.getElementById("main-dir-distance")
         this.mainDirUnit = document.getElementById("main-dir-unit")
-        this.mediaLoader.position.coords.on("update", () => {
+        mediaLoader.position.coords.on("update", () => {
             if (this.isInRoute) {
-                const currentPoint = turf.point(this.mediaLoader.position.coords.array);
+                const currentPoint = turf.point(mediaLoader.position.coords.array);
                 const snapped = turf.nearestPointOnLine(this.line, currentPoint, { units: 'kilometers' })
                 const distanceAlong = snapped.properties.location;
 
@@ -32,7 +30,7 @@ class Direction {
         })
         ipcRenderer.on("control.ok", (event, pressed) => {
             if (pressed && this.isInRoute) {
-                const currentPoint = turf.point(this.mediaLoader.position.coords.array);
+                const currentPoint = turf.point(mediaLoader.position.coords.array);
                 const snapped = turf.nearestPointOnLine(this.line, currentPoint, { units: 'kilometers' })
                 const distanceAlong = snapped.properties.location;
 
@@ -116,7 +114,7 @@ class Direction {
         this.isInRoute = true
         let [route, coordinates] = await this.getRoute(dest)
         this.line = route
-        const currentPoint = turf.point(this.mediaLoader.position.coords.array);
+        const currentPoint = turf.point(mediaLoader.position.coords.array);
         const snapped = turf.nearestPointOnLine(this.line, currentPoint, { units: 'kilometers' })
         this.userOffset = snapped.properties.location;
 
@@ -137,21 +135,21 @@ class Direction {
                 }
             })
             // const popup = new mapboxgl.Popup().setHTML("<p>" + txt + "</p>")
-            // new mapboxgl.Marker({}).setLngLat(inter.location).addTo(this.mediaLoader.map).setPopup(popup)
+            // new mapboxgl.Marker({}).setLngLat(inter.location).addTo(mediaLoader.map).setPopup(popup)
         })
 
-        if (this.mediaLoader.map.getSource('route')) {
-            this.mediaLoader.map.getSource('route').setData(route);
+        if (mediaLoader.map.getSource('route')) {
+            mediaLoader.map.getSource('route').setData(route);
             console.log("route already exist");
 
         } else {
-            this.mediaLoader.map.addSource("route", {
+            mediaLoader.map.addSource("route", {
                 type: 'geojson',
                 data: route,
                 lineMetrics: true
             })
             this.routeData = mediaLoader.map.getSource("route")
-            this.mediaLoader.map.addLayer({
+            mediaLoader.map.addLayer({
                 id: 'route',
                 type: 'line',
                 source: "route",
@@ -181,11 +179,11 @@ class Direction {
             bounds.extend(coord);
         }
 
-        this.mediaLoader.mapboxCamera.fitBounds(bounds)
+        mediaLoader.mapboxCamera.fitBounds(bounds)
     }
     async getRoute(dest) {
         return new Promise(async (resolve) => {
-            let userLocation = this.mediaLoader.position.coords
+            let userLocation = mediaLoader.position.coords
             let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${dest.longitude}%2C${dest.latitude}?alternatives=false&annotations=duration,congestion,maxspeed&geometries=geojson&notifications=all&language=fr&overview=full&steps=true&access_token=${mediaLoader.database.data["mapbox-token"]}`
             console.log(url);
 
@@ -207,7 +205,7 @@ class Direction {
                         "coordinates": coordinates
                     },
                     "properties": {
-                        "color": this.mediaLoader.settings.data.map.color.route.basic
+                        "color": mediaLoader.settings.data.map.color.route.basic
                     }
                 }
 
@@ -220,7 +218,7 @@ class Direction {
     }
     getDistance(coordinates) {
         return new Promise(async (resolve) => {
-            let userLocation = this.mediaLoader.position.coords
+            let userLocation = mediaLoader.position.coords
             let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${coordinates[0]}%2C${coordinates[1]}?alternatives=false&annotations=distance&access_token=${mediaLoader.database.data["mapbox-token"]}`
             console.log(url);
 

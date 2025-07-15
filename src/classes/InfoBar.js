@@ -1,8 +1,6 @@
 const path = require('path');
 const { ipcRenderer } = require("electron");
 const data = require("../data.json");
-const Battery = require('./Battery');
-const MediaLoader = require('./MediaLoader');
 const icons = data.icons
 
 class InfoBar {
@@ -18,12 +16,11 @@ class InfoBar {
 
     #DOMElement = document.getElementById("info-bar")
     
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ InfoBar class invoked");
         this.#lockElement.innerHTML = icons.lock.close
         this.#hourElement.innerText = "00:00"
         this.#tempElement.innerHTML = "20°C"
-        this.mediaLoader = mediaLoader
         ipcRenderer.on("data.temp", (event, temp) => {
             this.#tempElement.innerHTML = `${temp}°C`
         })

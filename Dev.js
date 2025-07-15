@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, screen } = require('electron')
 const path = require('node:path');
 const VehicleConnect = require('./VehicleConnect');
 
@@ -128,6 +128,9 @@ class Dev {
     get isDev() {
         return process.argv.includes("-dev")
     }
+    get isDemo() {
+        return process.argv.includes("--demo")
+    }
     createDevWindow = () => {
         if (!this.isDev) {
             return
@@ -149,7 +152,12 @@ class Dev {
         this.devWindow.on("ready-to-show", () => {
             this.devWindow.show()
         })
-
+        if (this.isDemo) {
+            let screens = screen.getAllDisplays()
+            let devScreen = screens[screens.length - 1].bounds
+            this.devWindow.setPosition(devScreen.x, devScreen.y)
+            this.devWindow.setFullScreen(true)
+        }
     }
 }
 

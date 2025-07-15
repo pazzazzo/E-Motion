@@ -1,9 +1,6 @@
-const MediaLoader = require("./MediaLoader");
-
 class PlaceSearch {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ PlaceSearch class invoked");
-        this.mediaLoader = mediaLoader
     }
     init(cb) {
         google.maps.importLibrary("places").then(v => {
@@ -16,7 +13,7 @@ class PlaceSearch {
             textQuery: name,
             fields: ["displayName", "location", "businessStatus", "formattedAddress", "rating", "photos"],
             // includedType: "restaurant",
-            locationBias: { lat: this.mediaLoader.position.coords.latitude, lng: this.mediaLoader.position.coords.longitude },
+            locationBias: { lat: mediaLoader.position.coords.latitude, lng: mediaLoader.position.coords.longitude },
             // isOpenNow: true,
             language: "fr-FR",
             maxResultCount: settings.max || 8,

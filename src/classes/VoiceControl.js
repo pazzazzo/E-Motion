@@ -2,9 +2,8 @@ const MediaLoader = require("./MediaLoader");
 const recorder = require("./recorder")
 
 class VoiceControl {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ VoiceControl class invoked");
-        this.mediaLoader = mediaLoader
         this.animationFrameID = null;
         this.placesList = document.getElementById("main-places")
         this.waypointsList = new Set()
@@ -59,7 +58,7 @@ class VoiceControl {
                             );
                             places.forEach(async (place) => {
                                 console.log(`Nom: ${place.displayName}\nAdresse: ${place.formattedAddress}`);
-                                let dist = await this.mediaLoader.direction.getDistance([place.location.lng(), place.location.lat()])
+                                let dist = await mediaLoader.direction.getDistance([place.location.lng(), place.location.lat()])
                                 const placeElement = document.createElement("div");
                                 placeElement.className = "main-place";
                                 placeElement.addEventListener("click", () => {
@@ -130,7 +129,7 @@ class VoiceControl {
 
                                 this.placesList.appendChild(placeElement);
                             });
-                            this.mediaLoader.mapboxCamera.fitBounds(bounds)
+                            mediaLoader.mapboxCamera.fitBounds(bounds)
                         }, { max: 4 })
                     }
                 } else {

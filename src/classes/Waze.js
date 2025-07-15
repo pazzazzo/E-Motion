@@ -1,13 +1,12 @@
 const MediaLoader = require("./MediaLoader")
 
 class Waze {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Waze class invoked");
         this.lastFetches = {}
         this.alertPending = false
         this.pendFetches = new Set()
         this.polices = new Set()
-        this.mediaLoader = mediaLoader
     }
     fetch(bounds, scopes = ["alerts", "users"]) {
         this.alertPending = true
@@ -48,7 +47,7 @@ class Waze {
 
                     const marker = new mapboxgl.Marker({
                         element: document.createElement("div"),
-                    }).setLngLat([alert.location.x, alert.location.y]).addTo(this.mediaLoader.map);
+                    }).setLngLat([alert.location.x, alert.location.y]).addTo(mediaLoader.map);
 
                     // Add an image to the element
                     const el = marker.getElement();

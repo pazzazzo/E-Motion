@@ -10,8 +10,8 @@ class Navbar {
         this.load()
     }
     load() {
-        this.settings.mediaLoader.settings.data["navbar"].forEach((navEl, i) => {
-            let pth = this.settings.mediaLoader.apps.get(navEl.id)
+        mediaLoader.settings.data["navbar"].forEach((navEl, i) => {
+            let pth = mediaLoader.apps.get(navEl.id)
             let manifest = JSON.parse(fs.readFileSync(path.join(pth, "manifest.json")).toString())
             console.log(manifest, navEl);
 
@@ -31,7 +31,7 @@ class Navbar {
             upside.appendChild(spanUp);
             upside.addEventListener("click", () => {
                 if (i > 0) {
-                    [this.settings.mediaLoader.settings.data["navbar"][i], this.settings.mediaLoader.settings.data["navbar"][i - 1]] = [this.settings.mediaLoader.settings.data["navbar"][i - 1], this.settings.mediaLoader.settings.data["navbar"][i]]
+                    [mediaLoader.settings.data["navbar"][i], mediaLoader.settings.data["navbar"][i - 1]] = [mediaLoader.settings.data["navbar"][i - 1], mediaLoader.settings.data["navbar"][i]]
                     this.reset()
                     this.load()
                 }
@@ -44,8 +44,8 @@ class Navbar {
             spanDown.textContent = 'arrow_downward';
             down.appendChild(spanDown);
             down.addEventListener("click", () => {
-                if (i < this.settings.mediaLoader.settings.data["navbar"].length - 1) {
-                    [this.settings.mediaLoader.settings.data["navbar"][i], this.settings.mediaLoader.settings.data["navbar"][i + 1]] = [this.settings.mediaLoader.settings.data["navbar"][i + 1], this.settings.mediaLoader.settings.data["navbar"][i]]
+                if (i < mediaLoader.settings.data["navbar"].length - 1) {
+                    [mediaLoader.settings.data["navbar"][i], mediaLoader.settings.data["navbar"][i + 1]] = [mediaLoader.settings.data["navbar"][i + 1], mediaLoader.settings.data["navbar"][i]]
                     this.reset()
                     this.load()
                 }
@@ -78,7 +78,7 @@ class Navbar {
             inputColor.classList.add('settings-nav-color');
             inputColor.value = `${navEl.color || manifest["default-color"]}`;
             inputColor.addEventListener("input", (e) => {
-                this.settings.mediaLoader.settings.data["navbar"][i].color = inputColor.value
+                mediaLoader.settings.data["navbar"][i].color = inputColor.value
                 icon.style.boxShadow = `0px 0px 0px 2px ${inputColor.value}`
             })
             mainDiv.append(nameDiv, inputColor);
@@ -87,11 +87,11 @@ class Navbar {
             // Bouton supprimer
             const deleteDiv = document.createElement('div');
             deleteDiv.classList.add('settings-nav-delete');
-            if ((navEl.removable === false || manifest.removable === false) && this.settings.mediaLoader.settings.data["navbar"].filter(item => item.id === navEl.id).length === 1) {
+            if ((navEl.removable === false || manifest.removable === false) && mediaLoader.settings.data["navbar"].filter(item => item.id === navEl.id).length === 1) {
                 deleteDiv.classList.add('disabled');
             } else {
                 deleteDiv.addEventListener("click", () => {
-                    this.settings.mediaLoader.settings.data["navbar"].splice(i, 1)
+                    mediaLoader.settings.data["navbar"].splice(i, 1)
                     this.reset()
                     this.load()
                 })

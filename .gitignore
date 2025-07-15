@@ -143,3 +143,4 @@ output.mp3
 package-lock.json
 tts.js
 librespot/
+database/

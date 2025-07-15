@@ -1,16 +1,13 @@
 const EventEmitter = require('events');
 const SpotifyWebApi = require('spotify-web-api-node');
-// const WebApiRequest = require('spotify-web-api-node/a');
-const MediaLoader = require('./MediaLoader');
 const { ipcRenderer } = require('electron');
 
 
 class SpotifyClient extends EventEmitter {
     #token;
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         super()
         console.log("✅ Spotify class invoked");
-        this.mediaLoader = mediaLoader
         this.webApi = new SpotifyWebApi()
     }
     init(cb = () => { }) {
@@ -28,24 +25,23 @@ class SpotifyClient extends EventEmitter {
         }
         this.connecting = true
         return new Promise(async (r, e) => {
-            const token = await this.refreshAccessToken(this.mediaLoader.database.data["spotify-refresh-token"])
+            const token = await this.refreshAccessToken(await mediaLoader.database.get("spotify-refresh-token"))
             console.log(token);
 
             if (token.access_token) {
                 ipcRenderer.send("spotify.start", {
-                    "name": this.mediaLoader.settings.data.machine.name,
+                    "name": mediaLoader.settings.data.machine.name,
                     "token": token.access_token
                 })
                 this.webApi.setAccessToken(token.access_token)
                 if (!refresh) {
                     this._updateCurrentState()
                 }
-                this.mediaLoader.database.data["spotify-refresh-token"] = token.refresh_token
+                mediaLoader.database.set("spotify-refresh-token", token.refresh_token)
                 this.#token = token
                 this.connected = true
                 this.synced = true
                 console.log('The access token has been refreshed!', token.access_token);
-                this.mediaLoader.database.save()
                 setTimeout(() => {
                     this.connect(true)
                 }, 59 * 1000 * 60);
@@ -67,8 +63,8 @@ class SpotifyClient extends EventEmitter {
                     duration: 1,
                     paused: true,
                     image: undefined,
-                    name: await this.mediaLoader.lang.t("music.unknown.title"),
-                    artist: await this.mediaLoader.lang.t("music.unknown.artist"),
+                    name: await mediaLoader.lang.t("music.unknown.title"),
+                    artist: await mediaLoader.lang.t("music.unknown.artist"),
                 })
             } else {
                 this.emit("player.state", {

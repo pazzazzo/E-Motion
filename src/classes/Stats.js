@@ -1,5 +1,4 @@
 const { ipcRenderer } = require("electron");
-const MediaLoader = require("./MediaLoader");
 const EventEmitter = require('events');
 const fs = require("fs");
 
@@ -14,12 +13,11 @@ function formatDate(date, opts = { withYear: true }) {
 }
 
 class DataGraph {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ DataGraph class invoked");
-        this.mediaLoader = mediaLoader;
         let raw;
         try {
-            raw = fs.readFileSync(this.mediaLoader.datagraphPath, 'utf8');
+            raw = fs.readFileSync(mediaLoader.datagraphPath, 'utf8');
             this.fileContent = JSON.parse(raw);
         } catch (err) {
             console.error('Read/parsing datagraph error: ', err);
@@ -33,18 +31,17 @@ class DataGraph {
 }
 
 class Data extends EventEmitter {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Data class invoked");
         super();
         this.data = {};
-        this.mediaLoader = mediaLoader
     }
 }
 
 class DataFile extends Data {
-    constructor(key, mediaLoader = new MediaLoader(), datagraph = new DataGraph(mediaLoader)) {
+    constructor(key, datagraph) {
         console.log("✅ DataFile class invoked");
-        super(mediaLoader);
+        super();
         this.key = key;
         this.data = datagraph.get(key) || {};
     }
@@ -78,12 +75,11 @@ class DataFile extends Data {
 }
 
 class Stats extends EventEmitter {
-    constructor(mediaLoader = new MediaLoader()) {
+    constructor() {
         console.log("✅ Stats class invoked");
         super();
-        this.mediaLoader = mediaLoader;
-        this.datagraph = new DataGraph(mediaLoader);
-        this.dataUse = new DataFile("data_use", mediaLoader, this.datagraph)
+        this.datagraph = new DataGraph();
+        this.dataUse = new DataFile("data_use", this.datagraph)
         ipcRenderer.on("proxy.update", (event, opt) => {
             let id = formatDate(new Date(), {withYear: true})
             this.dataUse.data[id] = opt.total

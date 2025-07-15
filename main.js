@@ -33,7 +33,7 @@ app.commandLine.appendSwitch('disable-renderer-backgrounding');
 app.commandLine.appendSwitch('max-gum-fps', '100');
 
 
-const DB_PATH = path.join(__dirname, 'src', 'database.json');
+const DB_PATH = path.join(__dirname, 'database');
 
 function pad(n) {
   return String(n).padStart(2, '0');
@@ -109,6 +109,10 @@ app.whenReady().then(async () => {
   await session.defaultSession.setProxy({
     proxyRules: proxy.rules
   })
+
+  const appPath = app.getAppPath();
+  console.log('App directory:', appPath);
+  console.log('__dirname:', __dirname);
 
   await createWindow();
   dev.createDevWindow();

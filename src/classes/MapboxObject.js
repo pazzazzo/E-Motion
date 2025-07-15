@@ -1,8 +1,7 @@
 const { EventEmitter } = require("events");
-const MediaLoader = require("./MediaLoader");
 
 class MapboxObject extends EventEmitter {
-    constructor(mediaLoader = new MediaLoader(), imgPath) {
+    constructor(imgPath) {
         super()
         console.log("✅ MapboxObject class invoked");
         this.coordinates = mediaLoader.position.coords.array

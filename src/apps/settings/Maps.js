@@ -24,33 +24,33 @@ class Maps {
             }
         }
 
-        this.controls.color.normal.value = this.settings.mediaLoader.settings.data.map.color.route.basic;
-        this.controls.color.traffic.value = this.settings.mediaLoader.settings.data.map.color.route.traffic;
-        this.controls.color.heavy.value = this.settings.mediaLoader.settings.data.map.color.route.heavyTraffic;
+        this.controls.color.normal.value = mediaLoader.settings.data.map.color.route.basic;
+        this.controls.color.traffic.value = mediaLoader.settings.data.map.color.route.traffic;
+        this.controls.color.heavy.value = mediaLoader.settings.data.map.color.route.heavyTraffic;
         this.controls.color.normal.addEventListener("input", (e) => {
-            this.settings.mediaLoader.settings.data.map.color.route.basic = e.target.value;
+            mediaLoader.settings.data.map.color.route.basic = e.target.value;
         })
         this.controls.color.traffic.addEventListener("input", (e) => {
-            this.settings.mediaLoader.settings.data.map.color.route.traffic = e.target.value;
+            mediaLoader.settings.data.map.color.route.traffic = e.target.value;
         })
         this.controls.color.heavy.addEventListener("input", (e) => {
-            this.settings.mediaLoader.settings.data.map.color.route.heavyTraffic = e.target.value;
+            mediaLoader.settings.data.map.color.route.heavyTraffic = e.target.value;
         })
 
-        this.controls.style[this.settings.mediaLoader.settings.data.map.style].checked = true;
+        this.controls.style[mediaLoader.settings.data.map.style].checked = true;
         for (const controlId in this.controls.style) {
             this.controls.style[controlId].addEventListener("change", (e) => {
                 if (e.target.checked) {
-                    this.settings.mediaLoader.settings.data.map.style = e.target.value;
+                    mediaLoader.settings.data.map.style = e.target.value;
                 }
             })
         }
 
-        this.controls["update-frequency"][this.settings.mediaLoader.settings.data.map.updateFrequency].selected = true;
+        this.controls["update-frequency"][mediaLoader.settings.data.map.updateFrequency].selected = true;
         for (const controlId in this.controls["update-frequency"]) {
             this.controls["update-frequency"][controlId].addEventListener("change", (e) => {
                 if (e.target.checked) {
-                    this.settings.mediaLoader.settings.data.map.updateFrequency = e.target.value;
+                    mediaLoader.settings.data.map.updateFrequency = e.target.value;
                 }
             })
         }
