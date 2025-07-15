@@ -118,7 +118,7 @@
   },
   "devDependencies": {
     "depcheck": "^1.4.7",
-    "electron": "31.2.0",
+    "electron": "37.2.2",
     "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9",
     "jest": "^30.0.0",
