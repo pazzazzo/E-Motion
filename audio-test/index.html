@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Audio Visualizer 300 bandes</title>
+  <style>
+    body { margin: 0; font-family: system-ui; background:#0b0b10; color:#eaeaf2; }
+    header { padding: 14px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    canvas { display:block; width: 100vw; height: calc(100vh - 70px); }
+    .btn { background:#1b1b25; border:1px solid #2a2a3a; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; }
+    input[type="range"] { width: 220px; }
+    small { opacity:.75; }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="btn" id="btnStart">Démarrer</button>
+    <button class="btn" id="btnMic">Micro</button>
+    <label class="btn">
+      Fichier audio
+      <input id="file" type="file" accept="audio/*" hidden />
+    </label>
+    <label>FFT size
+      <input id="fft" type="range" min="512" max="32768" step="512" value="4096">
+      <small id="fftVal"></small>
+    </label>
+    <small>(Astuce: 300 bandes = on regroupe les bins FFT)</small>
+  </header>
+
+  <canvas id="c"></canvas>
+
+  <audio id="audio" crossorigin="anonymous"></audio>
+
+  <script src="./visualizer.js"></script>
+</body>
+</html>

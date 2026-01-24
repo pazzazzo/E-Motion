@@ -21,6 +21,7 @@
         "voice": "Kore"
     },
     "navbar": [
+        {"id": "settings", "removable": false},
         {"id": "settings", "removable": false}
     ],
     "sound": {

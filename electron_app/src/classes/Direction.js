@@ -184,7 +184,7 @@ class Direction {
     async getRoute(dest) {
         return new Promise(async (resolve) => {
             let userLocation = mediaLoader.position.coords
-            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${dest.longitude}%2C${dest.latitude}?alternatives=false&annotations=duration,congestion,maxspeed&geometries=geojson&notifications=all&language=fr&overview=full&steps=true&access_token=${mediaLoader.database.data["mapbox-token"]}`
+            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${dest.longitude}%2C${dest.latitude}?alternatives=false&annotations=duration,congestion,maxspeed&geometries=geojson&notifications=all&language=fr&overview=full&steps=true&access_token=${await mediaLoader.database.get("mapbox-token")}`
             console.log(url);
 
 
