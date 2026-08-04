@@ -22,7 +22,7 @@ class Wifi extends EventEmitter {
             console.log("✅ Reconnected to Wi-Fi");
         });
         console.log("✅ Wifi class post init");
-        this.#updateWifi()
+        // this.#updateWifi()
     }
     getConnections(cb) {
         this.#wifi.getCurrentConnections().then(cb)

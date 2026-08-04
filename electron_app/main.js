@@ -176,15 +176,27 @@ ipcMain.on("spotify.start", (event, opt) => {
   if (libre) {
     return
   }
-  libre = spawn(path.join(__dirname, "librespot", "librespot"), [
+  libre = spawn("librespot", [
     '--name', opt.name || "No name",
     '--device-type', 'automobile',
     '--bitrate', opt.bitrate || 320,
     '-k', opt.token,
     '-c', path.join(__dirname, "spoticache"),
     '--cache-size-limit', '20G',
+    '--onevent', 'node ' + path.join(__dirname, "experiment", "ev.js"),
     '-x', `http://${proxy.host}:${proxy.port}`,
   ]);
+  console.log("librespot", [
+    '--name', opt.name || "No name",
+    '--device-type', 'automobile',
+    '--bitrate', opt.bitrate || 320,
+    '-k', opt.token,
+    '-c', path.join(__dirname, "spoticache"),
+    '--cache-size-limit', '20G',
+    '--onevent', 'node ' + path.join(__dirname, "experiment", "ev.js"),
+    '-x', `http://${proxy.host}:${proxy.port}`,
+  ].join(" "));
+  
   libre.stdout.on("data", data => {
     console.log(data.toString());
   })

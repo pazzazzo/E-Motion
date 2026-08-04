@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
-const can = require('socketcan');
+// const can = require('socketcan');
 const { exec } = require('child_process');
 
 class VehicleConnect {
@@ -30,7 +30,7 @@ class VehicleConnect {
             { pid: "15", description: "Capteur O2 (banc 1, capteur 2) - tension" },
         ];
 
-        this.listCanInterfaces((err, interfaces) => {
+        /*this.listCanInterfaces((err, interfaces) => {
             if (err) {
                 console.error("Erreur lors de la récupération des interfaces CAN.");
                 return;
@@ -60,7 +60,7 @@ class VehicleConnect {
             } else {
                 console.log("Aucune interface trouvée");
             }
-        });
+        });*/
     }
     speedChange(speed) {
         this.mainWindow.webContents.send("data.speed", speed)

@@ -219,9 +219,8 @@ class Direction {
     getDistance(coordinates) {
         return new Promise(async (resolve) => {
             let userLocation = mediaLoader.position.coords
-            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${coordinates[0]}%2C${coordinates[1]}?alternatives=false&annotations=distance&access_token=${mediaLoader.database.data["mapbox-token"]}`
+            let url = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${userLocation.longitude}%2C${userLocation.latitude}%3B${coordinates[0]}%2C${coordinates[1]}?alternatives=false&annotations=distance&access_token=${await mediaLoader.database.get("mapbox-token")}`
             console.log(url);
-
 
             try {
                 const response = await fetch(url);

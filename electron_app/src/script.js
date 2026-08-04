@@ -129,7 +129,7 @@ usb.usb.on("detach", (device) => {
 
 
 vehicle.rearCam.getCams().then(v => {
-    vehicle.rearCam.setCam(v[0].id)
+    vehicle.rearCam.setCam(v[0]?.id)
 })
 
 vehicle.on("rear.obstacle.detected", (distance) => {
